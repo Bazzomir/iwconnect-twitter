@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = () => {
+export const Search = () => {
   return (
     <aside
       className="col-3"
@@ -8,5 +8,3 @@ const Search = () => {
     ></aside>
   );
 };
-
-export default Search;

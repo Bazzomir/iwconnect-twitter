@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-import Button from './components/Button/Button';
-import ButtonClass from './components/Button/ButtonClass';
+import {Home} from './containers/Home/Home';
 
 function App() {
   return (
@@ -14,11 +13,7 @@ function App() {
           className="container"
           style={{background: 'blue', height: '100vh'}}
         >
-          <div className="row">
-           
-            
-           
-          </div>
+          <Home />
         </div>
       </div>
     </div>

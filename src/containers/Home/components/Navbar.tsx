@@ -1,9 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
+import Button from '../../../components/Button/Button';
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
-    <nav className="col-3" style={{background: 'cyan', height: '100vh'}}></nav>
+    <Styled.Container className="col-3">
+      <Button backgraundColor="lightblue" name="Tweet"></Button>
+    </Styled.Container>
   );
 };
 
-export default Navbar;
+// const Container = styled.nav`
+//   background: cyan;
+//   height: 100vh;
+// `;
+
+const Styled = {
+  Container: styled.nav`
+    background: cyan;
+    height: 100vh;
+  `,
+};

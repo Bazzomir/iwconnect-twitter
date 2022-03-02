@@ -1,9 +1,9 @@
 import React from 'react';
-import Main from './components/Main';
-import Navbar from './components/Navbar';
-import Search from './components/Search';
+import {Main} from './components/Main';
+import {Navbar} from './components/Navbar';
+import {Search} from './components/Search';
 
-const Home = () => {
+export const Home = () => {
   return (
     <div className="row">
       <Navbar />
@@ -12,5 +12,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;
