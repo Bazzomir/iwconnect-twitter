@@ -5,28 +5,23 @@ import ButtonClass from './components/Button/ButtonClass';
 
 function App() {
   return (
-    <>
-      <div>
-        <Button name="Tweet" backgraundColor="blue" textColor="white" />
-        <Button name="Tweet 2" backgraundColor="red" textColor="black" />
-        <Button name="Tweet 3" backgraundColor="green" textColor="yellow" />
-        <Button backgraundColor="yellow" />
+    <div
+      className="container-fluid"
+      style={{background: 'red', height: '100vh'}}
+    >
+      <div className="row">
+        <div
+          className="container"
+          style={{background: 'blue', height: '100vh'}}
+        >
+          <div className="row">
+           
+            
+           
+          </div>
+        </div>
       </div>
-
-      <br />
-      <br />
-
-      <div>
-        <ButtonClass name="Tweet 4" backgraundColor="blue" textColor="white" />
-        <ButtonClass name="Tweet 5" backgraundColor="red" textColor="black" />
-        <ButtonClass
-          name="Tweet 6"
-          backgraundColor="green"
-          textColor="yellow"
-        />
-        <ButtonClass backgraundColor="yellow" />
-      </div>
-    </>
+    </div>
   );
 }
 
