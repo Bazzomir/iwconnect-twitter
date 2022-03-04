@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface Props {
-  text: string;
+export interface Props {
+  text?: string;
   icon?: JSX.Element;
 }
 
