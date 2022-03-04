@@ -1,10 +1,16 @@
 import React from 'react';
+import {SearchBar} from '../../../components/RightSide/SearchBar';
+import {BsSearch} from 'react-icons/bs';
+import {Styled} from './Navbar';
+import {WhoToFollow} from '../../../components/RightSide/WhoToFollow';
+import {TrendsForYous} from '../../../components/RightSide/TrendsForYou';
 
 export const Search = () => {
   return (
-    <aside
-      className="col-3"
-      style={{background: 'green', height: '100vh'}}
-    ></aside>
+    <Styled.Container className="col-3">
+      <SearchBar icon={<BsSearch />} />
+      <TrendsForYous />
+      <WhoToFollow />
+    </Styled.Container>
   );
 };
