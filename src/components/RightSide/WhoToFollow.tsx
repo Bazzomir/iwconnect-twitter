@@ -1,5 +1,5 @@
 import React from 'react';
-import {Styled, WhoToFollowItems} from './RightSideItems/RightSideItems';
+import { Styled, WhoToFollowItems, } from './RightSideItems/RightSideItems';
 import {Props} from '../NavLink/NavLink';
 
 export const WhoToFollow = ({text}: Props) => {
