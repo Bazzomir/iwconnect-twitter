@@ -1,7 +1,13 @@
 import React from 'react';
-// import {Styled} from '../WhoToFollow';
 import styled from 'styled-components';
 import {LightButton} from '../../Button/Button';
+
+interface Props {
+  textGrey?: string;
+  textBold?: string;
+  textNum?: string;
+  textWhite?: string;
+}
 
 export const WhoToFollowItems = ({textGrey, textWhite}: Props) => {
   return (
@@ -9,7 +15,7 @@ export const WhoToFollowItems = ({textGrey, textWhite}: Props) => {
       <Styled.ImgWrapper className="col-3">
         <img
           src="https://i.pinimg.com/736x/78/b1/36/78b136e52a183d104aef5f1c6509e4c5.jpg"
-          style={{width: '50px', height: '50px', borderRadius:'100%'}}
+          style={{width: '50px', height: '50px', borderRadius: '100%'}}
           alt=" "
         />
       </Styled.ImgWrapper>
@@ -26,13 +32,6 @@ export const WhoToFollowItems = ({textGrey, textWhite}: Props) => {
   );
 };
 
-interface Props {
-  textGrey?: string;
-  textBold?: string;
-  textNum?: string;
-  textWhite?: string;
-}
-
 export const TrendsForYouItems = ({textGrey, textBold, textNum}: Props) => {
   return (
     <>
@@ -44,6 +43,17 @@ export const TrendsForYouItems = ({textGrey, textBold, textNum}: Props) => {
         </Styled.TextP>
       </Styled.MailWrapper>
     </>
+  );
+};
+
+export const RightBottomText = () => {
+  return (
+    <div className="mt-3">
+      <Styled.TextGrey>
+        Terms of Service Privacy Policy Cookie Policy Accessibility Ads info More ... @ 2022
+        Twitter, inc
+      </Styled.TextGrey>
+    </div>
   );
 };
 

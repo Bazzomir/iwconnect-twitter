@@ -13,5 +13,3 @@ export const WhoToFollow = ({text}: Props) => {
     </Styled.Container>
   );
 };
-
-
