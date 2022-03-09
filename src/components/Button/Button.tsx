@@ -1,89 +1,55 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 
 interface Props {
-  backgraundColor: string;
-  textColor?: string;
-  name?: string;
+  nameButton?: string;
+  onClick?: () => void;
 }
 
-interface State {
-  user: string[];
-  posts: string[];
-  comments: string[];
-  nekojBroj: number;
-  nekojBool: boolean;
-}
-
-const Button = ({name, backgraundColor, textColor = 'grey'}: Props) => {
+export const Button = ({nameButton}: Props) => {
   const [clicked, setCliced] = useState<number>(0);
-  const [text, setText] = useState<string>();
-  const someRef = useRef<HTMLDivElement>(null);
-
   const onClick = (event: any) => {
-    console.log('event', clicked);
+    console.log(` ${nameButton} btn-primary clicked`, clicked);
     setCliced(prevState => {
       return prevState + 1;
     });
-    // someRef?.current?.innerHTML = clicked;
   };
 
-  // const [users, setUsers] = useState<string[]>(['Ognen', 'Blagoj']);
-  // const [posts, setPosts] = useState<string[]>(['nekoj post']);
-  // const [comments, setComments] = useState<string[]>([]);
-  // const [nekojBroj, setNekojBroj] = useState<number>(0);
-  // const [nekojBool, setNekojBool] = useState<boolean>(true)'
-
-  // const [state, setState] = useState<State>({
-  //     user: ['Ognen', 'Blagoj'],
-  //     posts: [],
-  //     comments: [],
-  //     nekojBroj: 0,
-  //     nekojBool: true,
-  // })
-  // setState({
-  //     ...state,
-  //     posts: ['nekoj post'],
-  // })
-
-  // const person = {
-  //     name: "Bazzo",
-  //     lastname: "Jovanovski",
-  //     languages: ['Macedonian', 'English']
-  // }
-  // console.log(person)
-  // const array = ['Blagoj', 'Jovanovski']
-  // console.log(array)
-
   return (
-    <>
-      <div
-        ref={someRef}
-        onClick={onClick}
-        onMouseOver={() => {
-          console.log('hovered over button');
-        }}
-        style={{
-          backgroundColor: backgraundColor,
-          color: textColor,
-          borderRadius: '30px',
-          padding: '10px 30px',
-          width: 100,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {name}
-        {/* {!person.name ? name : name} */}
-      </div>
-      <input
-        value={text}
-        onChange={event => {
-          console.log('event', event.target.value);
-        }}
-      />
-    </>
+    <div
+      className="btn btn-primary col-12"
+      onClick={onClick}
+      style={{
+        borderRadius: '30px',
+        fontWeight: 'bold',
+        padding: '10px 30px',
+      }}
+    >
+      {nameButton}
+    </div>
   );
 };
 
-export default Button;
+export const LightButton = ({nameButton}: Props) => {
+  const [clicked, setCliced] = useState<number>(0);
+  const onClick = (event: any) => {
+    console.log(`${nameButton} btn-light clicked`, clicked);
+    setCliced(prevState => {
+      return prevState + 1;
+    });
+  };
+  return (
+    <div
+      className="btn btn-light col-12"
+      onClick={onClick}
+      style={{
+        borderRadius: '30px',
+        fontWeight: 'bold',
+        height:'40px',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
+    >
+      {nameButton}
+    </div>
+  );
+};
