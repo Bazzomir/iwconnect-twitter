@@ -44,9 +44,9 @@ export const LightButton = ({nameButton}: Props) => {
       style={{
         borderRadius: '30px',
         fontWeight: 'bold',
-        height:'40px',
+        height: '40px',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       {nameButton}
