@@ -89,10 +89,12 @@ export const Styled = {
     height: 50px;
     font-weight: bold;
   `,
-  TextP: styled.p`
+  TextP: styled.div`
     align-items: center;
-    justify-content: flex-strat;
+    justify-content: center;
     color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
   `,
   TextGrey: styled.p`
     color: grey;
