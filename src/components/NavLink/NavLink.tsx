@@ -1,14 +1,16 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 export interface Props {
   text?: string;
+  to: string;
   icon?: JSX.Element;
 }
 
-export const NavLink = ({icon, text}: Props) => {
+export const NavLink = ({icon, to, text}: Props) => {
   return (
-    <Styled.Container>
+    <Styled.Container to={to}>
       <Styled.IconWrapper>{icon}</Styled.IconWrapper>
       <Styled.TextWrapper>{text}</Styled.TextWrapper>
     </Styled.Container>
@@ -16,13 +18,13 @@ export const NavLink = ({icon, text}: Props) => {
 };
 
 export const Styled = {
-  Container: styled.div`
+  Container: styled(Link)`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     height: 50px;
-    margin-bottom: 10px;
+    color: white;
   `,
   IconWrapper: styled.div`
     display: flex;
@@ -40,6 +42,5 @@ export const Styled = {
     height: 50px;
     flex: 4;
     font-weight: bold;
-    
   `,
 };

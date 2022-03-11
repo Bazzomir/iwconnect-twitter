@@ -6,19 +6,20 @@ export const Main = () => {
   const [data, setData] = useState<PostType[]>([]);
 
   useEffect(() => {
-    fetch('http://jsonplaceholder.typicode.com/posts')
-      .then(response => {
-        return response.json();
-      })
-      .then((data: PostType[]) => setData(data));
+    const fetchFromApi = async () => {
+      const response = await fetch('http://jsonplaceholder.typicode.com/posts');
+      const data: PostType[] = await response.json();
+      setData(data);
+    };
+    fetchFromApi();
   }, []);
 
-  console.log('data', data);
+  // console.log('data', data);
 
   return (
     <main className="col-6">
       {data?.map(post => {
-        return <Post key={post.id} title={post.title} content={post.body} />;
+        return <Post key={post.id} {...post} />;
       })}
     </main>
   );

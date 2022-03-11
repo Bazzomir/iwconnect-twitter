@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Props} from '../NavLink/NavLink';
+
+ interface Props {
+  icon: JSX.Element;
+}
 
 export const SearchBar = ({icon}: Props) => {
   return (
