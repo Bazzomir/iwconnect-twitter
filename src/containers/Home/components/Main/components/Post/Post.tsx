@@ -1,13 +1,17 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import {Action} from './components/Action';
 
 interface Props {
   title: string;
-  content: string;
+  body: string;
+  id: number;
+  userId: number;
 }
 
-export const Post = ({title, content}: Props) => {
+export const Post = ({title, body, id, userId}: Props) => {
+  let navigate = useNavigate();
   return (
     <Styled.Container>
       <Styled.AdditionalInfo>Bitcoin cryptocurrency - See more</Styled.AdditionalInfo>
@@ -17,7 +21,7 @@ export const Post = ({title, content}: Props) => {
         </Styled.IconWrapper>
         <Styled.MainContent>
           <Styled.Title>{title}</Styled.Title>
-          <Styled.Content>{content}</Styled.Content>
+          <Styled.Content>{body}</Styled.Content>
           <Styled.Actions>
             <Action actionNumber={444} />
             <Action actionNumber={151} />
@@ -26,6 +30,20 @@ export const Post = ({title, content}: Props) => {
           </Styled.Actions>
         </Styled.MainContent>
       </Styled.Wrapper>
+      <button
+        onClick={() => {
+          navigate(`/posts/${id}`, {
+            state: {
+              title,
+              body,
+              id,
+              userId,
+            },
+          });
+        }}
+      >
+        Navigate to somewhere
+      </button>
     </Styled.Container>
   );
 };
