@@ -19,7 +19,7 @@ export const Search = () => {
 };
 
 const Styled = {
-  Container: styled.div`
+  Container: styled.nav`
     background: black;
     height: 100vh;
     color: whitesmoke;

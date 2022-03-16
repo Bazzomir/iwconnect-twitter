@@ -2,7 +2,7 @@ import React from 'react';
 import {SearchBar} from '../../../components/RightSide/SearchBar';
 import {BsSearch} from 'react-icons/bs';
 import {RiSettings2Line} from 'react-icons/ri';
-import {Styled} from '../../Navbar/Navbar';
+import {Styled} from './Navbar';
 import {WhoToFollow} from '../../../components/RightSide/WhoToFollow';
 import {TrendsForYous} from '../../../components/RightSide/TrendsForYou';
 import {RightBottomText} from '../../../components/RightSide/RightSideItems/RightSideItems';

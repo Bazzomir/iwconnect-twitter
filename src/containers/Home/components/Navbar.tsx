@@ -5,8 +5,8 @@ import {FaRegEnvelope} from 'react-icons/fa';
 import {BsBookmark, BsFileText, BsTwitter} from 'react-icons/bs';
 import {CgProfile, CgMoreO} from 'react-icons/cg';
 import styled from 'styled-components';
-import {Button} from '../../components/Button/Button';
-import {NavLink} from '../../components/NavLink/NavLink';
+import {Button} from '../../../components/Button/Button';
+import {NavLink} from '../../../components/NavLink/NavLink';
 
 export const Navbar = () => {
   return (
@@ -25,11 +25,15 @@ export const Navbar = () => {
   );
 };
 
+// const Container = styled.nav`
+//   background: cyan;
+//   height: 100vh;
+// `;
+
 export const Styled = {
   Container: styled.nav`
     background: black;
     height: 100vh;
     color: whitesmoke;
-    border-right: 1px solid white;
   `,
 };
