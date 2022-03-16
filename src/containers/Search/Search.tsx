@@ -21,7 +21,6 @@ export const Search = () => {
 const Styled = {
   Container: styled.div`
     background: black;
-    height: 100vh;
     color: whitesmoke;
     border-left: 1px solid white;
   `,

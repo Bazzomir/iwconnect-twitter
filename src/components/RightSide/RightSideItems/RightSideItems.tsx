@@ -19,7 +19,7 @@ export const WhoToFollowItems = ({textGrey, textWhite}: Props) => {
           alt=" "
         />
       </Styled.ImgWrapper>
-      <Styled.MailWrapper className="col-5">
+      <Styled.MailWrapper className="col-4">
         <Styled.TextP>
           <Styled.TextWhite>{textWhite}</Styled.TextWhite>
           <Styled.TextGrey>{textGrey}</Styled.TextGrey>
@@ -63,7 +63,6 @@ export const Styled = {
     background: #bfbfbf;
     border-radius: 15px;
     color: whitesmoke;
-    display: flex;
     margin: 0px;
     margin-top: 15px;
   `,
@@ -71,8 +70,8 @@ export const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 20px;
-    weight: 20px;
+    height: 15px;
+    weight: 15px;
     margin-top: 10px;
   `,
   MailWrapper: styled.div`
@@ -99,9 +98,7 @@ export const Styled = {
   TextGrey: styled.p`
     color: grey;
     font-size: 11px;
-    height: 10px;
-    margin-top: 0;
-    margin-bottom: 6px;
+    margin: 0;
   `,
   TextWhite: styled.p`
     color: white;

@@ -28,7 +28,6 @@ export const Navbar = () => {
 export const Styled = {
   Container: styled.nav`
     background: black;
-    height: 100vh;
     color: whitesmoke;
     border-right: 1px solid white;
   `,
