@@ -2,19 +2,25 @@ import React from 'react';
 import {Route, Routes as RRDRoutes} from 'react-router-dom';
 import {Main} from '../containers/Home/components/Main/Main';
 import {PostPage} from '../containers/PostPage/PostPage';
+import {Explore} from '../containers/pages/Explore';
+import {Notifications} from '../containers/pages/Notifications';
+import {Messages} from '../containers/pages/Messages';
+import {Bookmarks} from '../containers/pages/Bookmarks';
+import {Lists} from '../containers/pages/Lists';
+import {Profile} from '../containers/pages/Profile';
 
 export const Routes = () => {
   return (
     <RRDRoutes>
-      <Route path="/*" element={<Main />} />
+      <Route path="/" element={<Main />} />
       <Route path="posts" element={<div style={{color: 'white'}}></div>} />
       <Route path="posts/:id" element={<PostPage />} />
-      <Route path="expolore" element={<div style={{color: 'white'}}>Explore</div>} />
-      <Route path="notifications" element={<div style={{color: 'white'}}>Notification</div>} />
-      <Route path="messages" element={<div style={{color: 'white'}}>Messages</div>} />
-      <Route path="bookmarks" element={<div style={{color: 'white'}}>Bookmarks</div>} />
-      <Route path="lists" element={<div style={{color: 'white'}}>Lists</div>} />
-      <Route path="profile" element={<div style={{color: 'white'}}>Profile</div>} />
+      <Route path="explore" element={<Explore />} />
+      <Route path="notifications" element={<Notifications />} />
+      <Route path="messages" element={<Messages />} />
+      <Route path="bookmarks" element={<Bookmarks />} />
+      <Route path="lists" element={<Lists />} />
+      <Route path="profile" element={<Profile />} />
       <Route path="more" element={<div style={{color: 'white'}}>More</div>} />
       <Route path="*" element={<div style={{color: 'white'}}>This page doesn't exist!</div>} />
     </RRDRoutes>
