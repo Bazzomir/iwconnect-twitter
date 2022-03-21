@@ -1,21 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useLocation, useParams} from 'react-router-dom';
+import {useFetch} from '../../hooks/useFetch';
+import {Post as PostType} from '../Home/components/Main/types';
 
 export const PostPage = (props: any) => {
   const params = useParams();
   const location = useLocation();
-  const [data, setData] = useState();
+  // const [data, setData] = useState();
 
-  useEffect(() => {
-    const fetchFromApi = async () => {
-      const response = await fetch(`http://jsonplaceholder.typicode.com/posts/${params.id}`);
-      const data = await response.json();
-      setData(data);
-    };
-    if (!(location?.state as any)?.id) {
-      fetchFromApi();
-    }
-  }, []);
+  // const {data, fetchFromApi} = useFetch<PostType>(`posts/${params.id}`, {} as PostType);
+  // console.log('post', data);
+
+  // useEffect(() => {
+  //   if (!(location?.state as any)?.id) {
+  //     fetchFromApi();
+  //   }
+  // }, []);
 
   return <div>Post number {params.id}</div>;
 };

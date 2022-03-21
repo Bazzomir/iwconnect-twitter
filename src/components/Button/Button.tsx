@@ -53,3 +53,22 @@ export const LightButton = ({nameButton}: Props) => {
     </div>
   );
 };
+
+export const PostButton = ({nameButton, onClick}: Props) => {
+  return (
+    <div
+      className="btn btn-primary col-3"
+      onClick={onClick}
+      style={{
+        borderRadius: '30px',
+        fontWeight: 'bold',
+        height: '40px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+      }}
+    >
+      {nameButton}
+    </div>
+  );
+};

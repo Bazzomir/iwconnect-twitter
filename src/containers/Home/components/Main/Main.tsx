@@ -1,24 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
+import {useFetch} from '../../../../hooks/useFetch';
+import {AddTweet} from './components/AddTweet/AddTweet';
 import {Post} from './components/Post/Post';
 import type {Post as PostType} from './types';
 
 export const Main = () => {
-  const [data, setData] = useState<PostType[]>([]);
+  const {data: posts, fetchFromApi, addNewTweet} = useFetch<PostType[]>('posts', []);
 
   useEffect(() => {
-    const fetchFromApi = async () => {
-      const response = await fetch('http://jsonplaceholder.typicode.com/posts');
-      const data: PostType[] = await response.json();
-      setData(data);
-    };
     fetchFromApi();
   }, []);
 
-  // console.log('data', data);
+  console.log('data', posts);
 
   return (
     <main className="col-6">
-      {data?.map(post => {
+      <AddTweet addNewTweet={addNewTweet} />
+      {posts?.map(post => {
         return <Post key={post.id} {...post} />;
       })}
     </main>
