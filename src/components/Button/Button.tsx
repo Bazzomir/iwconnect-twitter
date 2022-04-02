@@ -21,7 +21,6 @@ export const Button = ({nameButton}: Props) => {
       style={{
         borderRadius: '30px',
         fontWeight: 'bold',
-        padding: '10px 30px',
       }}
     >
       {nameButton}
@@ -44,7 +43,6 @@ export const LightButton = ({nameButton}: Props) => {
       style={{
         borderRadius: '30px',
         fontWeight: 'bold',
-        height: '40px',
         justifyContent: 'center',
         alignItems: 'center',
       }}

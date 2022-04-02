@@ -11,15 +11,15 @@ import {NavLink} from '../../components/NavLink/NavLink';
 export const Navbar = () => {
   return (
     <Styled.Container className="col-3">
-      <NavLink icon={<BsTwitter />} />
-      <NavLink text="Home" icon={<RiHome7Line />} />
-      <NavLink text="Explore" icon={<RiHashtag />} />
-      <NavLink text="Notifications" icon={<IoIosNotificationsOutline />} />
-      <NavLink text="Messages" icon={<FaRegEnvelope />} />
-      <NavLink text="Bookmarks" icon={<BsBookmark />} />
-      <NavLink text="List" icon={<BsFileText />} />
-      <NavLink text="Profile" icon={<CgProfile />} />
-      <NavLink text="More" icon={<CgMoreO />} />
+      <NavLink to="/" icon={<BsTwitter />} />
+      <NavLink to="/" text="Home" icon={<RiHome7Line />} />
+      <NavLink to="/explore" text="Explore" icon={<RiHashtag />} />
+      <NavLink to="/notifications" text="Notifications" icon={<IoIosNotificationsOutline />} />
+      <NavLink to="/messages" text="Messages" icon={<FaRegEnvelope />} />
+      <NavLink to="/bookmarks" text="Bookmarks" icon={<BsBookmark />} />
+      <NavLink to="/lists" text="Lists" icon={<BsFileText />} />
+      <NavLink to="/profile" text="Profile" icon={<CgProfile />} />
+      <NavLink to="/more" text="More" icon={<CgMoreO />} />
       <Button nameButton="Tweet" />
     </Styled.Container>
   );
