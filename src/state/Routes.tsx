@@ -21,8 +21,22 @@ export const Routes = () => {
       <Route path="bookmarks" element={<Bookmarks />} />
       <Route path="lists" element={<Lists />} />
       <Route path="profile" element={<Profile />} />
-      <Route path="more" element={<div style={{color: 'white'}}>More</div>} />
-      <Route path="*" element={<div style={{color: 'white'}}>This page doesn't exist!</div>} />
+      <Route
+        path="more"
+        element={
+          <div className="col-6" style={{color: 'white'}}>
+            More
+          </div>
+        }
+      />
+      <Route
+        path="*"
+        element={
+          <div className="col-6" style={{color: 'white'}}>
+            This page doesn't exist!
+          </div>
+        }
+      />
     </RRDRoutes>
   );
 };

@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
-import {useFetch} from '../../../../hooks/useFetch';
+import {FetchPosts} from '../../../../hooks/useFetch';
 import {AddTweet} from './components/AddTweet/AddTweet';
 import {Post} from './components/Post/Post';
-import type {Post as PostType} from './types';
+import type {PostType} from './types';
 
 export const Main = () => {
-  const {data: posts, fetchFromApi, addNewTweet} = useFetch<PostType[]>('posts', []);
+  const {data: posts, FetchFromApi, addNewTweet} = FetchPosts<PostType[]>('posts', []);
 
   useEffect(() => {
-    fetchFromApi();
+    FetchFromApi();
   }, []);
 
   console.log('data', posts);

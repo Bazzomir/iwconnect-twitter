@@ -1,6 +1,10 @@
 import styled from 'styled-components';
-import {FaFileImage} from 'react-icons/fa';
-import type {Post as PostType} from '../../types';
+import {BsImage} from 'react-icons/bs';
+import {AiOutlineFileGif, AiOutlineSchedule} from 'react-icons/ai';
+import {BiPoll, BiSmile} from 'react-icons/bi';
+import {HiOutlineLocationMarker} from 'react-icons/hi';
+import {BsStars} from 'react-icons/bs';
+import type {PostType} from '../../types';
 import {PostButton} from '../../../../../../components/Button/Button';
 import {usePostTweet} from '../../../../../../hooks/usePostTweet';
 
@@ -9,12 +13,7 @@ interface Props {
 }
 
 export const AddTweet = ({addNewTweet}: Props) => {
-  const {tweet, error, loading, postTweet, setTweet, someRef} = usePostTweet(addNewTweet);
-
-  //   useEffect(() => {
-  //     addNewTweet(postedTweet);
-  //   }, [postedTweet]);
-
+  const {error, loading, postTweet, someRef} = usePostTweet(addNewTweet);
   if (error) {
     return (
       <div>
@@ -37,27 +36,28 @@ export const AddTweet = ({addNewTweet}: Props) => {
       <Styled.Form>
         <Styled.TextArea
           maxLength={140}
-          //   value={tweet}
           ref={someRef}
-          //   onChange={e => setTweet(e.target.value)}
           placeholder="Whats's happening?"
         ></Styled.TextArea>
         <Styled.ActionsWrapper>
           <Styled.IconsWrapper>
             <Styled.Icon>
-              <FaFileImage color="rgb(29,155,240)" />
+              <BsImage color="rgb(29,155,240)" />
             </Styled.Icon>
             <Styled.Icon>
-              <FaFileImage color="rgb(29,155,240)" />
+              <AiOutlineFileGif color="rgb(29,155,240)" />
             </Styled.Icon>
             <Styled.Icon>
-              <FaFileImage color="rgb(29,155,240)" />
+              <BiPoll color="rgb(29,155,240)" />
             </Styled.Icon>
             <Styled.Icon>
-              <FaFileImage color="rgb(29,155,240)" />
+              <BiSmile color="rgb(29,155,240)" />
             </Styled.Icon>
             <Styled.Icon>
-              <FaFileImage color="rgb(29,155,240)" />
+              <AiOutlineSchedule color="rgb(29,155,240)" />
+            </Styled.Icon>
+            <Styled.Icon>
+              <HiOutlineLocationMarker color="rgb(29,155,240)" />
             </Styled.Icon>
           </Styled.IconsWrapper>
           <PostButton nameButton="Tweet" onClick={postTweet} />

@@ -27,7 +27,7 @@ export const TrendsForYous = ({icon, text}: Props) => {
   );
 };
 
-const Styled = {
+export const Styled = {
   Container: styled.div`
     flex-direction: row;
     background: #bfbfbf;

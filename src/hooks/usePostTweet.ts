@@ -1,5 +1,5 @@
 import {useRef, useState} from 'react';
-import type {Post as PostType} from '../containers/Home/components/Main/types';
+import type {PostType} from '../containers/Home/components/Main/types';
 
 export const usePostTweet = (fn: (post: PostType) => void) => {
   const [tweet, setTweet] = useState<string>('');

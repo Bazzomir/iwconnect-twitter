@@ -1,16 +1,16 @@
 import {useState} from 'react';
-import type {Post as PostType} from '../containers/Home/components/Main/types';
+import type {PostType} from '../containers/Home/components/Main/types';
 
 type ReturnData<T> = {
   data: PostType[];
-  fetchFromApi: () => Promise<void>;
+  FetchFromApi: () => Promise<void>;
   addNewTweet: (post: PostType) => void;
 };
 
-export const useFetch = <T>(url: string, initialState: PostType[]): ReturnData<T> => {
+export const FetchPosts = <T>(url: string, initialState: PostType[]): ReturnData<T> => {
   const [data, setData] = useState<PostType[]>(initialState);
 
-  const fetchFromApi = async () => {
+  const FetchFromApi = async () => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/${url}`);
     const data = await response.json();
     setData(data);
@@ -20,7 +20,5 @@ export const useFetch = <T>(url: string, initialState: PostType[]): ReturnData<T
     setData(prevState => [post, ...prevState]);
   };
 
-  return {data, fetchFromApi, addNewTweet};
+  return {data, FetchFromApi, addNewTweet};
 };
-
-export const customFetch = () => {};

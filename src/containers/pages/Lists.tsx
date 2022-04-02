@@ -1,5 +1,5 @@
 import React from 'react';
 
 export const Lists = () => {
-  return <div>Lists</div>;
+  return <div className="col-6">Lists</div>;
 };
