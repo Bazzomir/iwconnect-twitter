@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 export interface Props {
   text: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
 }
 
 export const TrendsForYous = ({icon, text}: Props) => {
@@ -27,7 +27,7 @@ export const TrendsForYous = ({icon, text}: Props) => {
   );
 };
 
-const Styled = {
+export const Styled = {
   Container: styled.div`
     flex-direction: row;
     background: #bfbfbf;

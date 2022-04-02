@@ -13,7 +13,7 @@ export const Navbar = () => {
     <Styled.Container className="col-3">
       <NavLink to="/" icon={<BsTwitter />} />
       <NavLink to="/" text="Home" icon={<RiHome7Line />} />
-      <NavLink to="/expolore" text="Explore" icon={<RiHashtag />} />
+      <NavLink to="/explore" text="Explore" icon={<RiHashtag />} />
       <NavLink to="/notifications" text="Notifications" icon={<IoIosNotificationsOutline />} />
       <NavLink to="/messages" text="Messages" icon={<FaRegEnvelope />} />
       <NavLink to="/bookmarks" text="Bookmarks" icon={<BsBookmark />} />

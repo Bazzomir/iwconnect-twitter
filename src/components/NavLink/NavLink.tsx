@@ -25,6 +25,8 @@ export const Styled = {
     justify-content: flex-start;
     height: 50px;
     color: white;
+    font-size: 23px;
+    padding: 30px 0 30px 0;
   `,
   IconWrapper: styled.div`
     display: flex;
@@ -41,6 +43,5 @@ export const Styled = {
     padding-left: 10px;
     height: 50px;
     flex: 4;
-    font-weight: bold;
   `,
 };
