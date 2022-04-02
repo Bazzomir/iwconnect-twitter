@@ -8,6 +8,7 @@ import {Messages} from '../containers/pages/Messages';
 import {Bookmarks} from '../containers/pages/Bookmarks';
 import {Lists} from '../containers/pages/Lists';
 import {Profile} from '../containers/pages/Profile';
+import {Mentions} from '../containers/pages/Mentions';
 
 export const Routes = () => {
   return (
@@ -21,22 +22,9 @@ export const Routes = () => {
       <Route path="bookmarks" element={<Bookmarks />} />
       <Route path="lists" element={<Lists />} />
       <Route path="profile" element={<Profile />} />
-      <Route
-        path="more"
-        element={
-          <div className="col-6" style={{color: 'white'}}>
-            More
-          </div>
-        }
-      />
-      <Route
-        path="*"
-        element={
-          <div className="col-6" style={{color: 'white'}}>
-            This page doesn't exist!
-          </div>
-        }
-      />
+      <Route path="more" element={<div style={{color: 'white'}}>More</div>} />
+      <Route path="mentions" element={<Mentions />} />
+      <Route path="*" element={<div style={{color: 'white'}}>This page doesn't exist!</div>} />
     </RRDRoutes>
   );
 };

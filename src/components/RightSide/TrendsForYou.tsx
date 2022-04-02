@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 export interface Props {
   text: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
 }
 
 export const TrendsForYous = ({icon, text}: Props) => {
