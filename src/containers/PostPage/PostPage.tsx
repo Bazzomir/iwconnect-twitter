@@ -7,25 +7,23 @@ import {Action} from '../Home/components/Main/components/Post/components/Action'
 import {FaRegComment, FaRetweet} from 'react-icons/fa';
 import {AiOutlineHeart} from 'react-icons/ai';
 import {FiShare} from 'react-icons/fi';
+import {AddTweet} from '../Home/components/Main/components/AddTweet/AddTweet';
 
-interface PostProps {
-  title?: string;
-  body?: string;
-  id?: number;
-  userId?: number;
-}
-
-export const PostPage = ({title, body, id, userId}: PostProps) => {
+export const PostPage = () => {
   const params = useParams();
   const location = useLocation();
 
-  const {data: posts, FetchFromApi} = FetchPosts<PostType>(`posts/${params.id}`, {} as PostType[]);
+  const {
+    data: posts,
+    FetchFromApi,
+    addNewTweet,
+  } = FetchPosts<PostType>(`posts/${params.id}`, {} as PostType[]);
   // console.log('post', data);
 
   useEffect(() => {
-    // if ((location.state as any).id) {
-    //   FetchFromApi();
-    // }
+    if ((location.state as any).id) {
+      FetchFromApi();
+    }
     console.log('location.state', location.state);
   }, []);
 
@@ -48,10 +46,10 @@ export const PostPage = ({title, body, id, userId}: PostProps) => {
             </Styled.Actions>
           </Styled.MainContent>
         </Styled.Wrapper>
+        <div style={{borderTop: '1px solid white'}}>
+          <AddTweet addNewTweet={addNewTweet} />
+        </div>
       </Styled.Container>
-      {/* {posts?.map(post => {
-        return <Post key={post.id} />;
-      })} */}
       {posts &&
         posts.length > 0 &&
         posts.map(post => {

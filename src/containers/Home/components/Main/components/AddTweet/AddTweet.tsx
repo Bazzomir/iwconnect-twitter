@@ -3,7 +3,6 @@ import {BsImage} from 'react-icons/bs';
 import {AiOutlineFileGif, AiOutlineSchedule} from 'react-icons/ai';
 import {BiPoll, BiSmile} from 'react-icons/bi';
 import {HiOutlineLocationMarker} from 'react-icons/hi';
-import {BsStars} from 'react-icons/bs';
 import type {PostType} from '../../types';
 import {PostButton} from '../../../../../../components/Button/Button';
 import {usePostTweet} from '../../../../../../hooks/usePostTweet';
@@ -69,18 +68,19 @@ export const AddTweet = ({addNewTweet}: Props) => {
 
 const Styled = {
   Container: styled.div`
-    border: 1px solid white;
+    border-bottom: 1px solid white;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     height: 150px;
+    padding-bottom: 10px;
   `,
   Avatar: styled.img`
     height: 60px;
     width: 60px;
     border-radius: 50%;
-    margin: 10px 0 0 10px;
+    margin: 15px 0 0 10px;
   `,
   Form: styled.form`
     display: flex;
@@ -96,8 +96,13 @@ const Styled = {
     background: transparent;
     color: white;
     resize: none;
+    border: none;
     &::placeholder {
-      color: white;
+      color: grey;
+      position: absolute;
+      text-align: center;
+      margin-top: 30px;
+      font-size: 20px;
     }
   `,
   ActionsWrapper: styled.div`
