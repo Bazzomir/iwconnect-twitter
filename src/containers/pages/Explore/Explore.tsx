@@ -1,19 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-import {SearchBar} from '../../components/RightSide/SearchBar';
+import {SearchBar} from '../../../components/RightSide/SearchBar';
 import {BsSearch} from 'react-icons/bs';
 import {AiOutlineSetting} from 'react-icons/ai';
-import {TrendsForYouItems} from '../../components/RightSide/RightSideItems/RightSideItems';
+import {TrendsForYouItems} from '../../../components/RightSide/RightSideItems/RightSideItems';
+import {ExploreImageBox} from './ExploreImageBox';
 
 export const Explore = () => {
   return (
     <div className="col-6">
       <Styled.HeaderContainer>
-        <SearchBar icon={<BsSearch />} />
-        <Styled.HeaderIcon>
+        <div className="col-11">
+          <SearchBar icon={<BsSearch />} />
+        </div>
+        <div className="col-2">
           <AiOutlineSetting />
-        </Styled.HeaderIcon>
+        </div>
       </Styled.HeaderContainer>
+      <ExploreImageBox />
       <Styled.TrendsForYouContainer>
         <Styled.HeaderTrendsForYou>Trends for You</Styled.HeaderTrendsForYou>
         <TrendsForYouItems
@@ -81,15 +85,6 @@ const Styled = {
     color: white;
     font-weight: bold;
   `,
-  HeaderIcon: styled.div`
-    position: absolute;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    padding-right: 15px;
-    margin: auto;
-    flex: 1;
-  `,
   HeaderTrendsForYou: styled.div`
     display: flex;
     flex-direction: row;
@@ -105,6 +100,5 @@ const Styled = {
     flex-direction: column;
     align-items: left;
     padding-left: 10px;
-    border: 1px solid white;
   `,
 };

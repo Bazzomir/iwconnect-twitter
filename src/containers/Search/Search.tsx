@@ -5,7 +5,7 @@ import {RiSettings2Line} from 'react-icons/ri';
 import styled from 'styled-components';
 import {WhoToFollow} from '../../components/RightSide/WhoToFollow';
 import {TrendsForYous} from '../../components/RightSide/TrendsForYou';
-import {RightBottomText} from '../../components/RightSide/RightSideItems/RightSideItems';
+import {Footer} from '../Footer/Footer';
 
 export const Search = () => {
   return (
@@ -13,7 +13,7 @@ export const Search = () => {
       <SearchBar icon={<BsSearch />} />
       <TrendsForYous text="Trends for you" icon={<RiSettings2Line />} />
       <WhoToFollow text="Who to follow" />
-      <RightBottomText />
+      <Footer />
     </Styled.Container>
   );
 };

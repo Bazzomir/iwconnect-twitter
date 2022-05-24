@@ -24,6 +24,10 @@
   color: white;
 }
 
+li a:hover{
+  cursor: pointer;
+}
+
 .App-link {
   color: #61dafb;
 }

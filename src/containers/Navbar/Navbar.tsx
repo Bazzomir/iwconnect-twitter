@@ -7,6 +7,7 @@ import {CgProfile, CgMoreO} from 'react-icons/cg';
 import styled from 'styled-components';
 import {Button} from '../../components/Button/Button';
 import {NavLink} from '../../components/NavLink/NavLink';
+import {ProfileNavBar} from './ProfileNavBar';
 
 export const Navbar = () => {
   return (
@@ -21,6 +22,7 @@ export const Navbar = () => {
       <NavLink to="/profile" text="Profile" icon={<CgProfile />} />
       <NavLink to="/more" text="More" icon={<CgMoreO />} />
       <Button nameButton="Tweet" />
+      <ProfileNavBar />
     </Styled.Container>
   );
 };
