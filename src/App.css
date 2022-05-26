@@ -28,15 +28,8 @@ li a:hover{
   cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#commentsDialog .modal-content {
+  border: 2px solid white;
+  border-radius: 25px;
+  backdrop-filter: blur(5px);
 }

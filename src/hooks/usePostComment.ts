@@ -1,22 +1,48 @@
-import {useState} from 'react';
-import {useParams} from 'react-router-dom';
-import {PostComment} from '../containers/Home/components/Main/types';
+import {useRef, useState} from 'react';
+import type {PostComment} from '../containers/Home/components/Main/types';
 
-type ReturnComment<C> = {
-  commentsData: PostComment[];
-  fetchPostsComments: () => Promise<void>;
-};
+export const usePostComment = (fn: (post: PostComment) => void) => {
+  const [tweetComment, setTweetComment] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const someRef = useRef<HTMLTextAreaElement>(null);
+  //   const [postedTweet, setPostedTweet] = useState<PostType>({} as PostType);
 
-export const usePostComment = <C>(id: number | undefined, initialState: PostComment[]): ReturnComment<C> => {
-  const [commentsData, setDataComments] = useState<PostComment[]>(initialState);
-
-  const params = useParams();
-
-  const fetchPostsComments = async () => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`);
-    const commentsData = await response.json();
-    setDataComments(commentsData);
+  const postComment = async () => {
+    setLoading(true);
+    // @ts-ignore
+    console.log('ref value', someRef, someRef.current.value);
+    const text = someRef?.current?.value;
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/comments', {
+        method: 'POST',
+        body: JSON.stringify({
+          body: text,
+          userId: 1,
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+      const data = await response.json();
+      console.log('response', data);
+      //   setPostedTweet(data);
+      fn(data);
+    } catch (error: any) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+      setTweetComment('');
+    }
   };
 
-  return {commentsData, fetchPostsComments};
+  return {
+    postComment,
+    loading,
+    error,
+    tweetComment,
+    setTweetComment,
+    // postedTweet,
+    someRef,
+  };
 };

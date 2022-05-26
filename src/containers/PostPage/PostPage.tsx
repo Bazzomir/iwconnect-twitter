@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useLocation, useParams} from 'react-router-dom';
-import {FetchPosts} from '../../hooks/useFetch';
+import {FetchPosts} from '../../hooks/useFetchPost';
 import {PostType} from '../Home/components/Main/types';
 import {Post, Styled} from '../Home/components/Main/components/Post/Post';
 import {Action} from '../Home/components/Main/components/Post/components/Action';
