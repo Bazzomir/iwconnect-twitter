@@ -37,7 +37,7 @@ export const Post = ({title, body, id, userId}: Props) => {
     FetchFromApi();
   }, []);
 
-  console.log('commentsData', comments);
+  // console.log('commentsData', comments);
 
   var getRandomName = () => {
     var names = ['John', 'Sarah', 'Mike', 'Elisa', 'Anne', 'Gretchen', 'Harley', 'Daisy'];
