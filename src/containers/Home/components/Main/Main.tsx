@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {FetchPosts} from '../../../../hooks/useFetch';
+import {FetchPosts} from '../../../../hooks/useFetchPost';
 import {AddTweet} from './components/AddTweet/AddTweet';
 import {Post} from './components/Post/Post';
 import type {PostType} from './types';
