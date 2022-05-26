@@ -6,11 +6,11 @@ import {FaRegComment, FaRetweet} from 'react-icons/fa';
 import {AiOutlineHeart} from 'react-icons/ai';
 import {FiShare} from 'react-icons/fi';
 import {Modal} from 'react-bootstrap';
-import {usePostComment} from '../../../../../../hooks/usePostComment';
+import {useFetchComment} from '../../../../../../hooks/useFetchComment';
 import {PostComment} from '../../types';
-import {AddTweet} from '../AddTweet/AddTweet';
 import type {PostType} from '../../types';
-import {FetchPosts} from '../../../../../../hooks/useFetch';
+import {FetchPosts} from '../../../../../../hooks/useFetchPost';
+import {AddComments} from '../AddComments/AddComments';
 
 interface Props {
   title?: string;
@@ -25,8 +25,12 @@ export const Post = ({title, body, id, userId}: Props) => {
   const [showComments, setShowComments] = useState<boolean>(false);
   const toggleModal = () => setShowComments(!showComments);
 
-  const {data: posts, FetchFromApi, addNewTweet} = FetchPosts<PostType[]>('posts', []);
-  const {commentsData: comments, fetchPostsComments} = usePostComment<PostComment[]>(id, []);
+  const {data: posts, FetchFromApi} = FetchPosts<PostType[]>('posts', []);
+  const {
+    commentsData: comments,
+    fetchPostsComments,
+    addNewComment,
+  } = useFetchComment<PostComment[]>(id, []);
 
   useEffect(() => {
     fetchPostsComments();
@@ -35,9 +39,19 @@ export const Post = ({title, body, id, userId}: Props) => {
 
   console.log('commentsData', comments);
 
+  var getRandomName = () => {
+    var names = ['John', 'Sarah', 'Mike', 'Elisa', 'Anne', 'Gretchen', 'Harley', 'Daisy'];
+    const min = 0;
+    const max = names.length;
+    const rand = min + Math.random() * (max - min);
+    return names[Math.floor(rand)];
+  };
+
   return (
-    <Styled.Container>
-      <Styled.AdditionalInfo>{id}</Styled.AdditionalInfo>
+    <Styled.Container style={{padding: '3%'}}>
+      <Styled.AdditionalInfo>
+        {id} - {getRandomName()}
+      </Styled.AdditionalInfo>
       <Styled.Wrapper>
         <Styled.Avatar src="https://i.pravatar.cc/100" />
         <Styled.MainContent>
@@ -69,42 +83,49 @@ export const Post = ({title, body, id, userId}: Props) => {
             <Action icon={<FiShare />} actionNumber={0} />
           </Styled.Actions>
           <Modal
+            id="commentsDialog"
             show={showComments}
             onHide={() => {
               setShowComments(false);
             }}
+            size="lg"
           >
-            <Modal.Dialog>
-              <Modal.Header style={{backgroundColor: 'black', color: 'white'}}>
-                Comments for post - {title}
-              </Modal.Header>
-              <Modal.Body style={{backgroundColor: 'black', color: 'white'}}>
-                {comments?.map(comment => {
-                  return (
-                    <div className="row" style={{borderBottom: '5px solid green'}}>
-                      <div className="col-12 font-weight-bold">
-                        <img
-                          src="https://i.pravatar.cc/100"
-                          style={{
-                            width: '50px',
-                            height: '50px',
-                            borderRadius: '100%',
-                            marginRight: '10px',
-                            marginTop: '5px',
-                          }}
-                          alt=" "
-                        />
-                        Title: ({comment?.id}) - {comment?.name}
+            <Modal.Body
+              style={{
+                backgroundColor: 'black',
+                color: 'white',
+                wordWrap: 'break-word',
+              }}
+            >
+              <div className="row">
+                <div className="col-12">
+                  {comments?.map(comment => {
+                    return (
+                      <div className="row mt-2" style={{borderBottom: '3px solid white'}}>
+                        <div className="col-12 font-weight-bold">
+                          <img
+                            src="https://i.pravatar.cc/100"
+                            style={{
+                              width: '50px',
+                              height: '50px',
+                              borderRadius: '100%',
+                              marginRight: '10px',
+                              marginTop: '5px',
+                            }}
+                            alt=" "
+                          />
+                          Title: ({comment?.id} - {getRandomName()}) - {comment?.name}
+                        </div>
+                        <div className="col-11 offset-md-1 offset-sm-1 offset-lg-1 mb-3">
+                          <span className="font-weight-bold">Body:</span> {comment?.body}
+                        </div>
                       </div>
-                      <div className="col-12 mb-3">
-                        <span className="font-weight-bold">Body:</span> {comment?.body}
-                      </div>
-                    </div>
-                  );
-                })}
-                <AddTweet addNewTweet={addNewTweet} />
-              </Modal.Body>
-            </Modal.Dialog>
+                    );
+                  })}
+                </div>
+              </div>
+              <AddComments addNewComment={addNewComment} />
+            </Modal.Body>
           </Modal>
         </Styled.MainContent>
       </Styled.Wrapper>
