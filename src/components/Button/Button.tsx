@@ -16,11 +16,15 @@ export const Button = ({nameButton}: Props) => {
 
   return (
     <div
-      className="btn btn-primary col-12"
+      className="btn btn-xs col-12"
       onClick={onClick}
       style={{
         borderRadius: '30px',
         fontWeight: 'bold',
+        height: '55px',
+        backgroundColor: 'rgba(29,155,240,255)',
+        color: 'white',
+        padding: '12px 0',
       }}
     >
       {nameButton}
@@ -38,7 +42,7 @@ export const LightButton = ({nameButton}: Props) => {
   };
   return (
     <div
-      className="btn btn-light col-12"
+      className="btn btn-light"
       onClick={onClick}
       style={{
         borderRadius: '30px',
@@ -55,7 +59,7 @@ export const LightButton = ({nameButton}: Props) => {
 export const PostButton = ({nameButton, onClick}: Props) => {
   return (
     <div
-      className="btn btn-primary col-3"
+      className="btn col-3"
       onClick={onClick}
       style={{
         borderRadius: '30px',
@@ -64,6 +68,26 @@ export const PostButton = ({nameButton, onClick}: Props) => {
         justifyContent: 'center',
         alignItems: 'center',
         color: 'white',
+        backgroundColor: 'rgba(29,155,240,255)',
+      }}
+    >
+      {nameButton}
+    </div>
+  );
+};
+
+export const EditButton = ({nameButton}: Props) => {
+  return (
+    <div
+      className="btn btn-outline-secondary"
+      style={{
+        borderRadius: '30px',
+        fontWeight: 'bold',
+        height: '40px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        marginLeft: '50%',
       }}
     >
       {nameButton}

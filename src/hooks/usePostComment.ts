@@ -7,15 +7,13 @@ type ReturnComment<C> = {
   fetchPostsComments: () => Promise<void>;
 };
 
-export const usePostComment = <C>(id: string, initialState: PostComment[]): ReturnComment<C> => {
+export const usePostComment = <C>(id: number | undefined, initialState: PostComment[]): ReturnComment<C> => {
   const [commentsData, setDataComments] = useState<PostComment[]>(initialState);
 
   const params = useParams();
 
   const fetchPostsComments = async () => {
-    const response = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${params.id}/comments`
-    );
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`);
     const commentsData = await response.json();
     setDataComments(commentsData);
   };

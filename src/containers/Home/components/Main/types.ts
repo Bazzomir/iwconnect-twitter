@@ -8,7 +8,7 @@ export interface PostType {
 export interface PostComment {
   postId: number;
   id: number;
-  name: number;
+  name: string;
   email: string;
   body: string;
 }

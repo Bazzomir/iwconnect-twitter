@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import styled from 'styled-components';
 import {Action} from './components/Action';
 import {FaRegComment, FaRetweet} from 'react-icons/fa';
 import {AiOutlineHeart} from 'react-icons/ai';
 import {FiShare} from 'react-icons/fi';
-import {Modal} from '../../../../../../components/Modal/Modal';
+import {Modal} from 'react-bootstrap';
+import {usePostComment} from '../../../../../../hooks/usePostComment';
+import {PostComment} from '../../types';
+import {AddTweet} from '../AddTweet/AddTweet';
+import type {PostType} from '../../types';
+import {FetchPosts} from '../../../../../../hooks/useFetch';
 
 interface Props {
   title?: string;
@@ -13,19 +18,22 @@ interface Props {
   id?: number;
   userId?: number;
 }
-// onclick( { if(hasFocus) {
-//   set State = true
-//   <Modal />
-// }})
-// const showModal = () => {
-//   <a href="/modal" style={{width: '20%'}} />;
-// };
 
 export const Post = ({title, body, id, userId}: Props) => {
   const navigate = useNavigate();
-  const [showComments, setShowComments] = useState<boolean>(false);
 
+  const [showComments, setShowComments] = useState<boolean>(false);
   const toggleModal = () => setShowComments(!showComments);
+
+  const {data: posts, FetchFromApi, addNewTweet} = FetchPosts<PostType[]>('posts', []);
+  const {commentsData: comments, fetchPostsComments} = usePostComment<PostComment[]>(id, []);
+
+  useEffect(() => {
+    fetchPostsComments();
+    FetchFromApi();
+  }, []);
+
+  console.log('commentsData', comments);
 
   return (
     <Styled.Container>
@@ -33,69 +41,73 @@ export const Post = ({title, body, id, userId}: Props) => {
       <Styled.Wrapper>
         <Styled.Avatar src="https://i.pravatar.cc/100" />
         <Styled.MainContent>
-          <Styled.Title>{title}</Styled.Title>
-          <Styled.Content>{body}</Styled.Content>
+          <a
+            onClick={() => {
+              navigate(`/posts/${id}`, {
+                state: {
+                  title,
+                  body,
+                  id,
+                  userId,
+                },
+              });
+            }}
+          >
+            <Styled.Title>{title}</Styled.Title>
+            <Styled.Content>{body}</Styled.Content>
+          </a>
           <Styled.Actions>
             <Action
               icon={<FaRegComment />}
               actionNumber={444}
               onClick={() => {
-                // toggleModal();
+                toggleModal();
               }}
             />
             <Action icon={<FaRetweet />} actionNumber={151} />
             <Action icon={<AiOutlineHeart />} actionNumber={1941} />
             <Action icon={<FiShare />} actionNumber={0} />
           </Styled.Actions>
-          {/* <Modal show={showComments} onClose={toggleModal} /> */}
-          <div>
-            <div
-              className="modal fade"
-              id="exampleModalLong"
-              tabIndex={-1}
-              role="dialog"
-              aria-labelledby="exampleModalLongTitle"
-              aria-hidden="true"
-            >
-              <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                  <div className="modal-header">
-                    <h5 className="modal-title" id="exampleModalLongTitle">
-                      Modal title
-                    </h5>
-                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div className="modal-body">...</div>
-                  <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-dismiss="modal">
-                      Close
-                    </button>
-                    <button type="button" className="btn btn-primary">
-                      Save changes
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Modal
+            show={showComments}
+            onHide={() => {
+              setShowComments(false);
+            }}
+          >
+            <Modal.Dialog>
+              <Modal.Header style={{backgroundColor: 'black', color: 'white'}}>
+                Comments for post - {title}
+              </Modal.Header>
+              <Modal.Body style={{backgroundColor: 'black', color: 'white'}}>
+                {comments?.map(comment => {
+                  return (
+                    <div className="row" style={{borderBottom: '5px solid green'}}>
+                      <div className="col-12 font-weight-bold">
+                        <img
+                          src="https://i.pravatar.cc/100"
+                          style={{
+                            width: '50px',
+                            height: '50px',
+                            borderRadius: '100%',
+                            marginRight: '10px',
+                            marginTop: '5px',
+                          }}
+                          alt=" "
+                        />
+                        Title: ({comment?.id}) - {comment?.name}
+                      </div>
+                      <div className="col-12 mb-3">
+                        <span className="font-weight-bold">Body:</span> {comment?.body}
+                      </div>
+                    </div>
+                  );
+                })}
+                <AddTweet addNewTweet={addNewTweet} />
+              </Modal.Body>
+            </Modal.Dialog>
+          </Modal>
         </Styled.MainContent>
       </Styled.Wrapper>
-      <button
-        onClick={() => {
-          navigate(`/posts/${id}`, {
-            state: {
-              title,
-              body,
-              id,
-              userId,
-            },
-          });
-        }}
-      >
-        Navigate to somewhere
-      </button>
     </Styled.Container>
   );
 };

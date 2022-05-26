@@ -1,7 +1,6 @@
 import React from 'react';
 import {TrendsForYouItems} from './RightSideItems/RightSideItems';
 import styled from 'styled-components';
-// import {Styled as StyledNavLink, Props} from '../NavLink/NavLink';
 
 export interface Props {
   text: string;
@@ -11,8 +10,8 @@ export interface Props {
 export const TrendsForYous = ({icon, text}: Props) => {
   return (
     <Styled.Container className="row">
-      <Styled.TextWrapper>{text}</Styled.TextWrapper>
-      <Styled.IconWrapper>{icon}</Styled.IconWrapper>
+      <Styled.TextWrapper className="col-10">{text}</Styled.TextWrapper>
+      <Styled.IconWrapper className="col-2">{icon}</Styled.IconWrapper>
       <TrendsForYouItems
         textGrey="Digital assets & cryptodocumentary • Trending"
         textBold={'#Bitcoin 💰'}
@@ -30,7 +29,7 @@ export const TrendsForYous = ({icon, text}: Props) => {
 export const Styled = {
   Container: styled.div`
     flex-direction: row;
-    background: #bfbfbf;
+    background: rgba(22, 24, 28, 255);
     border-radius: 15px;
     color: whitesmoke;
     display: flex;

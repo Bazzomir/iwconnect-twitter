@@ -12,20 +12,20 @@ interface Props {
 export const WhoToFollowItems = ({textGrey, textWhite}: Props) => {
   return (
     <div className="row">
-      <Styled.ImgWrapper className="col-3">
+      <div className="col-3">
         <img
-          src="https://i.pinimg.com/736x/78/b1/36/78b136e52a183d104aef5f1c6509e4c5.jpg"
+          src="https://i.pravatar.cc/100"
           style={{width: '50px', height: '50px', borderRadius: '100%'}}
           alt=" "
         />
-      </Styled.ImgWrapper>
-      <Styled.MailWrapper className="col-4">
-        <Styled.TextP>
+      </div>
+      <div className="col-4" style={{marginRight: '15px'}}>
+        <Styled.TextP style={{textAlign: 'center', alignItems: 'center'}}>
           <Styled.TextWhite>{textWhite}</Styled.TextWhite>
           <Styled.TextGrey>{textGrey}</Styled.TextGrey>
         </Styled.TextP>
-      </Styled.MailWrapper>
-      <div>
+      </div>
+      <div className="col-3">
         <LightButton nameButton="Follow" />
       </div>
     </div>
@@ -35,7 +35,7 @@ export const WhoToFollowItems = ({textGrey, textWhite}: Props) => {
 export const TrendsForYouItems = ({textGrey, textBold, textNum}: Props) => {
   return (
     <>
-      <Styled.MailWrapper>
+      <Styled.MailWrapper className="col-12">
         <Styled.TextP>
           <Styled.TextGrey>{textGrey}</Styled.TextGrey>
           <Styled.TextBold>{textBold}</Styled.TextBold>
@@ -46,21 +46,10 @@ export const TrendsForYouItems = ({textGrey, textBold, textNum}: Props) => {
   );
 };
 
-export const RightBottomText = () => {
-  return (
-    <div className="mt-3">
-      <Styled.TextGrey>
-        Terms of Service Privacy Policy Cookie Policy Accessibility Ads info More ... @ 2022
-        Twitter, inc
-      </Styled.TextGrey>
-    </div>
-  );
-};
-
 export const Styled = {
   Container: styled.div`
     flex-direction: row;
-    background: #bfbfbf;
+    background: rgba(22, 24, 28, 255);
     border-radius: 15px;
     color: whitesmoke;
     margin: 0px;
@@ -90,7 +79,7 @@ export const Styled = {
   `,
   TextP: styled.div`
     align-items: center;
-    justify-content: center;
+    justify-content: flex-strat;
     color: white;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -104,7 +93,6 @@ export const Styled = {
     color: white;
     font-size: 20px;
     height: 20px;
-    margin-top: 0;
     margin-bottom: 6px;
   `,
   TextBold: styled.p`
