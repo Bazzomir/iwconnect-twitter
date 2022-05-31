@@ -59,13 +59,13 @@ export const Styled = {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
   `,
   IconWrapper: styled.div`
     display: flex;
     align-items: column;
     justify-content: center;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     flex: 1;
     padding: 20px;
     font-size: 25px;
@@ -83,7 +83,7 @@ export const Styled = {
     align-items: column;
     justify-content: center;
     height: 50px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 20px;
     // font-wight: bold;
     margin-bottom: -10px;

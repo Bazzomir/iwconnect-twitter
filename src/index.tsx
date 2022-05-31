@@ -5,11 +5,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
+import {CustomThemeContextConstructor} from './context/CustomThemeContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <CustomThemeContextConstructor>
+        <App />
+      </CustomThemeContextConstructor>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

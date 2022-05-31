@@ -125,7 +125,7 @@ const Styled = {
     flex-direction: row;
     max-height: 30px;
     max-width: 155px;
-    border: 1px solid white;
+    border: 1px solid lightgrey;
     border-radius: 15px;
     margin: 10px;
     text-align: center;

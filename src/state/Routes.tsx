@@ -9,7 +9,7 @@ import {Bookmarks} from '../containers/pages/Bookmarks/Bookmarks';
 import {Lists} from '../containers/pages/Lists/Lists';
 import {Mentions} from '../containers/pages/Notifications/Mentions';
 import {Profile} from '../containers/pages/Profile/Profile';
-import { More } from '../containers/Navbar/More';
+import {More} from '../containers/Navbar/More';
 
 export const Routes = () => {
   return (
@@ -23,7 +23,7 @@ export const Routes = () => {
       <Route path="bookmarks" element={<Bookmarks />} />
       <Route path="lists" element={<Lists />} />
       <Route path="profile" element={<Profile />} />
-      <Route path="more" element={<More/>} />
+      <Route path="more" element={<More />} />
       <Route path="mentions" element={<Mentions />} />
       <Route path="*" element={<div style={{color: 'white'}}>This page doesn't exist!</div>} />
     </RRDRoutes>

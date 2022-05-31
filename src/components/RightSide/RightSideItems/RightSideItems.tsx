@@ -49,9 +49,9 @@ export const TrendsForYouItems = ({textGrey, textBold, textNum}: Props) => {
 export const Styled = {
   Container: styled.div`
     flex-direction: row;
-    background: rgba(22, 24, 28, 255);
+    background: ${props => props.theme.RightSide.wrapperOne.background};
     border-radius: 15px;
-    color: whitesmoke;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     margin: 0px;
     margin-top: 15px;
   `,
@@ -80,7 +80,7 @@ export const Styled = {
   TextP: styled.div`
     align-items: center;
     justify-content: flex-strat;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     margin-top: 10px;
     margin-bottom: 10px;
   `,
@@ -90,7 +90,7 @@ export const Styled = {
     margin: 0;
   `,
   TextWhite: styled.p`
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 20px;
     height: 20px;
     margin-bottom: 6px;
@@ -98,7 +98,7 @@ export const Styled = {
   TextBold: styled.p`
     font-weight: bold;
     font-size: 17px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     margin-top: 0;
     margin-bottom: 0;
   `,

@@ -29,9 +29,9 @@ export const TrendsForYous = ({icon, text}: Props) => {
 export const Styled = {
   Container: styled.div`
     flex-direction: row;
-    background: rgba(22, 24, 28, 255);
+    background: ${props => props.theme.RightSide.wrapperOne.background};
     border-radius: 15px;
-    color: whitesmoke;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     display: flex;
     margin: 0px;
     margin-top: 15px;
@@ -42,7 +42,7 @@ export const Styled = {
     justify-content: flex-strat;
     padding-left: 10px;
     flex: 1;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
   `,
   TextWrapper: styled.div`
     display: flex;
