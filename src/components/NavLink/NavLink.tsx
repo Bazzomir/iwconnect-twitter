@@ -1,6 +1,7 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {useContext} from 'react';
+import {NavLink as RRDNavLink} from 'react-router-dom';
 import styled from 'styled-components';
+import {CustomThemeContext} from '../../context/CustomThemeContext';
 
 export interface Props {
   text?: string;
@@ -9,6 +10,7 @@ export interface Props {
 }
 
 export const NavLink = ({icon, to, text}: Props) => {
+  // const {theme} = useContext(CustomThemeContext);
   return (
     <Styled.Container to={to}>
       <Styled.IconWrapper>{icon}</Styled.IconWrapper>
@@ -18,7 +20,7 @@ export const NavLink = ({icon, to, text}: Props) => {
 };
 
 export const Styled = {
-  Container: styled(Link)`
+  Container: styled(RRDNavLink)`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -27,6 +29,7 @@ export const Styled = {
     color: white;
     font-size: 23px;
     padding: 30px 0 30px 0;
+    background: ${props => props.theme.Navbar.RRDNavLink.background}
   `,
   IconWrapper: styled.div`
     display: flex;
@@ -34,7 +37,7 @@ export const Styled = {
     justify-content: flex-strat;
     padding-left: 10px;
     flex: 1;
-    color: white;
+    color: ${props => props.theme.Navbar.iconColor.color};
   `,
   TextWrapper: styled.div`
     display: flex;
@@ -43,5 +46,6 @@ export const Styled = {
     padding-left: 10px;
     height: 50px;
     flex: 4;
+    color: ${props => props.theme.Navbar.textColor.color};
   `,
 };

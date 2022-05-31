@@ -20,8 +20,8 @@ export const Search = () => {
 
 const Styled = {
   Container: styled.div`
-    background: black;
+    background: ${props => props.theme.Navbar.nav.background};
     color: whitesmoke;
-    border-left: 1px solid white;
+    border-left: 1px solid lightgrey;
   `,
 };

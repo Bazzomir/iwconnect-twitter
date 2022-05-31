@@ -82,7 +82,7 @@ const Styled = {
     align-items: center;
     justify-content: flex-start;
     height: 50px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-weight: bold;
   `,
   HeaderTrendsForYou: styled.div`
@@ -91,7 +91,7 @@ const Styled = {
     align-items: center;
     justify-content: flex-start;
     height: 50px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 20px;
     font-weight: bold;
   `,

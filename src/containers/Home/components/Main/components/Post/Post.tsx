@@ -19,6 +19,14 @@ interface Props {
   userId?: number;
 }
 
+export const getRandomName = () => {
+  var names = ['John', 'Sarah', 'Mike', 'Elisa', 'Anne', 'Gretchen', 'Harley', 'Daisy'];
+  const min = 0;
+  const max = names.length;
+  const rand = min + Math.random() * (max - min);
+  return names[Math.floor(rand)];
+};
+
 export const Post = ({title, body, id, userId}: Props) => {
   const navigate = useNavigate();
 
@@ -38,14 +46,6 @@ export const Post = ({title, body, id, userId}: Props) => {
   }, []);
 
   // console.log('commentsData', comments);
-
-  var getRandomName = () => {
-    var names = ['John', 'Sarah', 'Mike', 'Elisa', 'Anne', 'Gretchen', 'Harley', 'Daisy'];
-    const min = 0;
-    const max = names.length;
-    const rand = min + Math.random() * (max - min);
-    return names[Math.floor(rand)];
-  };
 
   return (
     <Styled.Container style={{padding: '3%'}}>
@@ -139,13 +139,14 @@ export const Styled = {
     flex-direction: column;
     alig-items: center;
     justify-content: centar;
-    border: 1px solid white;
+    border-bottom: 1px solid lightgrey;
     width: 100%;
     margin-bottom: 20px;
+    backgroud: ${props => props.theme.RightSide.wrapperOne.background};
   `,
   AdditionalInfo: styled.span`
     width: 100%;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
   `,
   Wrapper: styled.div`
     display: flex;
@@ -167,11 +168,11 @@ export const Styled = {
   Title: styled.div`
     margin: 0;
     padding: 0;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     text-align: left;
   `,
   Content: styled.p`
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
   `,
   Actions: styled.div`
     display: flex;

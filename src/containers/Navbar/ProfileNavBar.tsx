@@ -25,7 +25,7 @@ const Styled = {
     margin: 0;
   `,
   TextWhite: styled.p`
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 22px;
     height: 20px;
     margin-bottom: 9px;

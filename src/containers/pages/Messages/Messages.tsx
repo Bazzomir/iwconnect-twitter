@@ -50,7 +50,7 @@ export const Styled = {
     align-items: center;
     justify-content: flex-start;
     height: 50px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 20px;
     font-weight: bold;
   `,
@@ -72,7 +72,7 @@ export const Styled = {
     flex-direction: column;
     align-items: left;
     justify-content: flex-start;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     margin: auto;
     wight: 100%;
   `,
@@ -84,7 +84,7 @@ export const Styled = {
   TextWrapper: styled.div`
     align-items: center;
     padding-left: 10px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     padding: 10px 0 10px 0;
     font-size: 37.5px;
     font-weight: bold;

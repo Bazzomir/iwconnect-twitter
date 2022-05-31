@@ -24,6 +24,7 @@ const Styled = {
     color: white;
   `,
   CoverImage: styled.img`
+    margin-top: 15px;
     height: 300px;
   `,
 };

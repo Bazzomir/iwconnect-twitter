@@ -31,7 +31,7 @@ const Styled = {
   Container: styled.div`
     display: flex;
     flex-direction: row;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
   `,
   IconsWrapper: styled.span`
     display: flex;

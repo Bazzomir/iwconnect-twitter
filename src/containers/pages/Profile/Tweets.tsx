@@ -113,7 +113,7 @@ const Styled = {
     margin-top: 5px;
   `,
   TextWhite: styled.p`
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 22px;
     height: 20px;
     margin-bottom: 6px;
@@ -125,14 +125,14 @@ const Styled = {
     flex-direction: row;
     max-height: 30px;
     max-width: 155px;
-    border: 1px solid white;
+    border: 1px solid lightgrey;
     border-radius: 15px;
     margin: 10px;
     text-align: center;
   `,
   BallonText: styled.p`
     display: column;
-    color: White;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 15px;
     font-weight: bold;
     flex: 3;
@@ -143,6 +143,6 @@ const Styled = {
     align-items: center;
     justify-content: flex-strat;
     flex: 2;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
   `,
 };

@@ -11,7 +11,7 @@ export const Main = () => {
     FetchFromApi();
   }, []);
 
-  console.log('data', posts);
+  // console.log('data', posts);
 
   return (
     <main className="col-6">

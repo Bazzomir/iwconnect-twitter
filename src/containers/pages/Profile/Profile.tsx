@@ -117,14 +117,14 @@ export const Profile = () => {
   );
 };
 
-const Styled = {
+export const Styled = {
   HeaderContainer: styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     height: 50px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 20px;
     font-weight: bold;
   `,
@@ -147,7 +147,7 @@ const Styled = {
     align-items: center;
     justify-content: flex-strat;
     padding-right: 10px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
   `,
   TextGrey: styled.p`
     display: column;
@@ -160,8 +160,8 @@ const Styled = {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    color: white;
-    border: 1px solid white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
+    border: 1px solid lightgrey;
   `,
   CoverImage: styled.div`
     flex-direction: row;
@@ -186,7 +186,7 @@ const Styled = {
   TextP: styled.div`
     align-items: center;
     justify-content: flex-strat;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     margin: 15px 0 0 20px;
   `,
   GreyText: styled.p`
@@ -195,7 +195,7 @@ const Styled = {
     margin: 0;
   `,
   TextWhite: styled.p`
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 22px;
     height: 20px;
     margin-bottom: 6px;
@@ -213,7 +213,7 @@ const Styled = {
     align-items: center;
     justify-content: flex-strat;
     flex: 1;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     padding-right: 10px;
   `,
   TextWrapper: styled.p`
@@ -232,14 +232,14 @@ const Styled = {
     align-items: center;
     justify-content: flex-strat;
     flex: 1;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     padding-right: 2px;
   `,
   LinksProfile: styled.div`
     display: flex;
     align-items: column;
     justify-content: center;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 15px;
     font-wight: bold;
     list-style-type: none;
