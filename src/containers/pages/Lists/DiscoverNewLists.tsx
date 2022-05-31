@@ -137,7 +137,7 @@ const Styled = {
   TextP: styled.div`
     align-items: center;
     justify-content: center;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     margin: 5px 0 10px 0;
   `,
   TextGrey: styled.p`
@@ -146,12 +146,12 @@ const Styled = {
     margin: 0;
   `,
   TextWhiteGrey: styled.p`
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 11px;
     margin: 0;
   `,
   TextWhite: styled.p`
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 20px;
     height: 20px;
     margin-top: 0;

@@ -38,7 +38,7 @@ const Styled = {
     align-items: center;
     justify-content: flex-start;
     height: 50px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     font-size: 20px;
     font-weight: bold;
   `,
@@ -60,7 +60,7 @@ const Styled = {
     align-items: center;
     justify-content: flex-strat;
     padding-right: 10px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
   `,
   TextParagraphWrapper: styled.p`
     display: row;
@@ -71,16 +71,16 @@ const Styled = {
   TextWrapper: styled.div`
     align-items: center;
     padding-left: 10px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     padding: 10px 0 10px 0;
     font-size: 20px;
     font-weight: bold;
   `,
   WhoToFollowContainer: styled.div`
     flex-direction: column;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     aling-text: center;
     justify-content: flex-start;
-    border: 1px solid black;
+    border: 1px solid lightgrey;
   `,
 };

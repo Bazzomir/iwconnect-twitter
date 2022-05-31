@@ -18,14 +18,14 @@ const Styled = {
   Container: styled.div`
     margin: 0px;
     margin-top: 10px;
-    background: rgba(22, 24, 28, 255);
+    background: ${props => props.theme.RightSide.wrapperOne.background};
     color: whitesmoke;
     border-radius: 50px;
     position: relative;
   `,
   SearchBoxStyle: styled.input`
     position: relative;
-    background: rgba(22, 24, 28, 255);
+    background: ${props => props.theme.RightSide.wrapperOne.background};
     display: flex;
     align-items: center;
     justify-content: flex-strat;
@@ -42,6 +42,6 @@ const Styled = {
     align-items: center;
     padding-right: 5px;
     padding-left: 17px;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperOne.title.color};
   `,
 };

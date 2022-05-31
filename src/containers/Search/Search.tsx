@@ -19,10 +19,9 @@ export const Search = () => {
 };
 
 const Styled = {
-  Container: styled.nav`
-    background: black;
-    height: 100vh;
+  Container: styled.div`
+    background: ${props => props.theme.Navbar.nav.background};
     color: whitesmoke;
-    border-left: 1px solid white;
+    border-left: 1px solid lightgrey;
   `,
 };
