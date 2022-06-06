@@ -9,7 +9,7 @@ import {Lists} from '../containers/pages/Lists/Lists';
 import {Mentions} from '../containers/pages/Notifications/Mentions';
 import {Profile} from '../containers/pages/Profile/Profile';
 import {More} from '../containers/Navbar/More';
-import {PostPage} from '../containers/Home/components/Main/components/PostPage/PostPage';
+import {PostPage} from '../containers/Home/components/Main/components/PostPage/PostPage'
 
 export const Routes = () => {
   return (
