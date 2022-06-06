@@ -37,9 +37,9 @@ export const theme = {
         },
       },
     },
-    Border:{
-      
-    }
+    links: {
+      color: 'white',
+    },
   },
   light: {
     Navbar: {
@@ -78,6 +78,9 @@ export const theme = {
           color: 'black',
         },
       },
+    },
+    links: {
+      color: 'black',
     },
   },
 };

@@ -1,25 +1,27 @@
+import {useContext, useEffect, useState} from 'react'; 
+import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
-import {BsImage,BsStars} from 'react-icons/bs';
-import {AiOutlineFileGif, AiOutlineSchedule, } from 'react-icons/ai';
+import {Styled as StyledHeader} from '../../../../../pages/Messages/Messages';
+import {BsImage, BsStars} from 'react-icons/bs';
+import {AiOutlineFileGif, AiOutlineSchedule} from 'react-icons/ai';
 import {BiPoll, BiSmile} from 'react-icons/bi';
 import {HiOutlineLocationMarker} from 'react-icons/hi';
-import type {PostType} from '../../types';
 import {PostButton} from '../../../../../../components/Button/Button';
 import {usePostTweet} from '../../../../../../hooks/usePostTweet';
-import {Styled as StyledHeader} from '../../../../../pages/Messages/Messages';
 
-interface Props {
-  addNewTweet: (post: PostType) => void;
-}
+export const AddTweet = () => {
+  const {postTweet, tweet, setTweet, error, loading} = usePostTweet();
 
-export const AddTweet = ({addNewTweet}: Props) => {
-  const {error, loading, postTweet, someRef} = usePostTweet(addNewTweet);
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    mode: 'onChange',
+  });
+
   if (error) {
-    return (
-      <div>
-        <p>{error}</p>
-      </div>
-    );
+    return <div>alert(error)</div>;
   }
 
   if (loading) {
@@ -29,6 +31,11 @@ export const AddTweet = ({addNewTweet}: Props) => {
       </div>
     );
   }
+
+  const onSubmit = (data: any) => {
+    console.log('data', data);
+    postTweet();
+  };
 
   return (
     <div>
@@ -42,10 +49,12 @@ export const AddTweet = ({addNewTweet}: Props) => {
       </div>
       <Styled.Container>
         <Styled.Avatar src="https://i.pravatar.cc/100" />
-        <Styled.Form>
+        <Styled.Form onSubmit={handleSubmit(onSubmit)}>
           <Styled.TextArea
+            {...register('tweet')}
+            value={tweet}
+            onChange={e => setTweet(e.target.value)}
             maxLength={140}
-            ref={someRef}
             placeholder="Whats's happening?"
           ></Styled.TextArea>
           <Styled.ActionsWrapper>
@@ -69,7 +78,11 @@ export const AddTweet = ({addNewTweet}: Props) => {
                 <HiOutlineLocationMarker color="rgb(29,155,240)" />
               </Styled.Icon>
             </Styled.IconsWrapper>
-            <PostButton nameButton="Tweet" onClick={postTweet} />
+            <PostButton
+              type="submit"
+              nameButton="Tweet"
+              disabled={!!Object.keys(errors).length}
+            />
           </Styled.ActionsWrapper>
         </Styled.Form>
       </Styled.Container>

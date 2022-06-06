@@ -6,19 +6,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from 'react-router-dom';
 import {CustomThemeContextConstructor} from './context/CustomThemeContext';
+import {TweetsContextConstructor} from './context/TweetsContext';
+import {TweetsCommentsContextConstructor} from './context/TweetsCommentsContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <CustomThemeContextConstructor>
-        <App />
+        <TweetsContextConstructor>
+          <TweetsCommentsContextConstructor>
+            <App />
+          </TweetsCommentsContextConstructor>
+        </TweetsContextConstructor>
       </CustomThemeContextConstructor>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

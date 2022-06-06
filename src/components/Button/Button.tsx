@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 interface Props {
   nameButton?: string;
   onClick?: () => void;
+  type?: React.HTMLProps<HTMLButtonElement>['type'];
 }
 
 export const Button = ({nameButton}: Props) => {
@@ -57,9 +58,17 @@ export const LightButton = ({nameButton}: Props) => {
   );
 };
 
-export const PostButton = ({nameButton, onClick}: Props) => {
+export const PostButton = ({
+  nameButton,
+  onClick,
+  type,
+  ...rest
+}: React.HTMLProps<HTMLButtonElement> & Props) => {
   return (
-    <div
+    <button
+      {...rest}
+      // @ts-ignore
+      type={type}
       className="btn col-3"
       onClick={onClick}
       style={{
@@ -73,7 +82,29 @@ export const PostButton = ({nameButton, onClick}: Props) => {
       }}
     >
       {nameButton}
-    </div>
+    </button>
+  );
+};
+
+export const ReplyButton = ({nameButton, onClick}: Props) => {
+  return (
+    <button
+      className="col-2"
+      onClick={onClick}
+      style={{
+        float: 'right',
+        marginTop: '25px',
+        borderRadius: '30px',
+        fontWeight: 'bold',
+        height: '50px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        backgroundColor: 'rgba(29,155,240,255)',
+      }}
+    >
+      {nameButton}
+    </button>
   );
 };
 

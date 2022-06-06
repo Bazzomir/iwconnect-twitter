@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import './App.css';
 import {Navbar} from './containers/Navbar/Navbar';
 import {Search} from './containers/Search/Search';
@@ -16,10 +16,8 @@ function App() {
 
   return (
     <ThemeProvider theme={theme[localTheme]}>
-      {/* <button onClick={toggleTheme}>switch theme</button> */}
       <div className="container-fluid">
         <div className="row">
-          {/* <Navbar theme={theme} toggleTheme={toggleTheme} /> */}
           <Navbar />
           <Routes />
           {location.pathname !== '/messages' && location.pathname !== '/explore' && <Search />}

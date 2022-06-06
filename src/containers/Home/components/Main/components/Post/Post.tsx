@@ -6,11 +6,9 @@ import {FaRegComment, FaRetweet} from 'react-icons/fa';
 import {AiOutlineHeart} from 'react-icons/ai';
 import {FiShare} from 'react-icons/fi';
 import {Modal} from 'react-bootstrap';
+import {AddComments} from '../AddComments/AddComments';
 import {useFetchComment} from '../../../../../../hooks/useFetchComment';
 import {PostComment} from '../../types';
-import type {PostType} from '../../types';
-import {FetchPosts} from '../../../../../../hooks/useFetchPost';
-import {AddComments} from '../AddComments/AddComments';
 
 interface Props {
   title?: string;
@@ -20,7 +18,7 @@ interface Props {
 }
 
 export const getRandomName = () => {
-  var names = ['John', 'Sarah', 'Mike', 'Elisa', 'Anne', 'Gretchen', 'Harley', 'Daisy'];
+  const names = ['John', 'Sarah', 'Mike', 'Elisa', 'Anne', 'Gretchen', 'Harley', 'Daisy'];
   const min = 0;
   const max = names.length;
   const rand = min + Math.random() * (max - min);
@@ -29,23 +27,16 @@ export const getRandomName = () => {
 
 export const Post = ({title, body, id, userId}: Props) => {
   const navigate = useNavigate();
-
   const [showComments, setShowComments] = useState<boolean>(false);
-  const toggleModal = () => setShowComments(!showComments);
-
-  const {data: posts, FetchFromApi} = FetchPosts<PostType[]>('posts', []);
   const {
     commentsData: comments,
     fetchPostsComments,
     addNewComment,
-  } = useFetchComment<PostComment[]>(id, []);
+  } = useFetchComment<PostComment[]>(`${id}/comments`, []);
 
   useEffect(() => {
     fetchPostsComments();
-    FetchFromApi();
   }, []);
-
-  // console.log('commentsData', comments);
 
   return (
     <Styled.Container style={{padding: '3%'}}>
@@ -57,7 +48,7 @@ export const Post = ({title, body, id, userId}: Props) => {
         <Styled.MainContent>
           <a
             onClick={() => {
-              navigate(`/posts/${id}`, {
+              navigate(`/post/${id}`, {
                 state: {
                   title,
                   body,
@@ -75,7 +66,7 @@ export const Post = ({title, body, id, userId}: Props) => {
               icon={<FaRegComment />}
               actionNumber={444}
               onClick={() => {
-                toggleModal();
+                setShowComments(prevState => !prevState);
               }}
             />
             <Action icon={<FaRetweet />} actionNumber={151} />
@@ -143,6 +134,8 @@ export const Styled = {
     width: 100%;
     margin-bottom: 20px;
     backgroud: ${props => props.theme.RightSide.wrapperOne.background};
+    overflow: hidden;
+    word-wrap: break-word;
   `,
   AdditionalInfo: styled.span`
     width: 100%;

@@ -13,7 +13,8 @@ interface Props {
 }
 
 export const AddComments = ({addNewComment}: Props) => {
-  const {error, loading, postComment, someRef} = usePostComment(addNewComment);
+  const {postComment, loading, error, someRef} = usePostComment(addNewComment);
+
   if (error) {
     return (
       <div>
@@ -35,8 +36,8 @@ export const AddComments = ({addNewComment}: Props) => {
       <Styled.Avatar src="https://i.pravatar.cc/100" />
       <Styled.Form>
         <Styled.TextArea
-          maxLength={140}
           ref={someRef}
+          maxLength={140}
           placeholder="Tweet your reply"
         ></Styled.TextArea>
         <Styled.ActionsWrapper>
@@ -60,7 +61,7 @@ export const AddComments = ({addNewComment}: Props) => {
               <HiOutlineLocationMarker color="rgb(29,155,240)" />
             </Styled.Icon>
           </Styled.IconsWrapper>
-          <PostButton nameButton="Tweet" onClick={postComment} />
+          <PostButton type="submit" nameButton="Tweet" onClick={postComment} />
         </Styled.ActionsWrapper>
       </Styled.Form>
     </Styled.Container>
@@ -74,6 +75,7 @@ const Styled = {
     align-items: flex-start;
     height: 150px;
     padding: 10px 0 10px 0;
+    overflow: hidden;
   `,
   Avatar: styled.img`
     height: 50px;
@@ -111,6 +113,7 @@ const Styled = {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    overflow: hidden;
   `,
   IconsWrapper: styled.div`
     display: flex;

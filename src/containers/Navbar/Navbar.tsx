@@ -9,10 +9,10 @@ import {Button} from '../../components/Button/Button';
 import {NavLink} from '../../components/NavLink/NavLink';
 import {ProfileNavBar} from './ProfileNavBar';
 import {CustomThemeContext} from '../../context/CustomThemeContext';
-// import {theme} from '../../theme/theme';
 
 export const Navbar = () => {
-  const {theme: localTheme, toggleTheme} = useContext(CustomThemeContext);
+  const {toggleTheme} = useContext(CustomThemeContext);
+
   return (
     <Styled.Container className="col-3">
       <NavLink to="/" icon={<BsTwitter />} />
@@ -25,14 +25,6 @@ export const Navbar = () => {
       <NavLink to="/profile" text="Profile" icon={<CgProfile />} />
       <NavLink to="/more" text="More" icon={<CgMoreO />} />
       <Button nameButton="Tweet" />
-      {/* <button
-        type="button"
-        className="btn btn-secondary"
-        style={{borderRadius: '50px', marginTop: '25px'}}
-        onClick={toggleTheme}
-      >
-        Toggle Theme
-      </button> */}
       <label className="switch mt-3">
         <input type="checkbox" onClick={toggleTheme} />
         <span className="slider round"></span>

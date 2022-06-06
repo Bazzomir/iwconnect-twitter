@@ -5,7 +5,7 @@ import {RiSettings2Line} from 'react-icons/ri';
 import styled from 'styled-components';
 import {WhoToFollow} from '../../components/RightSide/WhoToFollow';
 import {TrendsForYous} from '../../components/RightSide/TrendsForYou';
-import {Footer} from '../Footer/Footer';
+import { Footer } from '../Footer/Footer';
 
 export const Search = () => {
   return (

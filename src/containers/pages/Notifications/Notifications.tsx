@@ -25,7 +25,7 @@ export const Notifications = () => {
             }}
             style={{
               textDecoration: 'none',
-              color: 'white',
+              color: '' + ((props: any) => props.theme.links.color),
               fontWeight: tabNumActivated == 0 ? 'bold' : 'normal',
             }}
           >
@@ -39,7 +39,7 @@ export const Notifications = () => {
             }}
             style={{
               textDecoration: 'none',
-              color: 'white',
+              color: '' + ((props: any) => props.theme.links.color),
               fontWeight: tabNumActivated == 1 ? 'bold' : 'normal',
             }}
           >
@@ -65,7 +65,7 @@ export const Styled = {
     display: flex;
     align-items: column;
     justify-content: center;
-    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
+    color: ${props => props.theme.Navbar.iconColor.color};
     flex: 1;
     padding: 20px;
     font-size: 25px;
@@ -83,13 +83,11 @@ export const Styled = {
     align-items: column;
     justify-content: center;
     height: 50px;
-    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
+    color: ${props => props.theme.links.color};
     font-size: 20px;
-    // font-wight: bold;
     margin-bottom: -10px;
     list-style-type: none;
     justify-content: space-around;
     text-decoration: none;
-    color: rgb(128, 105, 255);
   `,
 };

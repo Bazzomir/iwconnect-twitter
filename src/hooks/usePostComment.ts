@@ -1,12 +1,11 @@
-import {useRef, useState} from 'react';
-import type {PostComment} from '../containers/Home/components/Main/types';
+import { useRef, useState} from 'react';
+import { PostComment } from '../containers/Home/components/Main/types';
 
 export const usePostComment = (fn: (post: PostComment) => void) => {
   const [tweetComment, setTweetComment] = useState<string>('');
-  const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
   const someRef = useRef<HTMLTextAreaElement>(null);
-  //   const [postedTweet, setPostedTweet] = useState<PostType>({} as PostType);
 
   const postComment = async () => {
     setLoading(true);
@@ -24,10 +23,9 @@ export const usePostComment = (fn: (post: PostComment) => void) => {
           'Content-type': 'application/json; charset=UTF-8',
         },
       });
-      const data = await response.json();
-      console.log('response', data);
-      //   setPostedTweet(data);
-      fn(data);
+      const commentsData = await response.json();
+      console.log('response', commentsData);
+      fn(commentsData);
     } catch (error: any) {
       setError(error.message);
     } finally {
@@ -38,11 +36,10 @@ export const usePostComment = (fn: (post: PostComment) => void) => {
 
   return {
     postComment,
-    loading,
     error,
+    loading,
     tweetComment,
     setTweetComment,
-    // postedTweet,
     someRef,
   };
 };

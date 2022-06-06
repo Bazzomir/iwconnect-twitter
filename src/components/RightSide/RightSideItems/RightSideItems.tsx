@@ -11,7 +11,7 @@ interface Props {
 
 export const WhoToFollowItems = ({textGrey, textWhite}: Props) => {
   return (
-    <div className="row">
+    <div className="row" style={{overflow: 'hidden'}}>
       <div className="col-3">
         <img
           src="https://i.pravatar.cc/100"

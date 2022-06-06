@@ -1,7 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {NavLink as RRDNavLink} from 'react-router-dom';
 import styled from 'styled-components';
-import {CustomThemeContext} from '../../context/CustomThemeContext';
 
 export interface Props {
   text?: string;
@@ -10,7 +9,6 @@ export interface Props {
 }
 
 export const NavLink = ({icon, to, text}: Props) => {
-  // const {theme} = useContext(CustomThemeContext);
   return (
     <Styled.Container to={to}>
       <Styled.IconWrapper>{icon}</Styled.IconWrapper>
@@ -29,7 +27,8 @@ export const Styled = {
     color: white;
     font-size: 23px;
     padding: 30px 0 30px 0;
-    background: ${props => props.theme.Navbar.RRDNavLink.background}
+    background: ${props => props.theme.Navbar.RRDNavLink.background};
+    overflow: hidden;
   `,
   IconWrapper: styled.div`
     display: flex;
