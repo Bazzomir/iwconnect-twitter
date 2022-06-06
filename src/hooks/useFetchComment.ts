@@ -1,29 +1,27 @@
 import {useState} from 'react';
 import {useParams} from 'react-router-dom';
-import {PostComment} from '../containers/Home/components/Main/types';
-
-type ReturnComment<C> = {
-  commentsData: PostComment[];
-  fetchPostsComments: () => Promise<void>;
-  addNewComment: (post: PostComment) => void;
-};
+import type {PostComment} from '../containers/Home/components/Main/types';
 
 export const useFetchComment = <C>(
-  id: number | undefined,
+  url: string,
   initialState: PostComment[]
-): ReturnComment<C> => {
+): {
+  commentsData: PostComment[];
+  fetchPostsComments: () => Promise<void>;
+  addNewComment: (postComments: PostComment) => void;
+} => {
   const [commentsData, setDataComments] = useState<PostComment[]>(initialState);
 
   const params = useParams();
 
   const fetchPostsComments = async () => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`);
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${url}`);
     const commentsData = await response.json();
     setDataComments(commentsData);
   };
 
-  const addNewComment = (post: PostComment) => {
-    setDataComments(prevState => [post, ...prevState]);
+  const addNewComment = (postComments: PostComment) => {
+    setDataComments(prevState => [postComments, ...prevState]);
   };
 
   return {commentsData, fetchPostsComments, addNewComment};

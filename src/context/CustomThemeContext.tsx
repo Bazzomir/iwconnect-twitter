@@ -12,9 +12,6 @@ export const CustomThemeContext = React.createContext<ContextValues>({
 
 export const CustomThemeContextConstructor = ({children}: {children: JSX.Element}) => {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
-  //   const toggleTheme = () => {
-  //     setValue(prevState => (prevState === 'dark' ? 'light' : 'dark'));
-  //   };
 
   const toggleTheme = useCallback(() => {
     setTheme(prevState => (prevState === 'dark' ? 'light' : 'dark'));

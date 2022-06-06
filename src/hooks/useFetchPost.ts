@@ -3,14 +3,14 @@ import type {PostType} from '../containers/Home/components/Main/types';
 
 type ReturnData<T> = {
   data: PostType[];
-  FetchFromApi: () => Promise<void>;
+  FetchPostFromApi: () => Promise<void>;
   addNewTweet: (post: PostType) => void;
 };
 
 export const FetchPosts = <T>(url: string, initialState: PostType[]): ReturnData<T> => {
   const [data, setData] = useState<PostType[]>(initialState);
 
-  const FetchFromApi = async () => {
+  const FetchPostFromApi = async () => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/${url}`);
     const data = await response.json();
     setData(data);
@@ -20,6 +20,6 @@ export const FetchPosts = <T>(url: string, initialState: PostType[]): ReturnData
     setData(prevState => [post, ...prevState]);
   };
 
-  return {data, FetchFromApi, addNewTweet};
+  return {data, FetchPostFromApi, addNewTweet};
 };
 
