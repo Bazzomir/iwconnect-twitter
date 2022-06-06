@@ -1,22 +1,15 @@
-import React, {useEffect} from 'react';
-import {FetchPosts} from '../../../../hooks/useFetchPost';
+import React, {useContext} from 'react';
 import {AddTweet} from './components/AddTweet/AddTweet';
 import {Post} from './components/Post/Post';
-import type {PostType} from './types';
+import {TweetsContext} from '../../../../context/TweetsContext';
 
 export const Main = () => {
-  const {data: posts, FetchFromApi, addNewTweet} = FetchPosts<PostType[]>('posts', []);
-
-  useEffect(() => {
-    FetchFromApi();
-  }, []);
-
-  // console.log('data', posts);
+  const {tweets} = useContext(TweetsContext);
 
   return (
     <main className="col-6">
-      <AddTweet addNewTweet={addNewTweet} />
-      {posts?.map(post => {
+      <AddTweet />
+      {tweets?.map(post => {
         return <Post key={post.id} {...post} />;
       })}
     </main>

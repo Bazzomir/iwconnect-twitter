@@ -1,14 +1,24 @@
+import {useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import styled from 'styled-components';
-import type {PostType} from '../../types';
-import {PostButton} from '../../../../../../components/Button/Button';
-import {usePostTweet} from '../../../../../../hooks/usePostTweet';
+import {ReplyButton} from '../../../../../../components/Button/Button';
+import {useFetchComment} from '../../../../../../hooks/useFetchComment';
+import {usePostComment} from '../../../../../../hooks/usePostComment';
+import {PostComment} from '../../types';
 
 interface Props {
-  addNewTweet: (post: PostType) => void;
+  addNewComment: (post: PostComment) => void;
 }
 
-export const AddTweetPostPage = ({addNewTweet}: Props) => {
-  const {error, loading, postTweet, someRef} = usePostTweet(addNewTweet);
+export const AddCommentsPostPage = ({addNewComment}: Props) => {
+  const params = useParams();
+  const {postComment, loading, error, someRef} = usePostComment(addNewComment);
+  const {fetchPostsComments} = useFetchComment<PostComment[]>(`${params.id}/comments`, []);
+
+  useEffect(() => {
+    fetchPostsComments();
+  }, []);
+
   if (error) {
     return (
       <div>
@@ -30,12 +40,12 @@ export const AddTweetPostPage = ({addNewTweet}: Props) => {
       <Styled.Avatar src="https://i.pravatar.cc/100" />
       <Styled.Form>
         <Styled.TextArea
-          maxLength={140}
           ref={someRef}
-          placeholder="Replay your tweet"
+          maxLength={140}
+          placeholder="Tweet your reply"
         ></Styled.TextArea>
+        <ReplyButton type="submit" nameButton="Tweet" onClick={postComment} />
       </Styled.Form>
-      <PostButton nameButton="Tweet" onClick={postTweet} />
     </Styled.Container>
   );
 };
@@ -45,7 +55,7 @@ const Styled = {
     border-bottom: 1px solid lightgrey;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     height: 100%;
     padding-bottom: 10px;
   `,
@@ -56,7 +66,7 @@ const Styled = {
     margin: 15px 0 0 10px;
   `,
   Form: styled.form`
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     align-items: flex-start;
     height: 100%;
@@ -65,7 +75,7 @@ const Styled = {
   `,
   TextArea: styled.textarea`
     height: 75px;
-    width: 100%;
+    width: 75%;
     background: transparent;
     color: white;
     resize: none;
@@ -74,7 +84,7 @@ const Styled = {
       color: grey;
       position: absolute;
       text-align: center;
-      margin-top: 25px;
+      margin-top: 30px;
       font-size: 20px;
     }
   `,

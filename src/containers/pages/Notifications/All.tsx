@@ -1,12 +1,12 @@
 import React from 'react';
-import { BsTwitter } from 'react-icons/bs';
-import { Styled } from './Notifications';
+import {BsTwitter} from 'react-icons/bs';
+import {Styled} from './Notifications';
 
 export const All = () => {
   return (
     <>
       <Styled.NotificationsContainer>
-        <div className="row" style={{border: '1px solid white'}}>
+        <div className="row" style={{border: '1px solid lightgrey'}}>
           <div className="col-2">
             <Styled.IconWrapper>
               <BsTwitter />
@@ -19,7 +19,7 @@ export const All = () => {
             </Styled.TextWrapper>
           </div>
         </div>
-        <div className="row" style={{border: '1px solid white'}}>
+        <div className="row" style={{border: '1px solid lightgrey'}}>
           <div className="col-2">
             <Styled.IconWrapper>
               <BsTwitter />
@@ -32,7 +32,7 @@ export const All = () => {
             </Styled.TextWrapper>
           </div>
         </div>
-        <div className="row" style={{border: '1px solid white'}}>
+        <div className="row" style={{border: '1px solid lightgrey'}}>
           <div className="col-2">
             <Styled.IconWrapper>
               <BsTwitter />
@@ -45,7 +45,7 @@ export const All = () => {
             </Styled.TextWrapper>
           </div>
         </div>
-        <div className="row" style={{border: '1px solid white'}}>
+        <div className="row" style={{border: '1px solid lightgrey'}}>
           <div className="col-2">
             <Styled.IconWrapper>
               <BsTwitter />
@@ -58,7 +58,7 @@ export const All = () => {
             </Styled.TextWrapper>
           </div>
         </div>
-        <div className="row" style={{border: '1px solid white'}}>
+        <div className="row" style={{border: '1px solid lightgrey'}}>
           <div className="col-2">
             <Styled.IconWrapper>
               <BsTwitter />
@@ -71,7 +71,7 @@ export const All = () => {
             </Styled.TextWrapper>
           </div>
         </div>
-        <div className="row" style={{border: '1px solid white'}}>
+        <div className="row" style={{border: '1px solid lightgrey'}}>
           <div className="col-2">
             <Styled.IconWrapper>
               <BsTwitter />
@@ -84,7 +84,7 @@ export const All = () => {
             </Styled.TextWrapper>
           </div>
         </div>
-        <div className="row" style={{border: '1px solid white'}}>
+        <div className="row" style={{border: '1px solid lightgrey'}}>
           <div className="col-2">
             <Styled.IconWrapper>
               <BsTwitter />

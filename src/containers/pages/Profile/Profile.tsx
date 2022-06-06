@@ -56,7 +56,7 @@ export const Profile = () => {
                 }}
                 style={{
                   textDecoration: 'none',
-                  color: 'white',
+                  color: '' + ((props: any) => props.theme.links.color),
                   fontWeight: tabNumActivated == 0 ? 'bold' : 'normal',
                 }}
               >
@@ -70,7 +70,7 @@ export const Profile = () => {
                 }}
                 style={{
                   textDecoration: 'none',
-                  color: 'white',
+                  color: '' + ((props: any) => props.theme.links.color),
                   marginLeft: '35px',
                   fontWeight: tabNumActivated == 1 ? 'bold' : 'normal',
                 }}
@@ -85,7 +85,7 @@ export const Profile = () => {
                 }}
                 style={{
                   textDecoration: 'none',
-                  color: 'white',
+                  color: '' + ((props: any) => props.theme.links.color),
                   fontWeight: tabNumActivated == 2 ? 'bold' : 'normal',
                 }}
               >
@@ -99,7 +99,7 @@ export const Profile = () => {
                 }}
                 style={{
                   textDecoration: 'none',
-                  color: 'white',
+                  color: '' + ((props: any) => props.theme.links.color),
                   fontWeight: tabNumActivated == 3 ? 'bold' : 'normal',
                 }}
               >
