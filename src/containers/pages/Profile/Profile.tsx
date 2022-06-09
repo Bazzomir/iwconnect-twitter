@@ -49,7 +49,7 @@ export const Profile = () => {
             <Styled.FollowText>Followers</Styled.FollowText>
           </Styled.TextP>
           <Styled.LinksProfile id="links">
-            <li className="col-2">
+            <li className="col-2" key={''}>
               <a
                 onClick={() => {
                   settabNumActivated(0);
@@ -63,7 +63,7 @@ export const Profile = () => {
                 Tweets
               </a>
             </li>
-            <li className="col-5">
+            <li className="col-5" key={'tweets&replies'}>
               <a
                 onClick={() => {
                   settabNumActivated(1);
@@ -78,7 +78,7 @@ export const Profile = () => {
                 Tweets & replies
               </a>
             </li>
-            <li className="col-3">
+            <li className="col-3" key={'media'}>
               <a
                 onClick={() => {
                   settabNumActivated(2);
@@ -92,7 +92,7 @@ export const Profile = () => {
                 Media
               </a>
             </li>
-            <li className="col-2">
+            <li className="col-2" key={'links'}>
               <a
                 onClick={() => {
                   settabNumActivated(3);

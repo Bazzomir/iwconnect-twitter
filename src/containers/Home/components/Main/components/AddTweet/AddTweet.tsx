@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from 'react'; 
+import {useContext, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
 import {Styled as StyledHeader} from '../../../../../pages/Messages/Messages';
@@ -10,7 +10,7 @@ import {PostButton} from '../../../../../../components/Button/Button';
 import {usePostTweet} from '../../../../../../hooks/usePostTweet';
 
 export const AddTweet = () => {
-  const {postTweet, tweet, setTweet, error, loading} = usePostTweet();
+  const {postTweet, tweet, setTweet, error, loading, someRef} = usePostTweet();
 
   const {
     register,
@@ -33,7 +33,7 @@ export const AddTweet = () => {
   }
 
   const onSubmit = (data: any) => {
-    console.log('data', data);
+    // console.log('data', data);
     postTweet();
   };
 
@@ -51,9 +51,10 @@ export const AddTweet = () => {
         <Styled.Avatar src="https://i.pravatar.cc/100" />
         <Styled.Form onSubmit={handleSubmit(onSubmit)}>
           <Styled.TextArea
-            {...register('tweet')}
-            value={tweet}
-            onChange={e => setTweet(e.target.value)}
+            // {...register('tweet')}
+            // value={tweet}
+            // onChange={e => setTweet(e.target.value)}
+            ref={someRef}
             maxLength={140}
             placeholder="Whats's happening?"
           ></Styled.TextArea>
@@ -78,11 +79,7 @@ export const AddTweet = () => {
                 <HiOutlineLocationMarker color="rgb(29,155,240)" />
               </Styled.Icon>
             </Styled.IconsWrapper>
-            <PostButton
-              type="submit"
-              nameButton="Tweet"
-              disabled={!!Object.keys(errors).length}
-            />
+            <PostButton type="submit" nameButton="Tweet" disabled={!!Object.keys(errors).length} />
           </Styled.ActionsWrapper>
         </Styled.Form>
       </Styled.Container>
