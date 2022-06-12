@@ -18,14 +18,17 @@ function App() {
     <ThemeProvider theme={theme[localTheme]}>
       <div className="container-fluid">
         <div className="row">
+          {/* <div className="row">
           <Navbar />
           <Routes />
           {location.pathname !== '/messages' && location.pathname !== '/explore' && <Search />}
           {location.pathname == '/explore' && (
             <div className="col-3">
-              <Footer />
+            <Footer />
             </div>
-          )}
+            )}
+        </div> */}
+          <Routes />
         </div>
       </div>
     </ThemeProvider>
