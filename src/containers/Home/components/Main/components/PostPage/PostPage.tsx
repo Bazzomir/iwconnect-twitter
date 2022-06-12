@@ -12,8 +12,8 @@ import {getRandomName} from '../Post/Post';
 import {IoMdArrowBack} from 'react-icons/io';
 import {useFetchComment} from '../../../../../../hooks/useFetchComment';
 import {AddCommentsPostPage} from '../AddComments/AddCommentsPostPage';
-import { Modal } from 'react-bootstrap';
-import { AddComments } from '../AddComments/AddComments';
+import {Modal} from 'react-bootstrap';
+import {AddComments} from '../AddComments/AddComments';
 
 export const PostPage = () => {
   const params = useParams();
@@ -30,7 +30,7 @@ export const PostPage = () => {
     if ((location.state as any).id) {
       FetchPostFromApi();
     }
-    console.log('location.state', location.state);
+    // console.log('location.state', location.state);
   }, []);
 
   useEffect(() => {
@@ -108,7 +108,11 @@ export const PostPage = () => {
               <div className="col-12">
                 {comments?.map(comment => {
                   return (
-                    <div className="row mt-2" style={{borderBottom: '3px solid white'}}>
+                    <div
+                      className="row mt-2"
+                      key={comment.id}
+                      style={{borderBottom: '3px solid lightgrey'}}
+                    >
                       <div className="col-12 font-weight-bold">
                         <img
                           src="https://i.pravatar.cc/100"

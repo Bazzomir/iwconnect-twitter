@@ -18,7 +18,7 @@ export const Notifications = () => {
         </StyledHeader.HeaderIcon>
       </StyledHeader.HeaderContainer>
       <Styled.AllMentions>
-        <li className="col-2">
+        <li className="col-2" key={'all'}>
           <a
             onClick={() => {
               settabNumActivated(0);
@@ -32,7 +32,7 @@ export const Notifications = () => {
             All
           </a>
         </li>
-        <li className="col-2">
+        <li className="col-2" key={'mentions'}>
           <a
             onClick={() => {
               settabNumActivated(1);
