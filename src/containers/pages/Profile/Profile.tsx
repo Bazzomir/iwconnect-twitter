@@ -7,6 +7,7 @@ import {Tweets} from './Tweets';
 import {TweetsAndReplies} from './Tweets&Replies';
 import {Media} from './Media';
 import {Links} from './Links';
+import {PageWrapperComponent} from '../../PageWrapper/PageWrapperComponent';
 
 export const Profile = () => {
   var initialTab = 0;
@@ -14,106 +15,108 @@ export const Profile = () => {
   const [tabNumActivated, settabNumActivated] = React.useState(initialTab);
 
   return (
-    <div className="col-6">
-      <Styled.HeaderContainer>
-        <Styled.FirstIcon>
-          <IoMdArrowBack />
-        </Styled.FirstIcon>
-        <Styled.Header>
-          John Doe
-          <Styled.TextGrey>0 Tweets</Styled.TextGrey>
-        </Styled.Header>
-      </Styled.HeaderContainer>
-      <Styled.Container>
-        <Styled.CoverImage />
-        <Styled.ProfileInfo>
-          <Styled.AvatarImage
-            className="col-4 rounded-circle w-25"
-            src="https://i.pravatar.cc/100"
-          />
-          <EditButton nameButton="Edit Profile" />
-          <Styled.TextP>
-            <Styled.TextWhite>John Doe</Styled.TextWhite>
-            <Styled.GreyText>@johndoe</Styled.GreyText>
-            <Styled.JoinedDiv>
-              <Styled.TextWrapper>
-                <Styled.IconWrapper>
-                  <GoCalendar />
-                </Styled.IconWrapper>
-                Joined March 2022
-              </Styled.TextWrapper>
-            </Styled.JoinedDiv>
-            <Styled.FollowNumber>1</Styled.FollowNumber>
-            <Styled.FollowText>Following</Styled.FollowText>
-            <Styled.FollowNumber>0</Styled.FollowNumber>
-            <Styled.FollowText>Followers</Styled.FollowText>
-          </Styled.TextP>
-          <Styled.LinksProfile id="links">
-            <li className="col-2" key={''}>
-              <a
-                onClick={() => {
-                  settabNumActivated(0);
-                }}
-                style={{
-                  textDecoration: 'none',
-                  color: '' + ((props: any) => props.theme.links.color),
-                  fontWeight: tabNumActivated == 0 ? 'bold' : 'normal',
-                }}
-              >
-                Tweets
-              </a>
-            </li>
-            <li className="col-5" key={'tweets&replies'}>
-              <a
-                onClick={() => {
-                  settabNumActivated(1);
-                }}
-                style={{
-                  textDecoration: 'none',
-                  color: '' + ((props: any) => props.theme.links.color),
-                  marginLeft: '35px',
-                  fontWeight: tabNumActivated == 1 ? 'bold' : 'normal',
-                }}
-              >
-                Tweets & replies
-              </a>
-            </li>
-            <li className="col-3" key={'media'}>
-              <a
-                onClick={() => {
-                  settabNumActivated(2);
-                }}
-                style={{
-                  textDecoration: 'none',
-                  color: '' + ((props: any) => props.theme.links.color),
-                  fontWeight: tabNumActivated == 2 ? 'bold' : 'normal',
-                }}
-              >
-                Media
-              </a>
-            </li>
-            <li className="col-2" key={'links'}>
-              <a
-                onClick={() => {
-                  settabNumActivated(3);
-                }}
-                style={{
-                  textDecoration: 'none',
-                  color: '' + ((props: any) => props.theme.links.color),
-                  fontWeight: tabNumActivated == 3 ? 'bold' : 'normal',
-                }}
-              >
-                Links
-              </a>
-            </li>
-          </Styled.LinksProfile>
-        </Styled.ProfileInfo>
-      </Styled.Container>
-      {tabNumActivated == 0 && <Tweets />}
-      {tabNumActivated == 1 && <TweetsAndReplies />}
-      {tabNumActivated == 2 && <Media />}
-      {tabNumActivated == 3 && <Links />}
-    </div>
+    <PageWrapperComponent>
+      <div className="col-6">
+        <Styled.HeaderContainer>
+          <Styled.FirstIcon>
+            <IoMdArrowBack />
+          </Styled.FirstIcon>
+          <Styled.Header>
+            John Doe
+            <Styled.TextGrey>0 Tweets</Styled.TextGrey>
+          </Styled.Header>
+        </Styled.HeaderContainer>
+        <Styled.Container>
+          <Styled.CoverImage />
+          <Styled.ProfileInfo>
+            <Styled.AvatarImage
+              className="col-4 rounded-circle w-25"
+              src="https://i.pravatar.cc/100"
+            />
+            <EditButton nameButton="Edit Profile" />
+            <Styled.TextP>
+              <Styled.TextWhite>John Doe</Styled.TextWhite>
+              <Styled.GreyText>@johndoe</Styled.GreyText>
+              <Styled.JoinedDiv>
+                <Styled.TextWrapper>
+                  <Styled.IconWrapper>
+                    <GoCalendar />
+                  </Styled.IconWrapper>
+                  Joined March 2022
+                </Styled.TextWrapper>
+              </Styled.JoinedDiv>
+              <Styled.FollowNumber>1</Styled.FollowNumber>
+              <Styled.FollowText>Following</Styled.FollowText>
+              <Styled.FollowNumber>0</Styled.FollowNumber>
+              <Styled.FollowText>Followers</Styled.FollowText>
+            </Styled.TextP>
+            <Styled.LinksProfile id="links">
+              <li className="col-2" key={''}>
+                <a
+                  onClick={() => {
+                    settabNumActivated(0);
+                  }}
+                  style={{
+                    textDecoration: 'none',
+                    color: '' + ((props: any) => props.theme.links.color),
+                    fontWeight: tabNumActivated == 0 ? 'bold' : 'normal',
+                  }}
+                >
+                  Tweets
+                </a>
+              </li>
+              <li className="col-5" key={'tweets&replies'}>
+                <a
+                  onClick={() => {
+                    settabNumActivated(1);
+                  }}
+                  style={{
+                    textDecoration: 'none',
+                    color: '' + ((props: any) => props.theme.links.color),
+                    marginLeft: '35px',
+                    fontWeight: tabNumActivated == 1 ? 'bold' : 'normal',
+                  }}
+                >
+                  Tweets & replies
+                </a>
+              </li>
+              <li className="col-3" key={'media'}>
+                <a
+                  onClick={() => {
+                    settabNumActivated(2);
+                  }}
+                  style={{
+                    textDecoration: 'none',
+                    color: '' + ((props: any) => props.theme.links.color),
+                    fontWeight: tabNumActivated == 2 ? 'bold' : 'normal',
+                  }}
+                >
+                  Media
+                </a>
+              </li>
+              <li className="col-2" key={'links'}>
+                <a
+                  onClick={() => {
+                    settabNumActivated(3);
+                  }}
+                  style={{
+                    textDecoration: 'none',
+                    color: '' + ((props: any) => props.theme.links.color),
+                    fontWeight: tabNumActivated == 3 ? 'bold' : 'normal',
+                  }}
+                >
+                  Links
+                </a>
+              </li>
+            </Styled.LinksProfile>
+          </Styled.ProfileInfo>
+        </Styled.Container>
+        {tabNumActivated == 0 && <Tweets />}
+        {tabNumActivated == 1 && <TweetsAndReplies />}
+        {tabNumActivated == 2 && <Media />}
+        {tabNumActivated == 3 && <Links />}
+      </div>
+    </PageWrapperComponent>
   );
 };
 

@@ -6,15 +6,24 @@ import {Notifications} from '../containers/pages/Notifications/Notifications';
 import {Messages} from '../containers/pages/Messages/Messages';
 import {Bookmarks} from '../containers/pages/Bookmarks/Bookmarks';
 import {Lists} from '../containers/pages/Lists/Lists';
-import {Mentions} from '../containers/pages/Notifications/Mentions';
 import {Profile} from '../containers/pages/Profile/Profile';
 import {More} from '../containers/Navbar/More';
-import {PostPage} from '../containers/Home/components/Main/components/PostPage/PostPage'
+import {PostPage} from '../containers/Home/components/Main/components/PostPage/PostPage';
+import {ProtectedRoute} from './ProtectedRoute';
+import {PageNotFound} from '../containers/pages/PageNotFound/PageNotFound';
+import {Login} from '../containers/pages/authPage/Login/Login';
 
 export const Routes = () => {
   return (
     <RRDRoutes>
-      <Route path="/" element={<Main />} />
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Main />
+          </ProtectedRoute>
+        }
+      />
       <Route path="posts" element={<div style={{color: 'white'}}></div>} />
       <Route path="post/:id" element={<PostPage />} />
       <Route path="explore" element={<Explore />} />
@@ -24,8 +33,8 @@ export const Routes = () => {
       <Route path="lists" element={<Lists />} />
       <Route path="profile" element={<Profile />} />
       <Route path="more" element={<More />} />
-      <Route path="mentions" element={<Mentions />} />
-      <Route path="*" element={<div style={{color: 'white'}}>This page doesn't exist!</div>} />
+      <Route path="/login" element={<Login />} />
+      <Route path="*" element={<PageNotFound />} />
     </RRDRoutes>
   );
 };
