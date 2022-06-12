@@ -112,7 +112,7 @@ export const usePostTweet = () => {
   const someRef = useRef<HTMLTextAreaElement>(null);
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  console.log('state', state);
+  // console.log('state', state);
 
   const postTweet = async () => {
     // setLoading(true);

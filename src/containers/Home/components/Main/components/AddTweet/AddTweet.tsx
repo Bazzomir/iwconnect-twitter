@@ -115,7 +115,7 @@ const Styled = {
     height: 100%;
     width: 100%;
     background: transparent;
-    color: white;
+    color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
     resize: none;
     border: none;
     &::placeholder {

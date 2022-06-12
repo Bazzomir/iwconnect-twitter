@@ -108,7 +108,11 @@ export const PostPage = () => {
               <div className="col-12">
                 {comments?.map(comment => {
                   return (
-                    <div className="row mt-2" style={{borderBottom: '3px solid white'}}>
+                    <div
+                      className="row mt-2"
+                      key={comment.id}
+                      style={{borderBottom: '3px solid lightgrey'}}
+                    >
                       <div className="col-12 font-weight-bold">
                         <img
                           src="https://i.pravatar.cc/100"
