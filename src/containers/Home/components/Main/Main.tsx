@@ -9,8 +9,8 @@ export const Main = () => {
   return (
     <main className="col-6">
       <AddTweet />
-      {tweets?.slice(0, 10)?.map(post => {
-        return <Post key={post.id} {...post} />;
+      {tweets?.slice(0, 10)?.map((post) => {
+        return <Post key={post.id}  {...post} />;
       })}
     </main>
   );

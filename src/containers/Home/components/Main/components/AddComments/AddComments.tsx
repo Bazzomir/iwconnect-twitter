@@ -95,7 +95,7 @@ const Styled = {
     height: 100%;
     width: 100%;
     background: transparent;
-    color: white;
+    color: ${props => props.theme.color};
     resize: none;
     border: none;
     align-items: center;

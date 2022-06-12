@@ -15,6 +15,7 @@ export const CustomThemeContextConstructor = ({children}: {children: JSX.Element
 
   const toggleTheme = useCallback(() => {
     setTheme(prevState => (prevState === 'dark' ? 'light' : 'dark'));
+   
     document.body.style.background = theme === 'dark' ? 'white' : 'black';
   }, [theme]);
 
@@ -28,3 +29,4 @@ export const CustomThemeContextConstructor = ({children}: {children: JSX.Element
 
   return <CustomThemeContext.Provider value={value}>{children}</CustomThemeContext.Provider>;
 };
+
