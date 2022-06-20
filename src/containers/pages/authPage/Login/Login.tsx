@@ -11,8 +11,7 @@ interface FormProps {
 }
 
 export const Login = () => {
-  const navigate = useNavigate();
-  const {user, login, error, loading, userIsLoggedIn} = useContext(AuthContext);
+  const {login, error, loading, userIsLoggedIn} = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -34,12 +33,6 @@ export const Login = () => {
   const onSubmit = (data: FormProps) => {
     login({username: data.username, password: data.password});
   };
-
-  useEffect(() => {
-    if (user) {
-      navigate('/');
-    }
-  }, [user]);
 
   if (userIsLoggedIn) {
     return <Navigate to="/" replace />;

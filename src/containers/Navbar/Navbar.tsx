@@ -5,13 +5,15 @@ import {FaRegEnvelope} from 'react-icons/fa';
 import {BsBookmark, BsFileText, BsTwitter} from 'react-icons/bs';
 import {CgProfile, CgMoreO} from 'react-icons/cg';
 import styled from 'styled-components';
-import {Button} from '../../components/Button/Button';
+import {Button, ReplyButton} from '../../components/Button/Button';
 import {NavLink} from '../../components/NavLink/NavLink';
 import {ProfileNavBar} from './ProfileNavBar';
 import {CustomThemeContext} from '../../context/CustomThemeContext';
+import {AuthContext} from '../../context/AuthContext';
 
 export const Navbar = () => {
   const {toggleTheme} = useContext(CustomThemeContext);
+  const {logout} = useContext(AuthContext);
 
   return (
     <Styled.Container className="col-3">
@@ -30,6 +32,7 @@ export const Navbar = () => {
         <span className="slider round"></span>
       </label>
       <ProfileNavBar />
+      <ReplyButton type="submit" nameButton="Logout" onClick={logout} />
     </Styled.Container>
   );
 };
