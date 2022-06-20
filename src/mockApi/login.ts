@@ -1,3 +1,5 @@
+import {LocalStorageConstants} from '../constants/constants';
+
 export class CustomLoginError extends Error {
   status: any;
   constructor(message: string, status?: number) {
@@ -21,12 +23,22 @@ export const loginApi = ({
     }
     if (username === 'admin@admin' && password === 'admin123') {
       resolve({
-        accessToken: 'accessToken',
-        refreshToken: 'refreshToken',
+        accessToken: LocalStorageConstants.AccessToken,
+        refreshToken: LocalStorageConstants.RefreshToken,
       });
     } else {
       //   reject('Check your username and password.');
       reject(new CustomLoginError('Check your username and password.', 401));
+    }
+  });
+};
+
+export const logoutApi = ({accessToken}: {accessToken: string | null}): Promise<boolean> => {
+  return new Promise((resolve, reject) => {
+    if (accessToken) {
+      resolve(true);
+    } else {
+      reject('You are not logged out');
     }
   });
 };
