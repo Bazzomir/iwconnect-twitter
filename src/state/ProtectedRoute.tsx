@@ -8,8 +8,8 @@ interface Props {
 }
 
 export const ProtectedRoute = ({children}: Props) => {
-  const {user} = useContext(AuthContext);
-  console.log('user', user);
+  const {userIsLoggedIn} = useContext(AuthContext);
+  console.log('user', userIsLoggedIn);
 
-  return user ? children : <Navigate to="/login" replace />;
+  return userIsLoggedIn ? children : <Navigate to="/login" replace />;
 };
