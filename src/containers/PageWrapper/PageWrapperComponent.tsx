@@ -4,6 +4,7 @@ import {Navbar} from '../Navbar/Navbar';
 import {Footer} from '../Footer/Footer';
 import {Search} from '../Search/Search';
 import {useLocation} from 'react-router-dom';
+// import ErrorBoundry from '../../components/ErrorBoundry/ErrorBoundry';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -14,15 +15,18 @@ export const PageWrapperComponent = ({children}: Props) => {
 
   return (
     <>
+      {/* <ErrorBoundry> */}
       <Navbar />
-      {/* <Routes /> */}
-      {children}
-      {location.pathname !== '/messages' && location.pathname !== '/explore' && <Search />}
-      {location.pathname == '/explore' && (
-        <div className="col-3">
-          <Footer />
-        </div>
-      )}
+      <>{children}</>
+      <>
+        {location.pathname !== '/messages' && location.pathname !== '/explore' && <Search />}
+        {location.pathname == '/explore' && (
+          <div className="col-3">
+            <Footer />
+          </div>
+        )}
+      </>
+      {/* </ErrorBoundry> */}
     </>
   );
 };

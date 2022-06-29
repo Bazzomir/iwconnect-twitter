@@ -5,7 +5,7 @@ import {FaRegEnvelope} from 'react-icons/fa';
 import {BsBookmark, BsFileText, BsTwitter} from 'react-icons/bs';
 import {CgProfile, CgMoreO} from 'react-icons/cg';
 import styled from 'styled-components';
-import {Button, ReplyButton} from '../../components/Button/Button';
+import {AuthButton, Button, ReplyButton} from '../../components/Button/Button';
 import {NavLink} from '../../components/NavLink/NavLink';
 import {ProfileNavBar} from './ProfileNavBar';
 import {CustomThemeContext} from '../../context/CustomThemeContext';
@@ -31,8 +31,9 @@ export const Navbar = () => {
         <input type="checkbox" onClick={toggleTheme} />
         <span className="slider round"></span>
       </label>
+      <AuthButton type="submit" nameButton="Logout" onClick={logout}/>
       <ProfileNavBar />
-      <ReplyButton type="submit" nameButton="Logout" onClick={logout} />
+      {/* <ReplyButton type="submit" nameButton="Logout" onClick={logout} /> */}
     </Styled.Container>
   );
 };

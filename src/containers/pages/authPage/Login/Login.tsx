@@ -2,11 +2,12 @@ import React, {useContext, useEffect} from 'react';
 import {Form, FormControl, InputGroup} from 'react-bootstrap';
 import {useForm} from 'react-hook-form';
 import {AuthContext} from '../../../../context/AuthContext';
-import {ReplyButton} from '../../../../components/Button/Button';
-import {Navigate, useNavigate} from 'react-router-dom';
+import {AuthButton} from '../../../../components/Button/Button';
+import {Navigate} from 'react-router-dom';
+import {BsTwitter} from 'react-icons/bs';
 
 interface FormProps {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -23,15 +24,15 @@ export const Login = () => {
 
   useEffect(() => {
     if (error) {
-      setError('username', {
+      setError('email', {
         type: 'value',
-        message: 'Check your username and password.',
+        message: 'Check your email and password.',
       });
     }
   }, [error]);
 
   const onSubmit = (data: FormProps) => {
-    login({username: data.username, password: data.password});
+    login({email: data.email, password: data.password});
   };
 
   if (userIsLoggedIn) {
@@ -44,56 +45,45 @@ export const Login = () => {
   ) : (
     <div className="container" style={{color: 'white'}}>
       <div className="row">
-        <div
-          className="col-6"
-          style={{border: '1px solid white', backgroundColor: 'blue', height: '700px'}}
-        >
-          <div style={{backgroundColor: 'blue'}}></div>
+        <div className="col-8">
+          <img
+            src="https://royaladarsh.files.wordpress.com/2021/05/image_editor_output_image-113800456-1622176846204.png"
+            alt=""
+            style={{float: 'left', height: '100%', width: '100%'}}
+          />
         </div>
-        <div className="col-6" style={{height: '700px'}}>
-          <div
-            style={{
-              border: '1px solid red',
-              padding: '20px',
-              marginLeft: '20px',
-              marginTop: '50px',
-              height: '10px',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            Icon
-          </div>
+        <div className="col-4" style={{height: '700px'}}>
+          <BsTwitter className="mt-5" style={{height: '100px', width: '50px'}} />
           <h2 className="mt-5">Happening now</h2>
           <h4 className="mt-2">Join Twitter today.</h4>
           <Form className="mt-5" onSubmit={handleSubmit(onSubmit)}>
-            <InputGroup className="mt-2 mb-2">Login</InputGroup>
-            <InputGroup.Text id="inputGroup-sizing-default">USERNAME</InputGroup.Text>
+            <InputGroup className="col mt-2 mb-2">Login</InputGroup>
+            <label id="inputGroup-sizing-default">email</label>
             <FormControl
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
               className="mt-1"
               type="text"
-              {...register('username', {
-                required: 'Username is require',
-                // validate: username => username.includes('@'),
+              {...register('email', {
+                required: 'email is required',
+                // validate: email => email.includes('@'),
               })}
             />
-            {errors.username?.message ? (
+            {errors.email?.message ? (
               <div className="alert alert-danger" role="alert">
-                {errors.username?.message}
+                {errors.email?.message}
               </div>
             ) : null}
-            <InputGroup.Text id="inputGroup-sizing-default" className="mt-5">
+            <label id="inputGroup-sizing-default" className="mt-5">
               PASSWORD
-            </InputGroup.Text>
+            </label>
             <FormControl
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
               className="mt-1"
-              type="text"
+              type="password"
               {...register('password', {
-                required: 'Password is require',
+                required: 'Password is required',
                 // validate: password => password === 'admin123',
               })}
             />
@@ -102,11 +92,9 @@ export const Login = () => {
                 {errors.password?.message}
               </div>
             ) : null}
-            <div className="col mt-3">
-              <ReplyButton type="submit" nameButton="Log In" />
-            </div>
-            <h6 className="col">
-              Don't have an account?<a href="/">Sing up</a>
+            <AuthButton type="submit" nameButton="Log In" />
+            <h6 className="row mt-4">
+              Don't have an account?<a href="/register">Sign up</a>
             </h6>
           </Form>
         </div>

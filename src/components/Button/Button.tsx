@@ -126,3 +126,26 @@ export const EditButton = ({nameButton}: Props) => {
     </div>
   );
 };
+
+export const AuthButton = ({nameButton, onClick}: Props) => {
+  return (
+    <button
+      className="col-6"
+      onClick={onClick}
+      style={{
+        float: 'right',
+        marginTop: '15px',
+        borderRadius: '30px',
+        fontWeight: 'bold',
+        height: '38px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        backgroundColor: 'rgba(29,155,240,255)',
+        overflow: 'hidden',
+      }}
+    >
+      {nameButton}
+    </button>
+  );
+};
