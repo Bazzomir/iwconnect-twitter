@@ -1,16 +1,31 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import {LocalStorageConstants} from '../constants/constants';
-import {CustomLoginError, loginApi, logoutApi} from '../mockApi/login';
+import {CustomLoginError, loginApi, logoutApi, registerUserApi} from '../mockApi/login';
 import {readFromStorage, removeFromStorage, writeInStorage} from '../utils/localStorage';
 
 interface User {
-  username: string;
+  email: string;
   password: string;
 }
 
 interface ContextValues {
-  login: ({username, password}: {username: string; password: string}) => void;
+  login: ({email, password}: {email: string; password: string}) => void;
   logout: () => void;
+  register: ({
+    firstname,
+    lastname,
+    email,
+    password,
+    repeatPassword,
+    birthday,
+  }: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+    repeatPassword: string;
+    birthday: string;
+  }) => void;
   userIsLoggedIn: boolean;
   user?: User;
   error?: string;
@@ -20,30 +35,145 @@ interface ContextValues {
 export const AuthContext = React.createContext<ContextValues>({
   login: () => {},
   logout: () => {},
+  register: () => {},
   loading: false,
   userIsLoggedIn: false,
 });
 
-export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
-  const [user, setUser] = useState<User>();
-  const [userIsLoggedIn, setUserIsLoggedIn] = useState<boolean>(() => {
-    if (readFromStorage(LocalStorageConstants.AccessToken)) {
-      return true;
+type ReducerState = {
+  userIsLoggedIn: boolean;
+  loading: boolean;
+  error: string;
+  user?: User;
+};
+
+const INITIAL_STATE = {
+  userIsLoggedIn: false,
+  loading: false,
+  error: '',
+};
+
+enum ActionEnum {
+  LOGIN_IN_PROGRESS = 'LOGIN_IN_PROGRESS',
+  LOGIN_SUCCESS = 'LOGIN_SUCCESS',
+  LOGIN_FAILUER = 'LOGIN_FAILUER',
+  RESET_STATE = 'RESET_STATE',
+  LOGOUT_SUCCESS = 'LOGOUT_SUCCESS',
+  LOGOUT_FAILUER = 'LOGOUT_FAILUER',
+  LOADING = 'LOADING',
+}
+
+type Action =
+  | {
+      type: ActionEnum.LOGIN_IN_PROGRESS;
     }
-    return false;
-  });
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>('');
+  | {
+      type: ActionEnum.LOGIN_SUCCESS;
+      payload: {
+        user: User;
+      };
+    }
+  | {
+      type: ActionEnum.LOGIN_FAILUER;
+      payload: {
+        error: string;
+      };
+    }
+  | {
+      type: ActionEnum.RESET_STATE;
+    }
+  | {
+      type: ActionEnum.LOGOUT_SUCCESS;
+    }
+  | {
+      type: ActionEnum.LOGOUT_FAILUER;
+      payload: {
+        error: string;
+      };
+    }
+  | {
+      type: ActionEnum.LOADING;
+      payload: boolean;
+    };
+
+const reducer = (state: ReducerState, action: Action): ReducerState => {
+  if (action.type === ActionEnum.LOGIN_IN_PROGRESS) {
+    return {
+      loading: true,
+      error: '',
+      userIsLoggedIn: false,
+    };
+  }
+
+  if (action.type === ActionEnum.LOGIN_SUCCESS) {
+    return {
+      loading: false,
+      error: '',
+      user: action.payload.user,
+      userIsLoggedIn: true,
+    };
+  }
+
+  if (action.type === ActionEnum.LOGIN_FAILUER) {
+    return {
+      loading: false,
+      error: action.payload.error,
+      user: undefined,
+      userIsLoggedIn: false,
+    };
+  }
+
+  if (action.type === ActionEnum.RESET_STATE || action.type === ActionEnum.LOGOUT_SUCCESS) {
+    return {
+      loading: false,
+      error: '',
+      userIsLoggedIn: false,
+      user: undefined,
+    };
+  }
+
+  if (action.type === ActionEnum.LOGOUT_FAILUER) {
+    return {
+      ...state,
+      loading: false,
+      error: action.payload.error,
+      userIsLoggedIn: true,
+    };
+  }
+
+  if (action.type === ActionEnum.LOADING) {
+    return {
+      ...state,
+      loading: action.payload,
+    };
+  }
+
+  return state;
+};
+
+export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
+  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
   useEffect(() => {
-    setLoading(true);
+    dispatch({
+      type: ActionEnum.LOADING,
+      payload: true,
+    });
     const timeout = setTimeout(() => {
       if (readFromStorage(LocalStorageConstants.AccessToken)) {
-        setUserIsLoggedIn(true);
-        setLoading(false);
+        dispatch({
+          type: ActionEnum.LOGIN_SUCCESS,
+          payload: {
+            user: {email: 'za domashno', password: 'isto za domashno'},
+          },
+        });
       } else {
-        setLoading(false);
-        setUserIsLoggedIn(false);
+        dispatch({
+          type: ActionEnum.LOGIN_FAILUER,
+          payload: {
+            error: '',
+          },
+        });
       }
     }, 1000);
     return () => {
@@ -51,37 +181,100 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
     };
   }, []);
 
-  const login = async ({username, password}: {username: string; password: string}) => {
+  const register = async ({
+    firstname,
+    lastname,
+    email,
+    password,
+    repeatPassword,
+    birthday,
+  }: {
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+    repeatPassword: string;
+    birthday: string;
+  }) => {
     try {
-      const result = await loginApi({username, password});
+      const result = await registerUserApi({
+        firstname,
+        lastname,
+        email,
+        password,
+        repeatPassword,
+        birthday,
+      });
       writeInStorage(LocalStorageConstants.AccessToken, result.accessToken);
       writeInStorage(LocalStorageConstants.RefreshToken, result.refreshToken);
-      setUser({username, password});
-      setUserIsLoggedIn(true);
+      writeInStorage(LocalStorageConstants.Email, result.user.email);
+      writeInStorage(LocalStorageConstants.Password, result.user.password);
+      writeInStorage(LocalStorageConstants.Password, result.user.password);
+      dispatch({type: ActionEnum.LOGIN_SUCCESS, payload: {user: {email, password}}});
     } catch (err: any) {
-      setUserIsLoggedIn(false);
-      setError((err as CustomLoginError)?.message);
+      dispatch({
+        type: ActionEnum.LOGOUT_FAILUER,
+        payload: err?.message,
+      });
+    }
+  };
+
+  const login = async ({email, password}: {email: string; password: string}) => {
+    dispatch({
+      type: ActionEnum.LOGIN_IN_PROGRESS,
+    });
+    try {
+      const result = await loginApi({email, password});
+      writeInStorage(LocalStorageConstants.AccessToken, result.accessToken);
+      writeInStorage(LocalStorageConstants.RefreshToken, result.refreshToken);
+      writeInStorage(LocalStorageConstants.Email, result.email);
+      writeInStorage(LocalStorageConstants.Password, result.password);
+      dispatch({type: ActionEnum.LOGIN_SUCCESS, payload: {user: {email, password}}});
+    } catch (err: any) {
+      dispatch({
+        type: ActionEnum.LOGIN_FAILUER,
+        payload: {error: (err as CustomLoginError)?.message},
+      });
     }
   };
 
   const logout = async () => {
+    dispatch({type: ActionEnum.LOADING, payload: true});
     try {
       const accessToken = readFromStorage(LocalStorageConstants.AccessToken);
       await logoutApi({accessToken});
       removeFromStorage(LocalStorageConstants.AccessToken);
       removeFromStorage(LocalStorageConstants.RefreshToken);
-      setUser(undefined);
-      setError('');
-      setUserIsLoggedIn(false);
+      removeFromStorage(LocalStorageConstants.Email);
+      removeFromStorage(LocalStorageConstants.Password);
+      dispatch({
+        type: ActionEnum.LOGOUT_SUCCESS,
+      });
     } catch (err: any) {
-      setError(err?.message);
+      dispatch({
+        type: ActionEnum.LOGOUT_FAILUER,
+        payload: err?.message,
+      });
     } finally {
-      setLoading(false);
+      dispatch({
+        type: ActionEnum.LOADING,
+        payload: false,
+      });
     }
   };
 
   return (
-    <AuthContext.Provider value={{user, login, logout, error, loading, userIsLoggedIn}}>
+    <AuthContext.Provider
+      value={{
+        user: state.user,
+        login,
+        logout,
+        register,
+        error: state.error,
+        loading: state.loading,
+        userIsLoggedIn: state.userIsLoggedIn,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

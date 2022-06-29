@@ -12,6 +12,7 @@ import {PostPage} from '../containers/Home/components/Main/components/PostPage/P
 import {ProtectedRoute} from './ProtectedRoute';
 import {PageNotFound} from '../containers/pages/PageNotFound/PageNotFound';
 import {Login} from '../containers/pages/authPage/Login/Login';
+import {Register} from '../containers/pages/authPage/Register/Register';
 
 export const Routes = () => {
   return (
@@ -34,6 +35,7 @@ export const Routes = () => {
       <Route path="profile" element={<Profile />} />
       <Route path="more" element={<More />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="*" element={<PageNotFound />} />
     </RRDRoutes>
   );
