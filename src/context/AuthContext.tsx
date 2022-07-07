@@ -27,6 +27,7 @@ interface ContextValues {
     birthday: string;
   }) => void;
   userIsLoggedIn: boolean;
+  userIsRegistred: boolean;
   user?: User;
   error?: string;
   loading: boolean;
@@ -38,10 +39,12 @@ export const AuthContext = React.createContext<ContextValues>({
   register: () => {},
   loading: false,
   userIsLoggedIn: false,
+  userIsRegistred: false,
 });
 
 type ReducerState = {
   userIsLoggedIn: boolean;
+  userIsRegistred: boolean;
   loading: boolean;
   error: string;
   user?: User;
@@ -49,6 +52,7 @@ type ReducerState = {
 
 const INITIAL_STATE = {
   userIsLoggedIn: false,
+  userIsRegistred: false,
   loading: false,
   error: '',
 };
@@ -61,6 +65,9 @@ enum ActionEnum {
   LOGOUT_SUCCESS = 'LOGOUT_SUCCESS',
   LOGOUT_FAILUER = 'LOGOUT_FAILUER',
   LOADING = 'LOADING',
+  REGISTER_IN_PROGRESS = 'REGISTER_IN_PROGRESS',
+  REGISTER_SUCCESS = 'REGISTER_SUCCESS',
+  REGISTER_FAILUER = 'REGISTER_FAILUER',
 }
 
 type Action =
@@ -94,6 +101,21 @@ type Action =
   | {
       type: ActionEnum.LOADING;
       payload: boolean;
+    }
+  | {
+      type: ActionEnum.REGISTER_IN_PROGRESS;
+    }
+  | {
+      type: ActionEnum.REGISTER_SUCCESS;
+      payload: {
+        user: User;
+      };
+    }
+  | {
+      type: ActionEnum.REGISTER_FAILUER;
+      payload: {
+        error: string;
+      };
     };
 
 const reducer = (state: ReducerState, action: Action): ReducerState => {
@@ -102,6 +124,7 @@ const reducer = (state: ReducerState, action: Action): ReducerState => {
       loading: true,
       error: '',
       userIsLoggedIn: false,
+      userIsRegistred: false,
     };
   }
 
@@ -111,6 +134,7 @@ const reducer = (state: ReducerState, action: Action): ReducerState => {
       error: '',
       user: action.payload.user,
       userIsLoggedIn: true,
+      userIsRegistred: true,
     };
   }
 
@@ -120,6 +144,7 @@ const reducer = (state: ReducerState, action: Action): ReducerState => {
       error: action.payload.error,
       user: undefined,
       userIsLoggedIn: false,
+      userIsRegistred: false,
     };
   }
 
@@ -128,6 +153,7 @@ const reducer = (state: ReducerState, action: Action): ReducerState => {
       loading: false,
       error: '',
       userIsLoggedIn: false,
+      userIsRegistred: true,
       user: undefined,
     };
   }
@@ -145,6 +171,35 @@ const reducer = (state: ReducerState, action: Action): ReducerState => {
     return {
       ...state,
       loading: action.payload,
+    };
+  }
+
+  if (action.type === ActionEnum.REGISTER_IN_PROGRESS) {
+    return {
+      loading: true,
+      error: '',
+      userIsRegistred: false,
+      userIsLoggedIn: false,
+    };
+  }
+
+  if (action.type === ActionEnum.REGISTER_SUCCESS) {
+    return {
+      loading: false,
+      error: '',
+      user: action.payload.user,
+      userIsRegistred: true,
+      userIsLoggedIn: false,
+    };
+  }
+
+  if (action.type === ActionEnum.REGISTER_FAILUER) {
+    return {
+      loading: false,
+      error: action.payload.error,
+      user: undefined,
+      userIsRegistred: false,
+      userIsLoggedIn: false,
     };
   }
 
@@ -273,6 +328,7 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
         error: state.error,
         loading: state.loading,
         userIsLoggedIn: state.userIsLoggedIn,
+        userIsRegistred: state.userIsRegistred,
       }}
     >
       {children}

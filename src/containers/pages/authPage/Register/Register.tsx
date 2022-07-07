@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {Navigate} from 'react-router-dom';
-import {AuthButton} from '../../../../components/Button/Button';
 import {AuthContext} from '../../../../context/AuthContext';
+import {AuthButton} from '../../../../components/Button/Button';
 
 interface RegisterProps {
   firstname: string;
@@ -14,7 +14,7 @@ interface RegisterProps {
 }
 
 export const Register = () => {
-  const {register: registerUser, error} = useContext(AuthContext);
+  const {register: registerUser, error, loading, userIsRegistred} = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -37,7 +37,14 @@ export const Register = () => {
     registerUser(data);
   };
 
-  return (
+  if (userIsRegistred) {
+    return <Navigate to="/login" replace />;
+  }
+
+  console.log('loading', loading);
+  return loading ? (
+    <p style={{color: 'white'}}>loading...</p>
+  ) : (
     <div className="container-fluid mt-5" style={{color: 'white'}}>
       <div className="row">
         <div className="col-7">
@@ -62,6 +69,11 @@ export const Register = () => {
                   required: 'Name is required',
                 })}
               />
+              {errors.firstname?.message ? (
+                <div className="alert alert-danger" role="alert">
+                  {errors.firstname?.message}
+                </div>
+              ) : null}
             </div>
             <div className="form-group">
               <label>Lastname</label>
@@ -75,6 +87,11 @@ export const Register = () => {
                   required: 'Lastname is required',
                 })}
               />
+              {errors.lastname?.message ? (
+                <div className="alert alert-danger" role="alert">
+                  {errors.lastname?.message}
+                </div>
+              ) : null}
             </div>
             <div className="form-group">
               <label className="control-label">Birthday</label>
@@ -87,6 +104,11 @@ export const Register = () => {
                   required: 'Birthday is required',
                 })}
               />
+              {errors.birthday?.message ? (
+                <div className="alert alert-danger" role="alert">
+                  {errors.birthday?.message}
+                </div>
+              ) : null}
             </div>
             <div className="form-group">
               <label>Email address</label>
@@ -100,6 +122,11 @@ export const Register = () => {
                   required: 'Email is required',
                 })}
               />
+              {errors.email?.message ? (
+                <div className="alert alert-danger" role="alert">
+                  {errors.email?.message}
+                </div>
+              ) : null}
             </div>
             <div className="form-group">
               <label>Password</label>
@@ -110,22 +137,30 @@ export const Register = () => {
                 placeholder="Password"
                 {...register('password', {
                   required: 'Password is required',
-                  // validate: password => password === 'admin123',
                 })}
               />
+              {errors.password?.message ? (
+                <div className="alert alert-danger" role="alert">
+                  {errors.password?.message}
+                </div>
+              ) : null}
             </div>
             <div className="form-group">
               <label>Confirm Password</label>
               <input
                 type="password"
                 className="form-control"
-                id="exampleInputPassword1"
+                id="exampleInputConfirmPassword1"
                 placeholder="Confirm Password"
                 {...register('repeatPassword', {
-                  required: 'Password is required',
-                  // validate: password => password === 'admin123',
+                  required: 'Confirm Password is required',
                 })}
               />
+              {errors.repeatPassword?.message ? (
+                <div className="alert alert-danger" role="alert">
+                  {errors.repeatPassword?.message}
+                </div>
+              ) : null}
             </div>
             <div className="form-check">
               <input type="checkbox" className="form-check-input" id="exampleCheck1" />
@@ -134,6 +169,9 @@ export const Register = () => {
             <div className="col-8">
               <AuthButton type="submit" nameButton="Sign In" />
             </div>
+            <h6 className="row mt-4">
+              You already have an account?<a href="/login">Sign in</a>
+            </h6>
           </form>
         </div>
       </div>
