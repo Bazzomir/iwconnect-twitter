@@ -4,30 +4,35 @@ import {IoMdArrowBack} from 'react-icons/io';
 import {RiPlayListAddLine} from 'react-icons/ri';
 import {FiMoreHorizontal} from 'react-icons/fi';
 import {DiscoverNewLists} from './DiscoverNewLists';
+import { PageWrapperComponent } from '../../PageWrapper/PageWrapperComponent';
 
 export const Lists = () => {
   return (
-    <div className="col-6">
-      <Styled.HeaderContainer>
-        <Styled.FirstIcon>
-          <IoMdArrowBack />
-        </Styled.FirstIcon>
-        <Styled.Header>Lists</Styled.Header>
-        <Styled.HeaderIcon>
-          <RiPlayListAddLine />
-          <FiMoreHorizontal />
-        </Styled.HeaderIcon>
-      </Styled.HeaderContainer>
-      <Styled.TextWrapper style={{marginBottom: '50px'}}>Pinned Lists</Styled.TextWrapper>
-      <Styled.TextParagraphWrapper style={{alignItems: 'center', borderBottom: '1px solid white'}}>
-        Nothing to see here yet — pin your favorite Lists to access them quickly.
-      </Styled.TextParagraphWrapper>
-      <DiscoverNewLists />
-      <Styled.TextWrapper>Your Lists</Styled.TextWrapper>
-      <Styled.TextParagraphWrapper>
-        You haven't created or followed any Lists. When you do, they'll show up here.
-      </Styled.TextParagraphWrapper>
-    </div>
+    <PageWrapperComponent>
+      <div className="col-6">
+        <Styled.HeaderContainer>
+          <Styled.FirstIcon>
+            <IoMdArrowBack />
+          </Styled.FirstIcon>
+          <Styled.Header>Lists</Styled.Header>
+          <Styled.HeaderIcon>
+            <RiPlayListAddLine />
+            <FiMoreHorizontal />
+          </Styled.HeaderIcon>
+        </Styled.HeaderContainer>
+        <Styled.TextWrapper style={{marginBottom: '50px'}}>Pinned Lists</Styled.TextWrapper>
+        <Styled.TextParagraphWrapper
+          style={{alignItems: 'center', borderBottom: '1px solid white'}}
+        >
+          Nothing to see here yet — pin your favorite Lists to access them quickly.
+        </Styled.TextParagraphWrapper>
+        <DiscoverNewLists />
+        <Styled.TextWrapper>Your Lists</Styled.TextWrapper>
+        <Styled.TextParagraphWrapper>
+          You haven't created or followed any Lists. When you do, they'll show up here.
+        </Styled.TextParagraphWrapper>
+      </div>
+    </PageWrapperComponent>
   );
 };
 
