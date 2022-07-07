@@ -57,7 +57,9 @@ export const Login = () => {
           <h2 className="mt-5">Happening now</h2>
           <h4 className="mt-2">Join Twitter today.</h4>
           <Form className="mt-5" onSubmit={handleSubmit(onSubmit)}>
-            <InputGroup className="col mt-2 mb-2">Login</InputGroup>
+            <InputGroup className="mt-2 mb-2">
+              <h3>Login</h3>
+            </InputGroup>
             <label id="inputGroup-sizing-default">email</label>
             <FormControl
               aria-label="Default"
