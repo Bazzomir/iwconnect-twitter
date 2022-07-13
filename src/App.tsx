@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import './App.css';
+import {Provider} from 'react-redux';
 import {Navbar} from './containers/Navbar/Navbar';
 import {Search} from './containers/Search/Search';
 import {useLocation} from 'react-router-dom';
@@ -8,6 +9,7 @@ import {Footer} from './containers/Footer/Footer';
 import {ThemeProvider} from 'styled-components';
 import {theme} from './theme/theme';
 import {CustomThemeContext} from './context/CustomThemeContext';
+import { store } from './state/store';
 
 function App() {
   const location = useLocation();
@@ -15,10 +17,11 @@ function App() {
   const {theme: localTheme} = useContext(CustomThemeContext);
 
   return (
-    <ThemeProvider theme={theme[localTheme]}>
-      <div className="container-fluid">
-        <div className="row">
-          {/* <div className="row">
+    <Provider store={store}>
+      <ThemeProvider theme={theme[localTheme]}>
+        <div className="container-fluid">
+          <div className="row">
+            {/* <div className="row">
           <Navbar />
           <Routes />
           {location.pathname !== '/messages' && location.pathname !== '/explore' && <Search />}
@@ -28,10 +31,11 @@ function App() {
             </div>
             )}
         </div> */}
-          <Routes />
+            <Routes />
+          </div>
         </div>
-      </div>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }
 
