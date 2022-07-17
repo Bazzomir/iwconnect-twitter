@@ -1,55 +1,13 @@
-interface User {
-  email: string;
-  password: string;
+export interface User {
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
+  repeatPassword?: string;
+  birthday?: string;
+  loading?: boolean;
+  error?: string;
 }
-
-// type Action =
-//   | {
-//       type: ActionEnum.LOGIN_IN_PROGRESS;
-//     }
-//   | {
-//       type: ActionEnum.LOGIN_SUCCESS;
-//       payload: {
-//         user: User;
-//       };
-//     }
-//   | {
-//       type: ActionEnum.LOGIN_FAILUER;
-//       payload: {
-//         error: string;
-//       };
-//     }
-//   | {
-//       type: ActionEnum.RESET_STATE;
-//     }
-//   | {
-//       type: ActionEnum.LOGOUT_SUCCESS;
-//     }
-//   | {
-//       type: ActionEnum.LOGOUT_FAILUER;
-//       payload: {
-//         error: string;
-//       };
-//     }
-//   | {
-//       type: ActionEnum.LOADING;
-//       payload: boolean;
-//     }
-//   | {
-//       type: ActionEnum.REGISTER_IN_PROGRESS;
-//     }
-//   | {
-//       type: ActionEnum.REGISTER_SUCCESS;
-//       payload: {
-//         user: User;
-//       };
-//     }
-//   | {
-//       type: ActionEnum.REGISTER_FAILUER;
-//       payload: {
-//         error: string;
-//       };
-//     };
 
 export type UserState = {
   userIsLoggedIn: boolean;
@@ -58,3 +16,11 @@ export type UserState = {
   error: string;
   user?: User;
 };
+
+// export interface UserError {
+//   error?: string;
+// }
+// export type ErrorState = {
+//   error: string;
+//   loginFailure?: boolean;
+// };

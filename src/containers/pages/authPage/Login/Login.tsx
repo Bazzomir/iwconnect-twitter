@@ -5,10 +5,6 @@ import {AuthContext} from '../../../../context/AuthContext';
 import {AuthButton} from '../../../../components/Button/Button';
 import {Navigate} from 'react-router-dom';
 import {BsTwitter} from 'react-icons/bs';
-import {useDispatch} from 'react-redux';
-import {loginInProgress} from '../../../../state/user/user.actions';
-import {useSelector} from 'react-redux';
-import {UserState} from '../../../../state/user/user.types';
 
 interface FormProps {
   email: string;
@@ -25,13 +21,6 @@ export const Login = () => {
   } = useForm<FormProps>({
     mode: 'onChange',
   });
-
-  const dispatch = useDispatch();
-  const userIsLoggedInFromState = useSelector((state: UserState) => {
-    // console.log(state);
-    return state?.userIsLoggedIn;
-  });
-  console.log(userIsLoggedInFromState);
 
   useEffect(() => {
     if (error) {
@@ -109,13 +98,6 @@ export const Login = () => {
             <h6 className="row mt-4">
               Don't have an account?<a href="/register">Sign up</a>
             </h6>
-            <button
-              onClick={() => {
-                dispatch(loginInProgress({userIsLoggedIn: true}));
-              }}
-            >
-              Fire Action
-            </button>
           </Form>
         </div>
       </div>
