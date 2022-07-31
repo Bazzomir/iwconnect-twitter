@@ -24,8 +24,8 @@ export const loginApi = ({
   password: string;
 }): Promise<{accessToken: string; refreshToken: string; email: string; password: string}> => {
   return new Promise((resolve, reject) => {
-    if (password.length < 4) {
-      reject(new CustomLoginError('Plase make your password at least 4 characters'));
+    if (password.length < 2) {
+      reject(new CustomLoginError('Plase make your password at least 2 characters'));
     }
     var validatedPassword = readFromStorage(email);
     //if validatedPassword is null - the user does not exist
@@ -53,13 +53,28 @@ export const logoutApi = ({accessToken}: {accessToken: string | null}): Promise<
   });
 };
 
+export const getUserApi = ({
+  accessToken,
+}: {
+  accessToken: string | null;
+}): Promise<{email: string; password: string}> => {
+  return new Promise((resolve, reject) => {
+    if (accessToken) {
+      const email = readFromStorage(LocalStorageConstants.Email);
+      const password = readFromStorage(LocalStorageConstants.Password);
+      if (email != null && password != null) {
+        resolve({email: email, password: password});
+      }
+    } else {
+      reject('You must login');
+    }
+  });
+};
+
 export const registerUserApi = ({
-  firstname,
-  lastname,
   email,
   password,
   repeatPassword,
-  birthday,
 }: {
   firstname: string;
   lastname: string;
