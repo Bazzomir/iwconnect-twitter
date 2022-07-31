@@ -1,4 +1,3 @@
-import {useContext, useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
 import {Styled as StyledHeader} from '../../../../../pages/Messages/Messages';
@@ -10,10 +9,9 @@ import {PostButton} from '../../../../../../components/Button/Button';
 import {usePostTweet} from '../../../../../../hooks/usePostTweet';
 
 export const AddTweet = () => {
-  const {postTweet, tweet, setTweet, error, loading, someRef} = usePostTweet();
+  const {postTweet, error, loading, someRef} = usePostTweet();
 
   const {
-    register,
     handleSubmit,
     formState: {errors},
   } = useForm({

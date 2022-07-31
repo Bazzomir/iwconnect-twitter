@@ -22,3 +22,7 @@ export const registerInProgress = actionCreator('REGISTER_IN_PROGRESS');
 export const registerSuccess = actionCreator<{user?: User}>('REGISTER_SUCCESS');
 
 export const registerFailure = actionCreator<{error: string}>('REGISTER_FAILUER');
+
+export const getUser = actionCreator<{user: User}>('GET_USER');
+
+export const getUserUnsuccess = actionCreator<{error: string}>('GET_USER_UNSUCCESS');
