@@ -39,7 +39,7 @@ export const Login = () => {
     return <Navigate to="/" replace />;
   }
 
-  console.log('loading', loading);
+  // console.log('loading', loading);
   return loading ? (
     <p style={{color: 'white'}}>loading...</p>
   ) : (

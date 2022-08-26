@@ -5,15 +5,18 @@ import {FaRegEnvelope} from 'react-icons/fa';
 import {BsBookmark, BsFileText, BsTwitter} from 'react-icons/bs';
 import {CgProfile, CgMoreO} from 'react-icons/cg';
 import styled from 'styled-components';
-import {AuthButton, Button, ReplyButton} from '../../components/Button/Button';
+import {AuthButton, Button} from '../../components/Button/Button';
 import {NavLink} from '../../components/NavLink/NavLink';
 import {ProfileNavBar} from './ProfileNavBar';
 import {CustomThemeContext} from '../../context/CustomThemeContext';
 import {AuthContext} from '../../context/AuthContext';
+// import {toggleTheme} from '../../state/theme/theme.actions';
+import {useDispatch} from 'react-redux';
 
 export const Navbar = () => {
   const {toggleTheme} = useContext(CustomThemeContext);
   const {logout} = useContext(AuthContext);
+  const dispatch = useDispatch();
 
   return (
     <Styled.Container className="col-3">
@@ -31,9 +34,8 @@ export const Navbar = () => {
         <input type="checkbox" onClick={toggleTheme} />
         <span className="slider round"></span>
       </label>
-      <AuthButton type="submit" nameButton="Logout" onClick={logout}/>
+      <AuthButton type="submit" nameButton="Logout" onClick={logout} />
       <ProfileNavBar />
-      {/* <ReplyButton type="submit" nameButton="Logout" onClick={logout} /> */}
     </Styled.Container>
   );
 };
