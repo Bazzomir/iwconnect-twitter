@@ -70,14 +70,15 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
   // }, []);
 
   useEffect(() => {
-    // dispatchRedux(actions.loading(true));
-    dispatchRedux(actions.loading(false));
+    dispatchRedux(actions.loading(true));
+    // dispatchRedux(actions.loading(false));
     const timeout = setTimeout(async () => {
       try {
         const accessToken = readFromStorage(LocalStorageConstants.AccessToken);
         const user = await getUserApi({accessToken});
         const {email, password} = user;
         dispatchRedux(getUser({user: {email, password}}));
+        dispatchRedux(actions.loading(false));
       } catch (error: any) {
         dispatchRedux(getUserUnsuccess({error: error?.message}));
       }
