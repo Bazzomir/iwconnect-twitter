@@ -10,7 +10,6 @@ import {NavLink} from '../../components/NavLink/NavLink';
 import {ProfileNavBar} from './ProfileNavBar';
 import {CustomThemeContext} from '../../context/CustomThemeContext';
 import {AuthContext} from '../../context/AuthContext';
-// import {toggleTheme} from '../../state/theme/theme.actions';
 import {useDispatch} from 'react-redux';
 
 export const Navbar = () => {

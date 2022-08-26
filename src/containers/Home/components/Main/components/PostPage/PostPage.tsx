@@ -14,7 +14,7 @@ import {useFetchComment} from '../../../../../../hooks/useFetchComment';
 import {AddCommentsPostPage} from '../AddComments/AddCommentsPostPage';
 import {Modal} from 'react-bootstrap';
 import {AddComments} from '../AddComments/AddComments';
-import { PageWrapperComponent } from '../../../../../PageWrapper/PageWrapperComponent';
+import {PageWrapperComponent} from '../../../../../PageWrapper/PageWrapperComponent';
 
 export const PostPage = () => {
   const params = useParams();
@@ -31,7 +31,6 @@ export const PostPage = () => {
     if ((location.state as any).id) {
       FetchPostFromApi();
     }
-    // console.log('location.state', location.state);
   }, []);
 
   useEffect(() => {
