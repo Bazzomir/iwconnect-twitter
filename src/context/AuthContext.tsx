@@ -44,7 +44,6 @@ export const AuthContext = React.createContext<ContextValues>({
 
 export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
   const dispatchRedux = useDispatch();
-  // const {user, loading, error, userIsLoggedIn, userIsRegistred} = useAuthState();
   const user = useSelector(selectors.userSelector);
   const error = useSelector(selectors.errorSelector);
   const loading = useSelector(selectors.loadingSelector);
@@ -52,26 +51,8 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
   const userIsRegistred = useSelector(selectors.userIsRegistredSelector);
   const capitalizedEmail = useSelector(selectors.emailCapitalizedSelector);
 
-  // useEffect(() => {
-  //   dispatchRedux(actions.loading(true));
-  //   const timeout = setTimeout(() => {
-  //     const accessToken = readFromStorage(LocalStorageConstants.AccessToken);
-  //     if (accessToken) {
-  //       dispatchRedux(
-  //         actions.loginSuccess({user: {email: 'za domashno', password: 'za domashno'}})
-  //       );
-  //     } else {
-  //       dispatchRedux(actions.loginFailure({error: 'Check your email and password!'}));
-  //     }
-  //   }, 1000);
-  //   return () => {
-  //     clearTimeout(timeout);
-  //   };
-  // }, []);
-
   useEffect(() => {
     dispatchRedux(actions.loading(true));
-    // dispatchRedux(actions.loading(false));
     const timeout = setTimeout(async () => {
       try {
         const accessToken = readFromStorage(LocalStorageConstants.AccessToken);

@@ -39,7 +39,6 @@ export const Login = () => {
     return <Navigate to="/" replace />;
   }
 
-  // console.log('loading', loading);
   return loading ? (
     <p style={{color: 'white'}}>loading...</p>
   ) : (
@@ -68,7 +67,6 @@ export const Login = () => {
               type="text"
               {...register('email', {
                 required: 'email is required',
-                // validate: email => email.includes('@'),
               })}
             />
             {errors.email?.message ? (
@@ -86,7 +84,6 @@ export const Login = () => {
               type="password"
               {...register('password', {
                 required: 'Password is required',
-                // validate: password => password === 'admin123',
               })}
             />
             {errors.password?.message ? (

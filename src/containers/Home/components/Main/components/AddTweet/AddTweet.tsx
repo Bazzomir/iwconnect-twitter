@@ -7,6 +7,7 @@ import {BiPoll, BiSmile} from 'react-icons/bi';
 import {HiOutlineLocationMarker} from 'react-icons/hi';
 import {PostButton} from '../../../../../../components/Button/Button';
 import {usePostTweet} from '../../../../../../hooks/usePostTweet';
+import React from 'react';
 
 export const AddTweet = () => {
   const {postTweet, error, loading, someRef} = usePostTweet();
@@ -31,7 +32,6 @@ export const AddTweet = () => {
   }
 
   const onSubmit = (data: any) => {
-    // console.log('data', data);
     postTweet();
   };
 
@@ -49,9 +49,6 @@ export const AddTweet = () => {
         <Styled.Avatar src="https://i.pravatar.cc/100" />
         <Styled.Form onSubmit={handleSubmit(onSubmit)}>
           <Styled.TextArea
-            // {...register('tweet')}
-            // value={tweet}
-            // onChange={e => setTweet(e.target.value)}
             ref={someRef}
             maxLength={140}
             placeholder="Whats's happening?"

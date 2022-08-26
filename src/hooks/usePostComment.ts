@@ -1,4 +1,4 @@
-import {useReducer, useRef, useState} from 'react';
+import {useReducer, useRef} from 'react';
 import {PostComment} from '../containers/Home/components/Main/types';
 
 type Action =
@@ -80,18 +80,12 @@ const reducer = (state: State, action: Action) => {
 };
 
 export const usePostComment = (fn: (post: PostComment) => void) => {
-  // const [tweetComment, setTweetComment] = useState<string>('');
-  // const [loading, setLoading] = useState<boolean>(false);
-  // const [error, setError] = useState<string>('');
   const someRef = useRef<HTMLTextAreaElement>(null);
 
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   console.log('state', state);
 
   const postComment = async () => {
-    // setLoading(true);
-    // @ts-ignore
-    // console.log('ref value', someRef, someRef.current.value);
     const text = someRef?.current?.value;
     try {
       dispatch({
@@ -113,7 +107,6 @@ export const usePostComment = (fn: (post: PostComment) => void) => {
         },
       });
       const commentsData = await response.json();
-      // console.log('response', commentsData);
       fn(commentsData);
       dispatch({
         type: 'POST_COMMENT_SUCCESS',
@@ -124,7 +117,6 @@ export const usePostComment = (fn: (post: PostComment) => void) => {
         },
       });
     } catch (error: any) {
-      // setError(error.message);
       dispatch({
         type: 'POST_COMMENT_ERROR',
         payload: {
@@ -133,9 +125,6 @@ export const usePostComment = (fn: (post: PostComment) => void) => {
           error: true,
         },
       });
-    } finally {
-      // setLoading(false);
-      // setTweetComment('');
     }
   };
 
