@@ -1,5 +1,6 @@
 import {useSelector} from 'react-redux';
 import {createSelector} from 'reselect';
+import {GlobalState} from '../types';
 import {UserState} from './user.types';
 
 // export const useAuthState = (): UserState => {
@@ -28,8 +29,9 @@ import {UserState} from './user.types';
 //   };
 // };
 
-const userState = (state: UserState) => {
-  return state;
+const userState = (state: GlobalState) => {
+  // console.log('state', state);
+  return state.user;
 };
 
 export const userSelector = createSelector(userState, state => state.user);

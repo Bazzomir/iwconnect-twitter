@@ -18,11 +18,11 @@ ReactDOM.render(
       <AuthContextConstructor>
         <BrowserRouter>
           <CustomThemeContextConstructor>
-            <TweetsContextConstructor>
-              <TweetsCommentsContextConstructor>
-                <App />
-              </TweetsCommentsContextConstructor>
-            </TweetsContextConstructor>
+          <TweetsContextConstructor>
+            <TweetsCommentsContextConstructor>
+              <App />
+            </TweetsCommentsContextConstructor>
+          </TweetsContextConstructor>
           </CustomThemeContextConstructor>
         </BrowserRouter>
       </AuthContextConstructor>
