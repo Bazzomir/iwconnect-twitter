@@ -5,6 +5,7 @@ import {AuthContext} from '../../../../context/AuthContext';
 import {AuthButton} from '../../../../components/Button/Button';
 import {Navigate} from 'react-router-dom';
 import {BsTwitter} from 'react-icons/bs';
+import firebase from '../../../../firebase';
 
 interface FormProps {
   email: string;

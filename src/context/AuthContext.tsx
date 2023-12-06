@@ -85,6 +85,7 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
     birthday: string;
   }) => {
     try {
+      
       dispatchRedux(actions.registerInProgress());
       const result = await registerUserApi({
         firstname,
