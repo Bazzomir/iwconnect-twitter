@@ -22,4 +22,3 @@ export const FetchPosts = <T>(url: string, initialState: PostType[]): ReturnData
 
   return {data, FetchPostFromApi, addNewTweet};
 };
-

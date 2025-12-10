@@ -59,8 +59,8 @@ export const Styled = {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 20px;
-    weight: 20px;
+    height: 15px;
+    weight: 15px;
     margin-top: 10px;
   `,
   MailWrapper: styled.div`
@@ -87,9 +87,7 @@ export const Styled = {
   TextGrey: styled.p`
     color: grey;
     font-size: 11px;
-    height: 10px;
-    margin-top: 0;
-    margin-bottom: 6px;
+    margin: 0;
   `,
   TextWhite: styled.p`
     color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
