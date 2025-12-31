@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/iwconnect-twitter/static/css/main.930ae3f4.css",
+    "main.js": "/iwconnect-twitter/static/js/main.a3d86bfe.js",
+    "static/js/787.f210881e.chunk.js": "/iwconnect-twitter/static/js/787.f210881e.chunk.js",
+    "index.html": "/iwconnect-twitter/index.html",
+    "main.930ae3f4.css.map": "/iwconnect-twitter/static/css/main.930ae3f4.css.map",
+    "main.a3d86bfe.js.map": "/iwconnect-twitter/static/js/main.a3d86bfe.js.map",
+    "787.f210881e.chunk.js.map": "/iwconnect-twitter/static/js/787.f210881e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.930ae3f4.css",
+    "static/js/main.a3d86bfe.js"
+  ]
+}
