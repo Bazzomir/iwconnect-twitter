@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {LocalStorageConstants} from '../constants/constants';
-import {getUserApi, loginApi, logoutApi, registerUserApi} from '../mockApi/login';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { LocalStorageConstants } from '../constants/constants';
+import { getUserApi, loginApi, logoutApi, registerUserApi } from '../mockApi/login';
 import * as actions from '../state/user/user.actions';
-import {getUser, getUserUnsuccess} from '../state/user/user.actions';
+import { getUser, getUserUnsuccess } from '../state/user/user.actions';
 import * as selectors from '../state/user/user.selectors';
-import {User} from '../state/user/user.types';
-import {readFromStorage, removeFromStorage, writeInStorage} from '../utils/localStorage';
+import { User } from '../state/user/user.types';
+import { readFromStorage, removeFromStorage, writeInStorage } from '../utils/localStorage';
 
 interface ContextValues {
-  login: ({email, password}: {email: string; password: string}) => void;
+  login: ({ email, password }: { email: string; password: string }) => void;
   logout: () => void;
   loading: boolean;
   userIsRegistred: boolean;
@@ -34,15 +34,15 @@ interface ContextValues {
 }
 
 export const AuthContext = React.createContext<ContextValues>({
-  login: () => {},
-  logout: () => {},
-  register: () => {},
+  login: () => { },
+  logout: () => { },
+  register: () => { },
   loading: false,
   userIsLoggedIn: false,
   userIsRegistred: false,
 });
 
-export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
+export const AuthContextConstructor = ({ children }: { children: JSX.Element }) => {
   const dispatchRedux = useDispatch();
   const user = useSelector(selectors.userSelector);
   const error = useSelector(selectors.errorSelector);
@@ -56,12 +56,13 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
     const timeout = setTimeout(async () => {
       try {
         const accessToken = readFromStorage(LocalStorageConstants.AccessToken);
-        const user = await getUserApi({accessToken});
-        const {email, password} = user;
-        dispatchRedux(getUser({user: {email, password}}));
+        const user = await getUserApi({ accessToken });
+        const { email, password } = user;
+        dispatchRedux(getUser({ user: { email, password } }));
         dispatchRedux(actions.loading(false));
       } catch (error: any) {
-        dispatchRedux(getUserUnsuccess({error: error?.message}));
+        dispatchRedux(getUserUnsuccess({ error: error?.message }));
+        dispatchRedux(actions.loading(false));
       }
     }, 1000);
     return () => {
@@ -85,7 +86,7 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
     birthday: string;
   }) => {
     try {
-      
+
       dispatchRedux(actions.registerInProgress());
       const result = await registerUserApi({
         firstname,
@@ -102,28 +103,28 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
       writeInStorage(LocalStorageConstants.Password, result.user.password);
     } catch (err: any) {
       dispatchRedux(
-        actions.registerFailure({error: err?.message || 'ups... Something went worng :('})
+        actions.registerFailure({ error: err?.message || 'ups... Something went worng :(' })
       );
     } finally {
       dispatchRedux(
         actions.registerSuccess({
-          user: {firstname, lastname, email, password, repeatPassword, birthday},
+          user: { firstname, lastname, email, password, repeatPassword, birthday },
         })
       );
     }
   };
 
-  const login = async ({email, password}: {email: string; password: string}) => {
+  const login = async ({ email, password }: { email: string; password: string }) => {
     dispatchRedux(actions.loginInProgress());
     try {
-      const result = await loginApi({email, password});
+      const result = await loginApi({ email, password });
       writeInStorage(LocalStorageConstants.AccessToken, result.accessToken);
       writeInStorage(LocalStorageConstants.RefreshToken, result.refreshToken);
       writeInStorage(LocalStorageConstants.Email, result.email);
       writeInStorage(LocalStorageConstants.Password, result.password);
-      dispatchRedux(actions.loginSuccess({user: {email, password}}));
+      dispatchRedux(actions.loginSuccess({ user: { email, password } }));
     } catch (err: any) {
-      dispatchRedux(actions.loginFailure({error: err?.message || 'Check your email and password'}));
+      dispatchRedux(actions.loginFailure({ error: err?.message || 'Check your email and password' }));
     }
   };
 
@@ -131,7 +132,7 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
     dispatchRedux(actions.loading(true));
     try {
       const accessToken = readFromStorage(LocalStorageConstants.AccessToken);
-      await logoutApi({accessToken});
+      await logoutApi({ accessToken });
       removeFromStorage(LocalStorageConstants.AccessToken);
       removeFromStorage(LocalStorageConstants.RefreshToken);
       removeFromStorage(LocalStorageConstants.Email);
@@ -139,7 +140,7 @@ export const AuthContextConstructor = ({children}: {children: JSX.Element}) => {
       dispatchRedux(actions.logoutSucces());
     } catch (err: any) {
       dispatchRedux(
-        actions.logoutFailure({error: err?.message || 'ups... Something went worng :('})
+        actions.logoutFailure({ error: err?.message || 'ups... Something went worng :(' })
       );
     } finally {
       dispatchRedux(actions.loading(false));

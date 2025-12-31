@@ -1,8 +1,12 @@
 import React from 'react';
 import { Styled, WhoToFollowItems, } from './RightSideItems/RightSideItems';
-import {Props} from '../NavLink/NavLink';
+// import {Props} from '../NavLink/NavLink';
 
-export const WhoToFollow = ({text}: Props) => {
+interface WhoToFollowProps {
+  text: string;
+}
+
+export const WhoToFollow = ({ text }: WhoToFollowProps) => {
   return (
     <Styled.Container className="row">
       <Styled.TitleP>{text}</Styled.TitleP>
