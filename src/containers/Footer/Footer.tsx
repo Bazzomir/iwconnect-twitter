@@ -40,7 +40,7 @@ export const Footer = () => {
           <p>More ...</p>
         </div>
         <div className="col">
-          <p>Twitter, © Blagoj Jovanovski 2022</p>
+          <p>Twitter, © Blagoj Jovanovski 2022-2026</p>
         </div>
       </div>
     </Styled.Container>
