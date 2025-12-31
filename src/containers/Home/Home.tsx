@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar } from '../Navbar/Navbar';
-import { Main } from './components/Main';
+import { Main } from './components/Main/Main';
 import { Search } from './components/Search';
 
 export const Home = () => {
