@@ -1,6 +1,20 @@
 {
   "name": "iwconnect-twitter",
-  "version": "0.1.0",
+  "version": "1.1.0",
+  "description": "Twitter clone built with React & TypeScript during iwconnect’s React Mentorship Program (2022). Includes Redux, Context API, dark/light theme, posts API, and avatar image integration.",
+  "author": {
+    "name": "Bazzomir",
+    "email": "bazzomir97@gmail.com",
+    "year": "2022-2026"
+  },
+  "homepage": "https://bazzomir.github.io/iwconnect-twitter/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Bazzomir/iwconnect-twitter"
+  },
+  "bugs": {
+    "url": "https://github.com/Bazzomir/iwconnect-twitter/issues"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -12,6 +26,7 @@
     "@types/react-dom": "^17.0.11",
     "bootstrap": "^4.6.1",
     "firebase": "^9.9.4",
+    "gh-pages": "^6.3.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.3",
     "react-dom": "^17.0.2",
@@ -28,6 +43,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
