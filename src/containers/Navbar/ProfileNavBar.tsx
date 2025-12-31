@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 export const ProfileNavBar = () => {
   return (
-    <div className="row" style={{position: 'fixed', bottom: '5px'}}>
+    <div className="row" style={{ position: 'fixed', bottom: '5px' }}>
       <img
         className="col-3"
         src="https://i.pravatar.cc/100"
-        style={{width: '150px', height: '50px', borderRadius: '50%'}}
+        style={{ width: '150px', height: '50px', borderRadius: '50%' }}
         alt=" "
       />
       <div className="col-9">
