@@ -42,7 +42,7 @@ Run locally
 ```npm start```
 
 Build
-```npm run build``
+```npm run build```
 
 Deploy to GitHub Pages
 ```npm run deploy```
