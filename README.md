@@ -16,20 +16,24 @@ The project was later revisited and refactored to improve code quality, fix lega
 - GitHub Pages for deployment
 
 ## ✨ Features
-User authentication flow (login / register)
-Global state management with Redux
-Context API for authentication abstraction
-Dark / Light theme support
-Posts feed (API-based)
-Avatar image integration
-Protected routes
-Responsive UI inspired by Twitter
+- User authentication flow (login / register)
+- Global state management with Redux
+- Context API for authentication abstraction
+- Dark / Light theme support
+- Posts feed (API-based)
+- Avatar image integration
+- Protected routes
+- Responsive UI inspired by Twitter
 
 ## 🧠 Architecture Notes
 Redux is used as the single source of truth for global application state (user, loading, errors).
+
 Context API is used as an integration layer (authentication logic, external services).
+
 The project intentionally contains both Redux and Context to demonstrate understanding of their different responsibilities.
+
 This project represents a legacy codebase refactoring exercise, common in real-world frontend projects.
+
 
 ## 🚀 Getting Started
 Prerequisites
