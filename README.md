@@ -3,8 +3,6 @@
 This project is a Twitter-like web application developed during the React Mentorship Program (Internship) at iwconnect in 2022.
 The goal of the project was to practice real-world React development, state management, and application architecture.
 
-The project was later revisited and refactored to improve code quality, fix legacy issues, and modernize parts of the application.
-
 ## 🛠️ Tech Stack
 - React + TypeScript
 - React Router
@@ -60,21 +58,19 @@ If Firebase is enabled, create a .env file and add:
 
 📚 What I Learned
 Working with legacy React codebases
+
 Refactoring without breaking existing functionality
+
 Managing authentication and global state
+
 Combining Redux and Context API responsibly
+
 Debugging build and deployment issues
+
 Preparing a project for production-like deployment
 
-📌 Future Improvements
-
-Complete Firebase authentication integration
-Replace mock APIs with real backend
-Improve folder structure and naming consistency
-Add tests (unit & integration)
-Migrate from CRA to Vite
-
 👤 Author
-Bazzomir 2022-2026
+Developer: Bazzomir 2022-2026
+Mentor: Ognen IWConnect Education Center
 Developed during the React Mentorship Program (iwconnect, 2022)
 Refactored and maintained as a personal learning and portfolio project.
