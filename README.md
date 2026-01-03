@@ -6,14 +6,14 @@ The goal of the project was to practice real-world React development, state mana
 The project was later revisited and refactored to improve code quality, fix legacy issues, and modernize parts of the application.
 
 ## 🛠️ Tech Stack
-React + TypeScript
-React Router
-Redux (global state management)
-Context API (authentication & integrations; Dark-Light Theme)
-Styled-components
-Firebase Authentication (in progress / planned)
-Mock APIs for posts and user data
-GitHub Pages for deployment
+- React + TypeScript
+- React Router
+- Redux (global state management)
+- Context API (authentication & integrations; Dark-Light Theme)
+- Styled-components
+- Firebase Authentication (in progress / planned)
+- Mock APIs for posts and user data
+- GitHub Pages for deployment
 
 ## ✨ Features
 User authentication flow (login / register)
@@ -51,6 +51,7 @@ Deploy to GitHub Pages
 If Firebase is enabled, create a .env file and add:
 
 ```REACT_APP_FIREBASE_API_KEY=your_key_here```
+
 ```REACT_APP_FIREBASE_AUTH_DOMAIN=your_domain_here```
 
 📚 What I Learned
