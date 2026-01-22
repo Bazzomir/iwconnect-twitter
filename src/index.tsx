@@ -15,7 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <AuthContextConstructor>
-        <BrowserRouter>
+        <BrowserRouter basename="/iwconnect-twitter">
           <CustomThemeContextConstructor>
             <TweetsContextConstructor>
               <TweetsCommentsContextConstructor>
