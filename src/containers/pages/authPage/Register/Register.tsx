@@ -1,8 +1,8 @@
-import React, {useContext, useEffect} from 'react';
-import {useForm} from 'react-hook-form';
-import {Navigate} from 'react-router-dom';
-import {AuthContext} from '../../../../context/AuthContext';
-import {AuthButton} from '../../../../components/Button/Button';
+import React, { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../../../../context/AuthContext';
+import { AuthButton } from '../../../../components/Button/Button';
 
 interface RegisterProps {
   firstname: string;
@@ -14,12 +14,12 @@ interface RegisterProps {
 }
 
 export const Register = () => {
-  const {register: registerUser, error, loading, userIsRegistred} = useContext(AuthContext);
+  const { register: registerUser, error, loading, userIsRegistred } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     setError,
-    formState: {errors},
+    formState: { errors },
   } = useForm<RegisterProps>({
     mode: 'onChange',
   });
@@ -43,18 +43,18 @@ export const Register = () => {
 
   console.log('loading', loading);
   return loading ? (
-    <p style={{color: 'white'}}>loading...</p>
+    <p style={{ color: 'white' }}>loading...</p>
   ) : (
-    <div className="container-fluid mt-5" style={{color: 'white'}}>
+    <div className="container d-flex justify-content-center align-items-center mt-1 mt-md-3 mt-xl-5" style={{ color: 'white' }}>
       <div className="row">
-        <div className="col-7">
+        <div className="col-0 col-md-6 col-xl-7">
           <img
             src="https://wallpapercave.com/wp/wp1973433.jpg"
-            alt=" "
-            style={{float: 'left', height: '100%', width: '100%'}}
+            alt="Register Image"
+            className="h-100 w-100 d-none d-md-block img-fluid"
           />
         </div>
-        <div className="col-5">
+        <div className="col=12 col-md-6 col-xl-5">
           <h3 className="mt-2">Join Twitter today.</h3>
           <form className="mt-5" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
@@ -170,7 +170,7 @@ export const Register = () => {
               <AuthButton type="submit" nameButton="Sign In" />
             </div>
             <h6 className="row mt-4">
-              You already have an account?<a href="/login">Sign in</a>
+              You already have an account?<a href="login">Sign in</a>
             </h6>
           </form>
         </div>
