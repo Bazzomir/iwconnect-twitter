@@ -7,7 +7,7 @@ import { Messages } from '../containers/pages/Messages/Messages';
 import { Bookmarks } from '../containers/pages/Bookmarks/Bookmarks';
 import { Lists } from '../containers/pages/Lists/Lists';
 import { Profile } from '../containers/pages/Profile/Profile';
-import { More } from '../containers/Navbar/More';
+// import { More } from '../containers/Navbar/More';
 import { PostPage } from '../containers/Home/components/Main/components/PostPage/PostPage';
 import { ProtectedRoute } from './ProtectedRoute';
 import { PageNotFound } from '../containers/pages/PageNotFound/PageNotFound';
@@ -34,7 +34,7 @@ export const Routes = () => {
       <Route path="bookmarks" element={<Bookmarks />} />
       <Route path="lists" element={<Lists />} />
       <Route path="profile" element={<Profile />} />
-      <Route path="more" element={<More />} />
+      {/* <Route path="more" element={<More />} /> */}
 
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
