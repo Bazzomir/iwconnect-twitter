@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Form, FormControl, InputGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../../context/AuthContext';
@@ -41,14 +41,14 @@ export const Login = () => {
   }
 
   return loading ? (
-    <p style={{ color: 'white' }}>loading...</p>
+    <p style={{ color: 'white', fontSize: '50px' }} className="bold text-center h-100 mx-auto my-auto">loading...</p>
   ) : (
-    <div className="container d-flex justify-content-center align-items-center mt-1 mt-md-3 mt-xl-5" style={{ color: 'white' }}>
+    <div className="container d-flex justify-content-center align-items-center my-1 my-md-3 my-xl-5" style={{ color: 'white' }}>
       <div className="row">
         <div className="col-0 col-md-6 col-xl-8">
           <img
             src="https://royaladarsh.files.wordpress.com/2021/05/image_editor_output_image-113800456-1622176846204.png"
-            alt="Login Image"
+            alt="Login"
             className="h-100 w-100 d-none d-md-block img-fluid"
           />
         </div>
@@ -56,13 +56,15 @@ export const Login = () => {
           <BsTwitter className="mt-5" style={{ height: '100px', width: '50px' }} />
           <h2 className="mt-5">Happening now</h2>
           <h4 className="mt-2">Join Twitter today.</h4>
-          <Form className="mt-5" onSubmit={handleSubmit(onSubmit)}>
-            <InputGroup className="mt-2 mb-2">
+          <Form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
+            <InputGroup className="my-2">
               <h3>Login</h3>
             </InputGroup>
-            <label id="inputGroup-sizing-default">Email</label>
+            <label htmlFor="emailLogin" id="inputGroup-sizing-default">Email</label>
             <FormControl
-              aria-label="Default"
+              id="emailLogin"
+              autoComplete="off"
+              aria-label="Email"
               aria-describedby="inputGroup-sizing-default"
               className="mt-1"
               type="text"
@@ -75,11 +77,13 @@ export const Login = () => {
                 {errors.email?.message}
               </div>
             ) : null}
-            <label id="inputGroup-sizing-default" className="mt-5">
+            <label htmlFor="passwordLogin" id="inputGroup-sizing-default" className="mt-3">
               Password
             </label>
             <FormControl
-              aria-label="Default"
+              id="passwordLogin"
+              autoComplete="off"
+              aria-label="Password"
               aria-describedby="inputGroup-sizing-default"
               className="mt-1"
               type="password"
@@ -92,10 +96,14 @@ export const Login = () => {
                 {errors.password?.message}
               </div>
             ) : null}
-            <AuthButton type="submit" nameButton="Log In" />
-            <h6 className="row mt-4">
-              Don't have an account?<a href="register">Sign up</a>
-            </h6>
+            <div className="row mt-4">
+              <h6 className="col-7">
+                Don't have an account? <a href="register">Sign up</a>
+              </h6>
+              <div className="col-5">
+                <AuthButton type="submit" nameButton="Log In" />
+              </div>
+            </div>
           </Form>
         </div>
       </div>

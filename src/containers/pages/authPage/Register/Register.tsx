@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../../../../context/AuthContext';
@@ -11,6 +11,7 @@ interface RegisterProps {
   password: string;
   repeatPassword: string;
   birthday: string;
+  terms: boolean;
 }
 
 export const Register = () => {
@@ -43,26 +44,27 @@ export const Register = () => {
 
   console.log('loading', loading);
   return loading ? (
-    <p style={{ color: 'white' }}>loading...</p>
+    <p style={{ color: 'white', fontSize: '50px' }} className="bold text-center h-100 mx-auto my-auto">loading...</p>
   ) : (
-    <div className="container d-flex justify-content-center align-items-center mt-1 mt-md-3 mt-xl-5" style={{ color: 'white' }}>
+    <div className="container d-flex justify-content-center align-items-center my-1 my-md-3 my-xl-5" style={{ color: 'white' }}>
       <div className="row">
         <div className="col-0 col-md-6 col-xl-7">
           <img
             src="https://wallpapercave.com/wp/wp1973433.jpg"
-            alt="Register Image"
+            alt="Register"
             className="h-100 w-100 d-none d-md-block img-fluid"
           />
         </div>
-        <div className="col=12 col-md-6 col-xl-5">
+        <div className="col-12 col-md-6 col-xl-5">
           <h3 className="mt-2">Join Twitter today.</h3>
           <form className="mt-5" onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
-              <label>Name</label>
+              <label htmlFor="name" className="control-label">Name</label>
               <input
                 type="text"
                 className="form-control"
-                id="exampleInputName1"
+                id="name"
+                autoComplete="given-name"
                 aria-describedby="nameHelp"
                 placeholder="Enter name"
                 {...register('firstname', {
@@ -76,11 +78,12 @@ export const Register = () => {
               ) : null}
             </div>
             <div className="form-group">
-              <label>Lastname</label>
+              <label htmlFor="lastName" className="control-label">Lastname</label>
               <input
                 type="text"
                 className="form-control"
-                id="exampleInputLastName1"
+                id="lastName"
+                autoComplete="family-name"
                 aria-describedby="lastNameHelp"
                 placeholder="Enter lastname"
                 {...register('lastname', {
@@ -94,11 +97,12 @@ export const Register = () => {
               ) : null}
             </div>
             <div className="form-group">
-              <label className="control-label">Birthday</label>
+              <label htmlFor="birthday" className="control-label">Birthday</label>
               <input
                 type="date"
                 className="form-control"
-                id="date"
+                id="birthday"
+                autoComplete="off"
                 placeholder="MM/DD/YYY"
                 {...register('birthday', {
                   required: 'Birthday is required',
@@ -111,11 +115,12 @@ export const Register = () => {
               ) : null}
             </div>
             <div className="form-group">
-              <label>Email address</label>
+              <label htmlFor="email" className="control-label">Email address</label>
               <input
                 type="email"
                 className="form-control"
-                id="exampleInputEmail1"
+                id="email"
+                autoComplete="off"
                 aria-describedby="emailHelp"
                 placeholder="Enter email"
                 {...register('email', {
@@ -129,11 +134,12 @@ export const Register = () => {
               ) : null}
             </div>
             <div className="form-group">
-              <label>Password</label>
+              <label htmlFor="password" className="control-label">Password</label>
               <input
                 type="password"
                 className="form-control"
-                id="exampleInputPassword1"
+                id="password"
+                autoComplete="off"
                 placeholder="Password"
                 {...register('password', {
                   required: 'Password is required',
@@ -146,11 +152,12 @@ export const Register = () => {
               ) : null}
             </div>
             <div className="form-group">
-              <label>Confirm Password</label>
+              <label htmlFor="confirmPassword" className="control-label">Confirm Password</label>
               <input
                 type="password"
                 className="form-control"
-                id="exampleInputConfirmPassword1"
+                id="confirmPassword"
+                autoComplete="off"
                 placeholder="Confirm Password"
                 {...register('repeatPassword', {
                   required: 'Confirm Password is required',
@@ -162,16 +169,32 @@ export const Register = () => {
                 </div>
               ) : null}
             </div>
-            <div className="form-check">
-              <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-              <label className="form-check-label">Check me out</label>
+            <div className="form-check mt-3">
+              <input
+                type="checkbox"
+                className="form-check-input"
+                id="terms"
+                {...register('terms', {
+                  required: 'You must accept the terms',
+                })}
+              />
+              <label htmlFor="terms" className="form-check-label">
+                I agree to all terms and conditions
+              </label>
             </div>
-            <div className="col-8">
-              <AuthButton type="submit" nameButton="Sign In" />
+            {errors.terms?.message ? (
+              <div className="alert alert-danger mt-2" role="alert">
+                {errors.terms.message}
+              </div>
+            ) : null}
+            <div className="row mt-4">
+              <h6 className="col-7">
+                You already have an account? <a href="login">Sign in</a>
+              </h6>
+              <div className="col-5">
+                <AuthButton type="submit" nameButton="Sign In" />
+              </div>
             </div>
-            <h6 className="row mt-4">
-              You already have an account?<a href="login">Sign in</a>
-            </h6>
           </form>
         </div>
       </div>
