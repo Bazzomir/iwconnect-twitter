@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {LightButton} from '../../Button/Button';
+import { LightButton } from '../../Button/Button';
 
 interface Props {
   textGrey?: string;
@@ -9,30 +9,31 @@ interface Props {
   textWhite?: string;
 }
 
-export const WhoToFollowItems = ({textGrey, textWhite}: Props) => {
+export const WhoToFollowItems = ({ textGrey, textWhite }: Props) => {
   return (
-    <div className="row" style={{overflow: 'hidden'}}>
-      <div className="col-3">
+    <div className="row d-flex justify-content-around align-items-center w-100 gap-3 m-0 p-0 my-2" style={{ overflow: 'hidden' }}>
+      <div className="col-2 m-0 p-0">
         <img
           src="https://i.pravatar.cc/100"
-          style={{width: '50px', height: '50px', borderRadius: '100%'}}
-          alt=" "
+          style={{ width: '40px', height: '40px', borderRadius: '100%' }}
+          alt="Avatar"
+          className="m-0 p-0"
         />
       </div>
-      <div className="col-4" style={{marginRight: '15px'}}>
-        <Styled.TextP style={{textAlign: 'center', alignItems: 'center'}}>
+      <div className="col-4 d-flex justify-content-center align-items-center m-0 p-0">
+        <Styled.TextP>
           <Styled.TextWhite>{textWhite}</Styled.TextWhite>
           <Styled.TextGrey>{textGrey}</Styled.TextGrey>
         </Styled.TextP>
       </div>
-      <div className="col-3">
+      <div className="col-4 m-0 p-0">
         <LightButton nameButton="Follow" />
       </div>
     </div>
   );
 };
 
-export const TrendsForYouItems = ({textGrey, textBold, textNum}: Props) => {
+export const TrendsForYouItems = ({ textGrey, textBold, textNum }: Props) => {
   return (
     <>
       <Styled.MailWrapper className="col-12">
@@ -61,13 +62,11 @@ export const Styled = {
     justify-content: center;
     height: 15px;
     weight: 15px;
-    margin-top: 10px;
   `,
   MailWrapper: styled.div`
     display: grid;
     align-items: center;
     justify-content: flex-strat;
-    padding: 0 5px 0 5px;
   `,
   TitleP: styled.div`
     display: flex;
@@ -81,8 +80,6 @@ export const Styled = {
     align-items: center;
     justify-content: flex-strat;
     color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
-    margin-top: 10px;
-    margin-bottom: 10px;
   `,
   TextGrey: styled.p`
     color: grey;
@@ -91,15 +88,11 @@ export const Styled = {
   `,
   TextWhite: styled.p`
     color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
-    font-size: 20px;
     height: 20px;
-    margin-bottom: 6px;
+    margin-bottom: 0px;
   `,
   TextBold: styled.p`
     font-weight: bold;
-    font-size: 17px;
     color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};
-    margin-top: 0;
-    margin-bottom: 0;
   `,
 };

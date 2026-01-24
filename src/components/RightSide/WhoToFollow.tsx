@@ -1,6 +1,4 @@
-import React from 'react';
 import { Styled, WhoToFollowItems, } from './RightSideItems/RightSideItems';
-// import {Props} from '../NavLink/NavLink';
 
 interface WhoToFollowProps {
   text: string;
@@ -10,7 +8,7 @@ export const WhoToFollow = ({ text }: WhoToFollowProps) => {
   return (
     <Styled.Container className="row">
       <Styled.TitleP>{text}</Styled.TitleP>
-      <div className="col-12">
+      <div className="col-12 m-0 p-0">
         <WhoToFollowItems textGrey="@clonebase" textWhite="Clonebase" />
         <WhoToFollowItems textGrey="@clonebase" textWhite="Clonebase" />
       </div>
