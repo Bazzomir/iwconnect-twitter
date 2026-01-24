@@ -43,13 +43,11 @@ export const LightButton = ({nameButton}: Props) => {
   };
   return (
     <div
-      className="btn btn-light"
+      className="btn btn-light d-flex justify-content-center align-items-center w-100"
       onClick={onClick}
       style={{
         borderRadius: '30px',
         fontWeight: 'bold',
-        justifyContent: 'center',
-        alignItems: 'center',
         border: '1px solid lightgrey',
       }}
     >
@@ -69,14 +67,12 @@ export const PostButton = ({
       {...rest}
       // @ts-ignore
       type={type}
-      className="btn col-3"
+      className="btn col-3 d-flex justify-content-center align-items-center"
       onClick={onClick}
       style={{
         borderRadius: '30px',
         fontWeight: 'bold',
         height: '40px',
-        justifyContent: 'center',
-        alignItems: 'center',
         color: 'white',
         backgroundColor: 'rgba(29,155,240,255)',
       }}
@@ -89,7 +85,7 @@ export const PostButton = ({
 export const ReplyButton = ({nameButton, onClick}: Props) => {
   return (
     <button
-      className="col-2"
+      className="col-2 d-flex justify-content-center align-items-center"
       onClick={onClick}
       style={{
         float: 'right',
@@ -97,8 +93,6 @@ export const ReplyButton = ({nameButton, onClick}: Props) => {
         borderRadius: '30px',
         fontWeight: 'bold',
         height: '50px',
-        justifyContent: 'center',
-        alignItems: 'center',
         color: 'white',
         backgroundColor: 'rgba(29,155,240,255)',
       }}
@@ -111,13 +105,11 @@ export const ReplyButton = ({nameButton, onClick}: Props) => {
 export const EditButton = ({nameButton}: Props) => {
   return (
     <div
-      className="btn btn-outline-secondary"
+      className="btn btn-outline-secondary d-flex justify-content-center align-items-center"
       style={{
         borderRadius: '30px',
         fontWeight: 'bold',
         height: '40px',
-        justifyContent: 'center',
-        alignItems: 'center',
         color: 'white',
         marginLeft: '50%',
       }}
@@ -130,19 +122,15 @@ export const EditButton = ({nameButton}: Props) => {
 export const AuthButton = ({nameButton, onClick}: Props) => {
   return (
     <button
-      className="col-6"
+      className="d-flex justify-content-center align-items-center border-0 w-100"
       onClick={onClick}
       style={{
-        float: 'right',
-        marginTop: '15px',
         borderRadius: '30px',
         fontWeight: 'bold',
         height: '38px',
-        justifyContent: 'center',
-        alignItems: 'center',
         color: 'white',
         backgroundColor: 'rgba(29,155,240,255)',
-        overflow: 'hidden',
+        overflow: 'hidden'
       }}
     >
       {nameButton}
