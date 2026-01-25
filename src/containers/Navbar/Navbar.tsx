@@ -20,10 +20,8 @@ export const Navbar = ({ className, onLinkClick }: NavbarProps) => {
   const { toggleTheme } = useContext(CustomThemeContext);
   const { logout } = useContext(AuthContext);
 
-  const navContainerClass = `col-11 col-md-3 ${className ? className : ''}`;
-
   return (
-    <Styled.Container className={navContainerClass}>
+    <Styled.Container className={`col-11 col-md-3 ${className ? className : ''}`}>
       <NavLink to="/" icon={<BsTwitter />} />
       <NavLink to="/" text="Home" icon={<RiHome7Line />} />
       <NavLink to="/explore" text="Explore" icon={<RiHashtag />} />
