@@ -13,7 +13,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 interface NavbarProps {
   className?: string;
-  onLinkClick?: () => void; // ова ќе го додадеме
+  onLinkClick?: () => void;
 }
 
 export const Navbar = ({ className, onLinkClick }: NavbarProps) => {

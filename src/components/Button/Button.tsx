@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 interface Props {
   nameButton?: string;
   onClick?: () => void;
   type?: React.HTMLProps<HTMLButtonElement>['type'];
+  isOpen?: boolean;
 }
 
-export const Button = ({nameButton}: Props) => {
+export const Button = ({ nameButton }: Props) => {
   const [clicked, setCliced] = useState<number>(0);
   const onClick = (event: any) => {
     console.log(` ${nameButton} btn-primary clicked`, clicked);
@@ -33,7 +34,7 @@ export const Button = ({nameButton}: Props) => {
   );
 };
 
-export const LightButton = ({nameButton}: Props) => {
+export const LightButton = ({ nameButton }: Props) => {
   const [clicked, setCliced] = useState<number>(0);
   const onClick = (event: any) => {
     console.log(`${nameButton} btn-light clicked`, clicked);
@@ -82,7 +83,7 @@ export const PostButton = ({
   );
 };
 
-export const ReplyButton = ({nameButton, onClick}: Props) => {
+export const ReplyButton = ({ nameButton, onClick }: Props) => {
   return (
     <button
       className="col-2 d-flex justify-content-center align-items-center"
@@ -102,7 +103,7 @@ export const ReplyButton = ({nameButton, onClick}: Props) => {
   );
 };
 
-export const EditButton = ({nameButton}: Props) => {
+export const EditButton = ({ nameButton }: Props) => {
   return (
     <div
       className="btn btn-outline-secondary d-flex justify-content-center align-items-center"
@@ -119,7 +120,7 @@ export const EditButton = ({nameButton}: Props) => {
   );
 };
 
-export const AuthButton = ({nameButton, onClick}: Props) => {
+export const AuthButton = ({ nameButton, onClick }: Props) => {
   return (
     <button
       className="d-flex justify-content-center align-items-center border-0 w-100"
@@ -134,6 +135,31 @@ export const AuthButton = ({nameButton, onClick}: Props) => {
       }}
     >
       {nameButton}
+    </button>
+  );
+};
+
+export const MobileMenuButton = ({ isOpen, onClick }: Props) => {
+  return (
+    <button
+      className="mobile-menu-btn"
+      onClick={onClick}
+      style={{
+        width: '42px',
+        height: '42px',
+        borderRadius: '50%',
+        fontSize: '24px',
+        fontWeight: 'bold',
+        backgroundColor: 'rgba(29,155,240,255)',
+        color: 'white',
+        position: 'fixed',
+        top: '15px',
+        left: '15px',
+        zIndex: 1101,
+        cursor: 'pointer',
+      }}
+    >
+      {isOpen ? '✕' : '☰'}
     </button>
   );
 };
