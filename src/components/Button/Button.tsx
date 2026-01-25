@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BsSearch } from 'react-icons/bs';
 
 interface Props {
   nameButton?: string;
@@ -160,6 +161,30 @@ export const MobileMenuButton = ({ isOpen, onClick }: Props) => {
       }}
     >
       {isOpen ? '✕' : '☰'}
+    </button>
+  );
+};
+
+export const MobileSearchButton = ({ isOpen, onClick }: Props) => {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        width: '42px',
+        height: '42px',
+        borderRadius: '50%',
+        fontSize: '24px',
+        fontWeight: 'bold',
+        backgroundColor: 'rgba(29,155,240,255)',
+        color: 'white',
+        position: 'fixed',
+        top: '15px',
+        right: '15px',
+        zIndex: 1101,
+        cursor: 'pointer',
+      }}
+    >
+      {isOpen ? '✕' : <BsSearch />}
     </button>
   );
 };

@@ -3,7 +3,7 @@ import { Navbar } from '../Navbar/Navbar';
 import { Footer } from '../Footer/Footer';
 import { Search } from '../Search/Search';
 import { useLocation } from 'react-router-dom';
-import { MobileMenuButton } from '../../components/Button/Button';
+import { MobileMenuButton, MobileSearchButton } from '../../components/Button/Button';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
@@ -12,6 +12,7 @@ interface Props {
 export const PageWrapperComponent = ({ children }: Props) => {
   const location = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const handleLinkClick = () => {
     setIsNavOpen(false);
@@ -21,10 +22,11 @@ export const PageWrapperComponent = ({ children }: Props) => {
   return (
     <>
       <MobileMenuButton isOpen={isNavOpen} onClick={() => setIsNavOpen(prev => !prev)} />
+      <MobileSearchButton isOpen={isSearchOpen} onClick={() => setIsSearchOpen(p => !p)} />
       <Navbar className={isNavOpen ? 'open' : ''} onLinkClick={handleLinkClick} />
       <>{children}</>
       <>
-        {location.pathname !== '/messages' && location.pathname !== '/explore' && <Search />}
+        {location.pathname !== '/messages' && location.pathname !== '/explore' && <Search className={isSearchOpen ? 'open' : ''} />}
         {location.pathname === '/explore' && (
           <div className="col-3">
             <Footer />
