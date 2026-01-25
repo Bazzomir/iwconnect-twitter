@@ -168,6 +168,7 @@ export const MobileMenuButton = ({ isOpen, onClick }: Props) => {
 export const MobileSearchButton = ({ isOpen, onClick }: Props) => {
   return (
     <button
+      className="mobile-search-btn"
       onClick={onClick}
       style={{
         width: '42px',

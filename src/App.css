@@ -11,12 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.mobile-menu-btn {
+.mobile-menu-btn,
+.mobile-search-btn {
   display: none;
 }
 
 @media (max-width: 768px) {
-  .mobile-menu-btn {
+
+  .mobile-menu-btn,
+  .mobile-search-btn {
     display: flex;
     justify-content: center;
     align-items: center;
