@@ -1,17 +1,16 @@
-import React from 'react';
 import { NavLink as RRDNavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { Styled as TrendsStyled } from '../RightSide/TrendsForYou';
 
 export interface Props {
   text?: string;
   to: string;
   icon?: JSX.Element;
+  onClick?: () => void;
 }
 
-export const NavLink = ({ icon, to, text }: Props) => {
+export const NavLink = ({ icon, to, text, onClick }: Props) => {
   return (
-    <Styled.Container to={to}>
+    <Styled.Container to={to} onClick={onClick}>
       <Styled.IconWrapper>{icon}</Styled.IconWrapper>
       <Styled.TextWrapper>{text}</Styled.TextWrapper>
     </Styled.Container>

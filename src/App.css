@@ -11,6 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.mobile-menu-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+
 #commentsDialog .modal-content {
   border: 2px solid white;
   border-radius: 25px;

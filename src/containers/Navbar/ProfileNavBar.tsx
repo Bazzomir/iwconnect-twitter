@@ -1,9 +1,8 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const ProfileNavBar = () => {
   return (
-    <div className="row" style={{ position: 'fixed', bottom: '5px' }}>
+    <div className="row mt-5">
       <img
         className="col-3"
         src="https://i.pravatar.cc/100"
