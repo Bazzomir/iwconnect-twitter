@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../../../../context/AuthContext';
-import { AuthButton } from '../../../../components/Button/Button';
+import { AuthContext } from '../../../context/AuthContext';
+import { AuthButton } from '../../../components/Button/Button';
 
 interface RegisterProps {
   firstname: string;

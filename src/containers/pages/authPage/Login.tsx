@@ -1,8 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { Form, FormControl, InputGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../../../context/AuthContext';
-import { AuthButton } from '../../../../components/Button/Button';
+import { AuthContext } from '../../../context/AuthContext';
+import { AuthButton } from '../../../components/Button/Button';
 import { Navigate } from 'react-router-dom';
 import { BsTwitter } from 'react-icons/bs';
 // import firebase from '../../../../firebase';
