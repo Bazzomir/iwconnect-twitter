@@ -1,97 +1,99 @@
 import React from 'react';
 import styled from 'styled-components';
-import {AiOutlinePlus} from 'react-icons/ai';
-import {FiX} from 'react-icons/fi';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { FiX } from 'react-icons/fi';
 
 export const Tweets = () => {
   return (
     <Styled.Container>
-      <Styled.TextWhite>Topics to follow</Styled.TextWhite>
-      <Styled.TextGrey>
-        Tweets about the Topics you follow show up in your Home timeline
-      </Styled.TextGrey>
-      <div className="row">
-        <Styled.BalloonToFollow className="col-4">
-          <Styled.BallonText>Football</Styled.BallonText>
-          <Styled.BallonIcon style={{color: 'blue'}}>
-            <AiOutlinePlus />
-          </Styled.BallonIcon>
-          <Styled.BallonIcon>
-            | <FiX />
-          </Styled.BallonIcon>
-        </Styled.BalloonToFollow>
-        <Styled.BalloonToFollow className="col-4">
-          <Styled.BallonText>Music</Styled.BallonText>
-          <Styled.BallonIcon style={{color: 'blue'}}>
-            <AiOutlinePlus />
-          </Styled.BallonIcon>
-          <Styled.BallonIcon>
-            | <FiX />
-          </Styled.BallonIcon>
-        </Styled.BalloonToFollow>
-        <Styled.BalloonToFollow className="col-4">
-          <Styled.BallonText>Crypto</Styled.BallonText>
-          <Styled.BallonIcon style={{color: 'blue'}}>
-            <AiOutlinePlus />
-          </Styled.BallonIcon>
-          <Styled.BallonIcon>
-            | <FiX />
-          </Styled.BallonIcon>
-        </Styled.BalloonToFollow>
-        <Styled.BalloonToFollow className="col-4">
-          <Styled.BallonText>Cats</Styled.BallonText>
-          <Styled.BallonIcon style={{color: 'blue'}}>
-            <AiOutlinePlus />
-          </Styled.BallonIcon>
-          <Styled.BallonIcon>
-            | <FiX />
-          </Styled.BallonIcon>
-        </Styled.BalloonToFollow>
-        <Styled.BalloonToFollow className="col-4">
-          <Styled.BallonText>Dog</Styled.BallonText>
-          <Styled.BallonIcon style={{color: 'blue'}}>
-            <AiOutlinePlus />
-          </Styled.BallonIcon>
-          <Styled.BallonIcon>
-            | <FiX />
-          </Styled.BallonIcon>
-        </Styled.BalloonToFollow>
-        <Styled.BalloonToFollow className="col-4">
-          <Styled.BallonText>GYM</Styled.BallonText>
-          <Styled.BallonIcon style={{color: 'blue'}}>
-            <AiOutlinePlus />
-          </Styled.BallonIcon>
-          <Styled.BallonIcon>
-            | <FiX />
-          </Styled.BallonIcon>
-        </Styled.BalloonToFollow>
-        <Styled.BalloonToFollow className="col-4">
-          <Styled.BallonText>Mars</Styled.BallonText>
-          <Styled.BallonIcon style={{color: 'blue'}}>
-            <AiOutlinePlus />
-          </Styled.BallonIcon>
-          <Styled.BallonIcon>
-            | <FiX />
-          </Styled.BallonIcon>
-        </Styled.BalloonToFollow>
-        <Styled.BalloonToFollow className="col-4">
-          <Styled.BallonText>React</Styled.BallonText>
-          <Styled.BallonIcon style={{color: 'blue'}}>
-            <AiOutlinePlus />
-          </Styled.BallonIcon>
-          <Styled.BallonIcon>
-            | <FiX />
-          </Styled.BallonIcon>
-        </Styled.BalloonToFollow>
-        <Styled.BalloonToFollow className="col-4">
-          <Styled.BallonText>JavaScript</Styled.BallonText>
-          <Styled.BallonIcon style={{color: 'blue'}}>
-            <AiOutlinePlus />
-          </Styled.BallonIcon>
-          <Styled.BallonIcon>
-            | <FiX />
-          </Styled.BallonIcon>
-        </Styled.BalloonToFollow>
+      <div className="mt-4">
+        <Styled.TextWhite>Topics to follow</Styled.TextWhite>
+        <Styled.TextGrey>
+          Tweets about the Topics you follow show up in your Home timeline
+        </Styled.TextGrey>
+        <div className="row">
+          <Styled.BalloonToFollow className="col-4">
+            <Styled.BallonText>Football</Styled.BallonText>
+            <Styled.BallonIcon style={{ color: 'blue' }}>
+              <AiOutlinePlus />
+            </Styled.BallonIcon>
+            <Styled.BallonIcon>
+              | <FiX />
+            </Styled.BallonIcon>
+          </Styled.BalloonToFollow>
+          <Styled.BalloonToFollow className="col-4">
+            <Styled.BallonText>Music</Styled.BallonText>
+            <Styled.BallonIcon style={{ color: 'blue' }}>
+              <AiOutlinePlus />
+            </Styled.BallonIcon>
+            <Styled.BallonIcon>
+              | <FiX />
+            </Styled.BallonIcon>
+          </Styled.BalloonToFollow>
+          <Styled.BalloonToFollow className="col-4">
+            <Styled.BallonText>Crypto</Styled.BallonText>
+            <Styled.BallonIcon style={{ color: 'blue' }}>
+              <AiOutlinePlus />
+            </Styled.BallonIcon>
+            <Styled.BallonIcon>
+              | <FiX />
+            </Styled.BallonIcon>
+          </Styled.BalloonToFollow>
+          <Styled.BalloonToFollow className="col-4">
+            <Styled.BallonText>Cats</Styled.BallonText>
+            <Styled.BallonIcon style={{ color: 'blue' }}>
+              <AiOutlinePlus />
+            </Styled.BallonIcon>
+            <Styled.BallonIcon>
+              | <FiX />
+            </Styled.BallonIcon>
+          </Styled.BalloonToFollow>
+          <Styled.BalloonToFollow className="col-4">
+            <Styled.BallonText>Dog</Styled.BallonText>
+            <Styled.BallonIcon style={{ color: 'blue' }}>
+              <AiOutlinePlus />
+            </Styled.BallonIcon>
+            <Styled.BallonIcon>
+              | <FiX />
+            </Styled.BallonIcon>
+          </Styled.BalloonToFollow>
+          <Styled.BalloonToFollow className="col-4">
+            <Styled.BallonText>GYM</Styled.BallonText>
+            <Styled.BallonIcon style={{ color: 'blue' }}>
+              <AiOutlinePlus />
+            </Styled.BallonIcon>
+            <Styled.BallonIcon>
+              | <FiX />
+            </Styled.BallonIcon>
+          </Styled.BalloonToFollow>
+          <Styled.BalloonToFollow className="col-4">
+            <Styled.BallonText>Mars</Styled.BallonText>
+            <Styled.BallonIcon style={{ color: 'blue' }}>
+              <AiOutlinePlus />
+            </Styled.BallonIcon>
+            <Styled.BallonIcon>
+              | <FiX />
+            </Styled.BallonIcon>
+          </Styled.BalloonToFollow>
+          <Styled.BalloonToFollow className="col-4">
+            <Styled.BallonText>React</Styled.BallonText>
+            <Styled.BallonIcon style={{ color: 'blue' }}>
+              <AiOutlinePlus />
+            </Styled.BallonIcon>
+            <Styled.BallonIcon>
+              | <FiX />
+            </Styled.BallonIcon>
+          </Styled.BalloonToFollow>
+          <Styled.BalloonToFollow className="col-4">
+            <Styled.BallonText>JavaScript</Styled.BallonText>
+            <Styled.BallonIcon style={{ color: 'blue' }}>
+              <AiOutlinePlus />
+            </Styled.BallonIcon>
+            <Styled.BallonIcon>
+              | <FiX />
+            </Styled.BallonIcon>
+          </Styled.BalloonToFollow>
+        </div>
       </div>
     </Styled.Container>
   );
@@ -110,7 +112,7 @@ const Styled = {
     color: grey;
     font-size: 11px;
     margin: 0;
-    margin-top: 5px;
+    margin-top: 10px;
   `,
   TextWhite: styled.p`
     color: ${props => props.theme.RightSide.wrapperTwo.accountName.color};

@@ -1,21 +1,20 @@
-import React from 'react';
 import styled from 'styled-components';
-import {SearchBar} from '../../../components/RightSide/SearchBar';
-import {BsSearch} from 'react-icons/bs';
-import {AiOutlineSetting} from 'react-icons/ai';
-import {TrendsForYouItems} from '../../../components/RightSide/RightSideItems/RightSideItems';
-import {ExploreImageBox} from './ExploreImageBox';
+import { SearchBar } from '../../../components/RightSide/SearchBar';
+import { BsSearch } from 'react-icons/bs';
+import { AiOutlineSetting } from 'react-icons/ai';
+import { TrendsForYouItems } from '../../../components/RightSide/RightSideItems/RightSideItems';
+import { ExploreImageBox } from './ExploreImageBox';
 import { PageWrapperComponent } from '../../PageWrapper/PageWrapperComponent';
 
 export const Explore = () => {
   return (
     <PageWrapperComponent>
-      <div className="col-6">
+      <div className="col-12 col-md-9 col-lg-6">
         <Styled.HeaderContainer>
           <div className="col-11">
             <SearchBar icon={<BsSearch />} />
           </div>
-          <div className="col-2">
+          <div className="col-1">
             <AiOutlineSetting />
           </div>
         </Styled.HeaderContainer>
@@ -47,7 +46,7 @@ export const Explore = () => {
             textBold={'#crypto'}
             textNum="358K Tweets"
           />
-          <TrendsForYouItems
+          {/* <TrendsForYouItems
             textGrey="Digital assets & cryptodocumentary • Trending"
             textBold={'#Bitcoin 💰'}
             textNum="358K Tweets"
@@ -71,7 +70,7 @@ export const Explore = () => {
             textGrey="Digital assets & cryptodocumentary • Trending"
             textBold={'#Bitcoin 💰'}
             textNum="358K Tweets"
-          />
+          /> */}
         </Styled.TrendsForYouContainer>
       </div>
     </PageWrapperComponent>

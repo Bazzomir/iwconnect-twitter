@@ -12,7 +12,7 @@ export const Notifications = () => {
 
   return (
     <PageWrapperComponent>
-      <div className="col-6">
+      <div className="col-12 col-md-9 col-lg-6">
         <StyledHeader.HeaderContainer>
           <StyledHeader.Header>Notifications</StyledHeader.Header>
           <StyledHeader.HeaderIcon>

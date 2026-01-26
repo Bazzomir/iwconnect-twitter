@@ -21,7 +21,7 @@ export const Navbar = ({ className, onLinkClick }: NavbarProps) => {
   const { logout } = useContext(AuthContext);
 
   return (
-    <Styled.Container className={`col-11 col-md-3 ${className ? className : ''}`}>
+    <Styled.Container className={`col-11 col-lg-3 ${className ? className : ''}`}>
       <NavLink to="/" icon={<BsTwitter />} />
       <NavLink to="/" text="Home" icon={<RiHome7Line />} />
       <NavLink to="/explore" text="Explore" icon={<RiHashtag />} />
@@ -48,7 +48,7 @@ export const Styled = {
     border-right: 1px solid lightgrey;
     position: relative;
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       position: fixed;
       top: 0;
       left: 0;

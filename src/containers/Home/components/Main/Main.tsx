@@ -9,7 +9,7 @@ export const Main = () => {
 
   return (
     <PageWrapperComponent>
-      <main className="col-12 col-md-6">
+      <main className="col-12 col-md-9 col-lg-6">
         <AddTweet />
         {tweets?.slice(0, 10)?.map(post => {
           return <Post key={post.id} {...post} />;

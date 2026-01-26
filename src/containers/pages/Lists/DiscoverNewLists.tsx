@@ -1,10 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 import {LightButton} from '../../../components/Button/Button';
 
 export const DiscoverNewLists = () => {
   return (
-    <div className="col-12 " style={{borderBottom: '1px solid white'}}>
+    <div className="col-12" style={{borderBottom: '1px solid white'}}>
       <h3 style={{color: 'white'}}>Discover new Lists</h3>
       <div className="row">
         <div className="col-3">

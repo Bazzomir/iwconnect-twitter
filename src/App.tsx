@@ -11,7 +11,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme[localTheme]}>
-      <div className="container-fluid container-md d-flex justify-content-center">
+      <div className="container-fluid container-xl d-flex justify-content-center">
         <Routes />
       </div>
     </ThemeProvider>

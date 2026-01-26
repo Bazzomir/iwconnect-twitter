@@ -1,35 +1,34 @@
-import React from 'react';
 import styled from 'styled-components';
-import {Button} from '../../../components/Button/Button';
-import {AiOutlineSetting} from 'react-icons/ai';
-import {MdOutlineForwardToInbox} from 'react-icons/md';
+import { Button } from '../../../components/Button/Button';
+import { AiOutlineSetting } from 'react-icons/ai';
+import { MdOutlineForwardToInbox } from 'react-icons/md';
 import { PageWrapperComponent } from '../../PageWrapper/PageWrapperComponent';
 
 export const Messages = () => {
   return (
     <PageWrapperComponent>
-      <div className="col-9">
-        <div className="row">
-          <div className="col-5">
-            <Styled.HeaderContainer>
-              <Styled.Header>Messages</Styled.Header>
-              <Styled.HeaderIcon>
-                <AiOutlineSetting />
-                <MdOutlineForwardToInbox />
-              </Styled.HeaderIcon>
-            </Styled.HeaderContainer>
+      <div className="col-12 col-md-9">
+        <div className="row gap-5">
+          <Styled.HeaderContainer>
+            <Styled.Header>Messages</Styled.Header>
+            <Styled.HeaderIcon>
+              <AiOutlineSetting />
+              <MdOutlineForwardToInbox />
+            </Styled.HeaderIcon>
+          </Styled.HeaderContainer>
+          <div className="col-12 my-3">
             <Styled.TextContainer className="mt-5">
               <Styled.TextWrapper>Welcome to your inbox!</Styled.TextWrapper>
               <Styled.TextParagraphWrapper>
                 Drop a line, share Tweets and more with private conversations between you and others
                 on Twitter.
               </Styled.TextParagraphWrapper>
-              <div className="col">
+              <div className="col-12 col-sm-8 col-md-6">
                 <Button nameButton="Start a conversation" />
               </div>
             </Styled.TextContainer>
           </div>
-          <div className="col-7" style={{marginTop: '250px', padding: '90px'}}>
+          <div className="col-12 mt-5">
             <Styled.TextContainer>
               <Styled.TextWrapper>Select a message</Styled.TextWrapper>
               <Styled.TextParagraphWrapper>
@@ -42,7 +41,7 @@ export const Messages = () => {
           </div>
         </div>
       </div>
-    </PageWrapperComponent>
+    </PageWrapperComponent >
   );
 };
 

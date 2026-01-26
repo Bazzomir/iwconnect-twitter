@@ -1,5 +1,5 @@
 import React from 'react';
-import {Styled} from '../Messages/Messages';
+import { Styled } from '../Messages/Messages';
 
 export const Media = () => {
   return (
@@ -7,9 +7,9 @@ export const Media = () => {
       <Styled.TextContainer>
         <div className="d-flex justify-content-md-center mt-5 mb-3">
           <img
-            src="https://www.jing.fm/clipimg/full/66-661231_drawn-camera-file-camera-vector-png-transparent.png"
+            src="https://as2.ftcdn.net/jpg/08/84/07/31/1000_F_884073136_Nnt3rN419udYOiOlwg6kIRhVJ8I1v1uY.webp"
             alt=""
-            style={{height: '200px', width: '250px', textAlign: 'center'}}
+            style={{ height: '200px', width: '250px', textAlign: 'center' }}
           />
         </div>
         <Styled.TextWrapper className="d-flex justify-content-md-center">

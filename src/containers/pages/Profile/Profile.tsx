@@ -16,7 +16,7 @@ export const Profile = () => {
 
   return (
     <PageWrapperComponent>
-      <div className="col-6">
+      <div className="col-12 col-md-9 col-lg-6">
         <Styled.HeaderContainer>
           <Styled.FirstIcon>
             <IoMdArrowBack />

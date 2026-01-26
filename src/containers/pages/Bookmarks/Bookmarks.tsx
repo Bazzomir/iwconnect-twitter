@@ -5,7 +5,7 @@ import {Styled} from '../Messages/Messages';
 export const Bookmarks = () => {
   return (
     <PageWrapperComponent>
-      <div className="col-6">
+      <div className="col-12 col-md-9 col-lg-6">
         <Styled.HeaderContainer>
           <Styled.Header>Bookmarks</Styled.Header>
         </Styled.HeaderContainer>

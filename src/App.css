@@ -16,8 +16,7 @@ code {
   display: none;
 }
 
-@media (max-width: 768px) {
-
+@media (max-width: 992px) {
   .mobile-menu-btn,
   .mobile-search-btn {
     display: flex;
@@ -25,7 +24,6 @@ code {
     align-items: center;
   }
 }
-
 
 #commentsDialog .modal-content {
   border: 2px solid white;

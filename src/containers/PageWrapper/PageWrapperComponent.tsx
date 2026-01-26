@@ -28,9 +28,7 @@ export const PageWrapperComponent = ({ children }: Props) => {
       <>
         {location.pathname !== '/messages' && location.pathname !== '/explore' && <Search className={isSearchOpen ? 'open' : ''} />}
         {location.pathname === '/explore' && (
-          <div className="col-3">
-            <Footer />
-          </div>
+          <Footer />
         )}
       </>
     </>

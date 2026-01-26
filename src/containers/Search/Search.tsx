@@ -12,7 +12,7 @@ interface SearchProps {
 
 export const Search = ({ className }: SearchProps) => {
   return (
-    <Styled.Container className={`col-11 col-md-3 ${className ? className : ''}`}>
+    <Styled.Container className={`col-11 col-lg-3 ${className ? className : ''}`}>
       <SearchBar icon={<BsSearch />} />
       <TrendsForYous text="Trends for you" icon={<RiSettings2Line />} />
       <WhoToFollow text="Who to follow" />
@@ -28,7 +28,7 @@ const Styled = {
     border-left: 1px solid lightgrey;
     position: relative;
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       position: fixed;
       top: 0;
       right: 0;
