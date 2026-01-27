@@ -9,6 +9,8 @@ import { User } from '../state/user/user.types';
 import { readFromStorage, removeFromStorage, writeInStorage } from '../utils/localStorage';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 
 interface ContextValues {
   login: ({ email, password }: { email: string; password: string }) => void;
@@ -100,35 +102,43 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
     repeatPassword: string;
     birthday: string;
   }) => {
-    try {
-      dispatchRedux(actions.registerInProgress());
-      const result = await registerUserApi({
-        firstname,
-        lastname,
-        email,
-        password,
-        repeatPassword,
-        birthday,
-      });
+    if (password !== repeatPassword) {
+      dispatchRedux(
+        actions.registerFailure({
+          error: "Password and Repeat Password don't match",
+        })
+      );
+      return;
+    }
 
-      writeInStorage(LocalStorageConstants.AccessToken, result.accessToken);
-      writeInStorage(LocalStorageConstants.RefreshToken, result.refreshToken);
-      writeInStorage(LocalStorageConstants.Email, result.user.email);
-      writeInStorage(LocalStorageConstants.Password, result.user.password);
+    dispatchRedux(actions.registerInProgress());
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      dispatchRedux(
+        actions.registerSuccess({
+          user: {
+            firstname,
+            lastname,
+            email: userCredential.user.email!,
+            birthday,
+          },
+        })
+      );
     } catch (err: any) {
       dispatchRedux(
         actions.registerFailure({
-          error: err?.message || 'ups... Something went wrong :(',
-        })
-      );
-    } finally {
-      dispatchRedux(
-        actions.registerSuccess({
-          user: { firstname, lastname, email, password, repeatPassword, birthday },
+          error: err.message || 'Failed to register',
         })
       );
     }
   };
+
 
   const logout = async () => {
     dispatchRedux(actions.loading(true));
