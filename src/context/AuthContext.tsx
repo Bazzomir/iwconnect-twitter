@@ -1,25 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { LocalStorageConstants } from '../constants/constants';
-import { getUserApi, logoutApi, registerUserApi } from '../mockApi/login';
-import * as actions from '../state/user/user.actions';
-import { getUser, getUserUnsuccess } from '../state/user/user.actions';
-import * as selectors from '../state/user/user.selectors';
-import { User } from '../state/user/user.types';
-import { readFromStorage, removeFromStorage, writeInStorage } from '../utils/localStorage';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, } from 'firebase/auth';
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-
+import * as actions from '../state/user/user.actions';
+import * as selectors from '../state/user/user.selectors';
+import { User as TypeOfUser } from '../state/user/user.types';
 
 interface ContextValues {
-  login: ({ email, password }: { email: string; password: string }) => void;
+  login: (params: { email: string; password: string }) => void;
   logout: () => void;
-  loading: boolean;
-  userIsRegistred: boolean;
-  userIsLoggedIn: boolean;
-  user?: User;
-  error?: string;
   register: (params: {
     firstname: string;
     lastname: string;
@@ -28,6 +17,11 @@ interface ContextValues {
     repeatPassword: string;
     birthday: string;
   }) => void;
+  loading: boolean;
+  userIsLoggedIn: boolean;
+  userIsRegistred: boolean;
+  user?: TypeOfUser;
+  error?: string;
 }
 
 export const AuthContext = React.createContext<ContextValues>({
@@ -41,6 +35,7 @@ export const AuthContext = React.createContext<ContextValues>({
 
 export const AuthContextConstructor = ({ children }: { children: JSX.Element }) => {
   const dispatchRedux = useDispatch();
+
   const user = useSelector(selectors.userSelector);
   const error = useSelector(selectors.errorSelector);
   const loading = useSelector(selectors.loadingSelector);
@@ -49,21 +44,25 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
 
   useEffect(() => {
     dispatchRedux(actions.loading(true));
-    const timeout = setTimeout(async () => {
-      try {
-        const accessToken = readFromStorage(LocalStorageConstants.AccessToken);
-        const user = await getUserApi({ accessToken });
-        const { email, password } = user;
-        dispatchRedux(getUser({ user: { email, password } }));
-        dispatchRedux(actions.loading(false));
-      } catch (error: any) {
-        dispatchRedux(getUserUnsuccess({ error: error?.message }));
-        dispatchRedux(actions.loading(false));
-      }
-    }, 1000);
 
-    return () => clearTimeout(timeout);
-  }, []);
+    const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser?.email) {
+        dispatchRedux(
+          actions.loginSuccess({
+            user: {
+              email: firebaseUser.email,
+            },
+          })
+        );
+      } else {
+        dispatchRedux(actions.logoutSucces());
+      }
+
+      dispatchRedux(actions.loading(false));
+    });
+
+    return () => unsubscribe();
+  }, [dispatchRedux]);
 
   const login = async ({ email, password }: { email: string; password: string }) => {
     dispatchRedux(actions.loginInProgress());
@@ -114,11 +113,7 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
     dispatchRedux(actions.registerInProgress());
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
       dispatchRedux(
         actions.registerSuccess({
@@ -139,21 +134,16 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
     }
   };
 
-
   const logout = async () => {
     dispatchRedux(actions.loading(true));
+
     try {
-      const accessToken = readFromStorage(LocalStorageConstants.AccessToken);
-      await logoutApi({ accessToken });
-      removeFromStorage(LocalStorageConstants.AccessToken);
-      removeFromStorage(LocalStorageConstants.RefreshToken);
-      removeFromStorage(LocalStorageConstants.Email);
-      removeFromStorage(LocalStorageConstants.Password);
+      await signOut(auth);
       dispatchRedux(actions.logoutSucces());
     } catch (err: any) {
       dispatchRedux(
         actions.logoutFailure({
-          error: err?.message || 'ups... Something went wrong :(',
+          error: err.message || 'Logout failed',
         })
       );
     } finally {

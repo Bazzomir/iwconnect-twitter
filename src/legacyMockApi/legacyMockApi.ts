@@ -1,3 +1,11 @@
+/**
+ * LEGACY MOCK API
+ * Used during React mentorship program (2022)
+ * Replaced with Firebase Authentication
+ * Kept for reference only
+ */
+
+
 import { LocalStorageConstants } from '../constants/constants';
 import { readFromStorage, writeInStorage } from '../utils/localStorage';
 
