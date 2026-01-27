@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LocalStorageConstants } from '../constants/constants';
-import { getUserApi, loginApi, logoutApi, registerUserApi } from '../mockApi/login';
+import { getUserApi, logoutApi, registerUserApi } from '../mockApi/login';
 import * as actions from '../state/user/user.actions';
 import { getUser, getUserUnsuccess } from '../state/user/user.actions';
 import * as selectors from '../state/user/user.selectors';
 import { User } from '../state/user/user.types';
 import { readFromStorage, removeFromStorage, writeInStorage } from '../utils/localStorage';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
 
 interface ContextValues {
   login: ({ email, password }: { email: string; password: string }) => void;
@@ -16,14 +18,7 @@ interface ContextValues {
   userIsLoggedIn: boolean;
   user?: User;
   error?: string;
-  register: ({
-    firstname,
-    lastname,
-    email,
-    password,
-    repeatPassword,
-    birthday,
-  }: {
+  register: (params: {
     firstname: string;
     lastname: string;
     email: string;
@@ -49,7 +44,6 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
   const loading = useSelector(selectors.loadingSelector);
   const userIsLoggedIn = useSelector(selectors.userIsLoggedInSelector);
   const userIsRegistred = useSelector(selectors.userIsRegistredSelector);
-  const capitalizedEmail = useSelector(selectors.emailCapitalizedSelector);
 
   useEffect(() => {
     dispatchRedux(actions.loading(true));
@@ -65,10 +59,31 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
         dispatchRedux(actions.loading(false));
       }
     }, 1000);
-    return () => {
-      clearTimeout(timeout);
-    };
+
+    return () => clearTimeout(timeout);
   }, []);
+
+  const login = async ({ email, password }: { email: string; password: string }) => {
+    dispatchRedux(actions.loginInProgress());
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+
+      dispatchRedux(
+        actions.loginSuccess({
+          user: {
+            email: userCredential.user.email!,
+          },
+        })
+      );
+    } catch (err: any) {
+      dispatchRedux(
+        actions.loginFailure({
+          error: err.message || 'Invalid email or password',
+        })
+      );
+    }
+  };
 
   const register = async ({
     firstname,
@@ -86,7 +101,6 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
     birthday: string;
   }) => {
     try {
-
       dispatchRedux(actions.registerInProgress());
       const result = await registerUserApi({
         firstname,
@@ -96,14 +110,16 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
         repeatPassword,
         birthday,
       });
+
       writeInStorage(LocalStorageConstants.AccessToken, result.accessToken);
       writeInStorage(LocalStorageConstants.RefreshToken, result.refreshToken);
       writeInStorage(LocalStorageConstants.Email, result.user.email);
       writeInStorage(LocalStorageConstants.Password, result.user.password);
-      writeInStorage(LocalStorageConstants.Password, result.user.password);
     } catch (err: any) {
       dispatchRedux(
-        actions.registerFailure({ error: err?.message || 'ups... Something went worng :(' })
+        actions.registerFailure({
+          error: err?.message || 'ups... Something went wrong :(',
+        })
       );
     } finally {
       dispatchRedux(
@@ -111,20 +127,6 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
           user: { firstname, lastname, email, password, repeatPassword, birthday },
         })
       );
-    }
-  };
-
-  const login = async ({ email, password }: { email: string; password: string }) => {
-    dispatchRedux(actions.loginInProgress());
-    try {
-      const result = await loginApi({ email, password });
-      writeInStorage(LocalStorageConstants.AccessToken, result.accessToken);
-      writeInStorage(LocalStorageConstants.RefreshToken, result.refreshToken);
-      writeInStorage(LocalStorageConstants.Email, result.email);
-      writeInStorage(LocalStorageConstants.Password, result.password);
-      dispatchRedux(actions.loginSuccess({ user: { email, password } }));
-    } catch (err: any) {
-      dispatchRedux(actions.loginFailure({ error: err?.message || 'Check your email and password' }));
     }
   };
 
@@ -140,7 +142,9 @@ export const AuthContextConstructor = ({ children }: { children: JSX.Element }) 
       dispatchRedux(actions.logoutSucces());
     } catch (err: any) {
       dispatchRedux(
-        actions.logoutFailure({ error: err?.message || 'ups... Something went worng :(' })
+        actions.logoutFailure({
+          error: err?.message || 'ups... Something went wrong :(',
+        })
       );
     } finally {
       dispatchRedux(actions.loading(false));
