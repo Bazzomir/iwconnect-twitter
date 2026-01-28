@@ -8,13 +8,13 @@ import { BrowserRouter } from 'react-router-dom';
 import { CustomThemeContextConstructor } from './context/CustomThemeContext';
 import { TweetsContextConstructor } from './context/TweetsContext';
 import { TweetsCommentsContextConstructor } from './context/TweetsCommentsContext';
-import { AuthContextConstructor } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import { store } from './state/store';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <AuthContextConstructor>
+      <AuthProvider>
         <BrowserRouter basename="/iwconnect-twitter">
           <CustomThemeContextConstructor>
             <TweetsContextConstructor>
@@ -24,7 +24,7 @@ ReactDOM.render(
             </TweetsContextConstructor>
           </CustomThemeContextConstructor>
         </BrowserRouter>
-      </AuthContextConstructor>
+      </AuthProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -1,8 +1,7 @@
-import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
-import { AuthContext } from '../../../context/AuthContext';
 import { AuthButton } from '../../../components/Button/Button';
+import { useAuth } from '../../../context/AuthContext';
 
 interface RegisterProps {
   firstname: string;
@@ -15,7 +14,8 @@ interface RegisterProps {
 }
 
 export const Register = () => {
-  const { register: registerUser, error, loading, userIsRegistred } = useContext(AuthContext);
+  const { register: registerUser, loading, user } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -25,24 +25,21 @@ export const Register = () => {
     mode: 'onChange',
   });
 
-  useEffect(() => {
-    if (error) {
+  const onSubmit = async (data: RegisterProps) => {
+    try {
+      await registerUser(data);
+    } catch (err: any) {
       setError('password', {
         type: 'value',
-        message: "Password and Repeat Password don't match",
+        message: err.message || 'Registration failed',
       });
     }
-  }, [error]);
-
-  const onSubmit = (data: RegisterProps) => {
-    registerUser(data);
   };
 
-  if (userIsRegistred) {
+  if (user) {
     return <Navigate to="/login" replace />;
   }
 
-  console.log('loading', loading);
   return loading ? (
     <p style={{ color: 'white', fontSize: '50px' }} className="bold text-center h-100 mx-auto my-auto">loading...</p>
   ) : (

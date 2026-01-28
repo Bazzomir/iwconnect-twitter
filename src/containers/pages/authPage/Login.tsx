@@ -1,11 +1,9 @@
-import { useContext, useEffect } from 'react';
 import { Form, FormControl, InputGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../../context/AuthContext';
 import { AuthButton } from '../../../components/Button/Button';
 import { Navigate } from 'react-router-dom';
 import { BsTwitter } from 'react-icons/bs';
-// import firebase from '../../../../firebase';
+import { useAuth } from '../../../context/AuthContext';
 
 interface FormProps {
   email: string;
@@ -13,30 +11,22 @@ interface FormProps {
 }
 
 export const Login = () => {
-  const { login, error, loading, userIsLoggedIn } = useContext(AuthContext);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setError,
-  } = useForm<FormProps>({
-    mode: 'onChange',
-  });
+  const { login, loading, user } = useAuth();
 
-  useEffect(() => {
-    if (error) {
+  const { register, handleSubmit, setError, formState: { errors }, } = useForm<FormProps>({ mode: 'onChange', });
+
+  const onSubmit = async (data: FormProps) => {
+    try {
+      await login(data);
+    } catch {
       setError('email', {
         type: 'value',
         message: 'Check your email and password.',
       });
     }
-  }, [error]);
-
-  const onSubmit = (data: FormProps) => {
-    login({ email: data.email, password: data.password });
   };
 
-  if (userIsLoggedIn) {
+  if (user) {
     return <Navigate to="/" replace />;
   }
 

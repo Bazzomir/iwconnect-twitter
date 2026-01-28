@@ -9,7 +9,7 @@ import { AuthButton, Button } from '../../components/Button/Button';
 import { NavLink } from '../../components/NavLink/NavLink';
 import { ProfileNavBar } from './ProfileNavBar';
 import { CustomThemeContext } from '../../context/CustomThemeContext';
-import { AuthContext } from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 interface NavbarProps {
   className?: string;
@@ -18,7 +18,7 @@ interface NavbarProps {
 
 export const Navbar = ({ className, onLinkClick }: NavbarProps) => {
   const { toggleTheme } = useContext(CustomThemeContext);
-  const { logout } = useContext(AuthContext);
+  const { logout } = useAuth();
 
   return (
     <Styled.Container className={`col-11 col-lg-3 ${className ? className : ''}`}>
