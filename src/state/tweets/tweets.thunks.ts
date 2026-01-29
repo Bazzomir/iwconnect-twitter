@@ -7,13 +7,31 @@ export const fetchTweets = () => async (dispatch: Dispatch) => {
 
   try {
     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
-    if (!res.ok) {
-      throw new Error('Failed to fetch tweets');
-    }
-
-    const data: PostType[] = await res.json();
+    const data = await res.json();
     dispatch(actions.fetchTweetsSuccess(data));
-  } catch (error) {
-    dispatch(actions.fetchTweetsError('Something went wrong'));
+  } catch (err: any) {
+    dispatch(actions.fetchTweetsError(err.message));
+  }
+};
+
+export const postTweet = (text: string) => async (dispatch: Dispatch) => {
+  try {
+    const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        body: text,
+        userId: 1,
+        title: '',
+      }),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    });
+
+    const data: PostType = await res.json();
+
+    dispatch(actions.addTweet(data));
+  } catch (err) {
+    console.error('Post tweet failed', err);
   }
 };
