@@ -1,19 +1,31 @@
-import React, { useContext } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AddTweet } from './components/AddTweet/AddTweet';
 import { Post } from './components/Post/Post';
-import { TweetsContext } from '../../../../context/TweetsContext';
 import { PageWrapperComponent } from '../../../PageWrapper/PageWrapperComponent';
+import { fetchTweets } from '../../../../state/tweets/tweets.thunks';
+import { selectTweets, selectTweetsLoading } from '../../../../state/tweets/tweets.selectors';
 
 export const Main = () => {
-  const { tweets } = useContext(TweetsContext);
+  const dispatch = useDispatch();
+  const tweets = useSelector(selectTweets);
+  const loading = useSelector(selectTweetsLoading);
+
+  useEffect(() => {
+    dispatch(fetchTweets() as any);
+  }, [dispatch]);
 
   return (
     <PageWrapperComponent>
       <main className="col-12 col-md-9 col-lg-6">
         <AddTweet />
-        {tweets?.slice(0, 10)?.map(post => {
-          return <Post key={post.id} {...post} />;
-        })}
+
+        {loading && <p style={{ color: 'white', fontSize: '50px' }} className="bold text-center h-100 mx-auto my-auto">Loading tweets...</p>}
+
+        {!loading &&
+          tweets.slice(0, 10).map(post => (
+            <Post key={post.id} {...post} />
+          ))}
       </main>
     </PageWrapperComponent>
   );

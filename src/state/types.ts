@@ -1,4 +1,4 @@
-import {UserState} from './legacyUser/user.types';
+import {UserState} from './user/user.types';
 
 export type GlobalState = {
   user: UserState;

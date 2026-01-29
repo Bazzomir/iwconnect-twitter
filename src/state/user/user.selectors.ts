@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import {createSelector} from 'reselect';
-import {GlobalState} from '../legacyTypes';
+import {GlobalState} from '../types';
 import {UserState} from './user.types';
 
 // export const useAuthState = (): UserState => {

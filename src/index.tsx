@@ -9,7 +9,7 @@ import { CustomThemeContextConstructor } from './context/CustomThemeContext';
 import { TweetsContextConstructor } from './context/TweetsContext';
 import { TweetsCommentsContextConstructor } from './context/TweetsCommentsContext';
 import { AuthProvider } from './context/AuthContext';
-import { store } from './state/legacyStore';
+import { store } from './state/store';
 
 ReactDOM.render(
   <React.StrictMode>
