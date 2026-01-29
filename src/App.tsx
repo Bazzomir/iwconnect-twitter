@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import './App.css';
-import { Routes } from './state/Routes';
+import { Routes } from './routes/Routes';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme/theme';
 import { CustomThemeContext } from './context/CustomThemeContext';
