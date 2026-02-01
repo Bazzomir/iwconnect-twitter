@@ -16,19 +16,23 @@ export const TweetsCommentsContext = React.createContext<ContextValues>({
 
 export const TweetsCommentsContextConstructor = ({children}: {children: JSX.Element}) => {
   const params = useParams();
-  const {
-    commentsData: tweetsComments,
-    fetchPostsComments,
-    addNewComment,
-  } = useFetchComment<PostComment[]>(`${params.id}/comments`, []);
+  // const {
+    // commentsData: tweetsComments,
+    // fetchPostsComments,
+    // addNewComment,
+  // } = useFetchComment<PostComment[]>(`${params.id}/comments`, []);
 
   useEffect(() => {
-    fetchPostsComments();
+    // fetchPostsComments();
   }, [params.id]);
 
   return (
-    <TweetsCommentsContext.Provider value={{tweetsComments, addNewComment}}>
+    // <TweetsCommentsContext.Provider 
+    // value={{
+      // tweetsComments, addNewComment
+    // }}
+    // >
       {children}
-    </TweetsCommentsContext.Provider>
+    // </TweetsCommentsContext.Provider>
   );
 };

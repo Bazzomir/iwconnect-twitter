@@ -1,140 +1,39 @@
-import {useReducer, useRef} from 'react';
-import {PostComment} from '../containers/Home/components/Main/types';
+import { useRef, useState } from 'react';
+import { PostComment } from '../containers/Home/components/Main/types';
 
-type Action =
-  | {
-      type: 'POST_COMMENT_SUCCESS';
-      payload: {
-        comment: string;
-        loading: boolean;
-        error: boolean;
-      };
-    }
-  | {
-      type: 'POST_COMMENT_ERROR';
-      payload: {
-        comment: string;
-        loading: boolean;
-        error: true;
-      };
-    }
-  | {
-      type: 'POST_COMMENT_LOADING';
-      payload: {
-        comment: string;
-        loading: true;
-        error: boolean;
-      };
-    }
-  | {
-      type: 'UPDATE_COMMENT';
-      payload: {
-        comment: string;
-        loading: boolean;
-        error: boolean;
-      };
-    };
-
-interface State {
-  comment: string;
-  loading: boolean;
-  error: boolean;
-}
-
-const INITIAL_STATE: State = {
-  comment: '',
-  loading: false,
-  error: false,
-};
-
-const reducer = (state: State, action: Action) => {
-  switch (action.type) {
-    case 'POST_COMMENT_SUCCESS':
-      console.log('action.payload', action.payload);
-      return {
-        comment: action.payload.comment,
-        loading: action.payload.loading,
-        error: action.payload.error,
-      };
-    case 'POST_COMMENT_ERROR':
-      return {
-        comment: action.payload.comment,
-        loading: action.payload.loading,
-        error: action.payload.error,
-      };
-    case 'POST_COMMENT_LOADING':
-      return {
-        comment: action.payload.comment,
-        loading: action.payload.loading,
-        error: action.payload.error,
-      };
-    case 'UPDATE_COMMENT':
-      return {
-        comment: action.payload.comment,
-        loading: action.payload.loading,
-        error: action.payload.error,
-      };
-    default:
-      return state;
-  }
-};
-
-export const usePostComment = (fn: (post: PostComment) => void) => {
-  const someRef = useRef<HTMLTextAreaElement>(null);
-
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  console.log('state', state);
+export const usePostComment = (onSuccess: (c: PostComment) => void) => {
+  const ref = useRef<HTMLTextAreaElement>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const postComment = async () => {
-    const text = someRef?.current?.value;
+    const text = ref.current?.value;
+    if (!text) return;
+
     try {
-      dispatch({
-        type: 'POST_COMMENT_LOADING',
-        payload: {
-          comment: '',
-          loading: true,
-          error: false,
-        },
-      });
-      const response = await fetch('https://jsonplaceholder.typicode.com/comments', {
+      setLoading(true);
+      const res = await fetch('https://jsonplaceholder.typicode.com/comments', {
         method: 'POST',
         body: JSON.stringify({
           body: text,
-          userId: 1,
+          postId: 1,
+          email: 'user@twitter.com',
+          name: 'Twitter User',
         }),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
       });
-      const commentsData = await response.json();
-      fn(commentsData);
-      dispatch({
-        type: 'POST_COMMENT_SUCCESS',
-        payload: {
-          comment: commentsData,
-          loading: false,
-          error: false,
-        },
-      });
-    } catch (error: any) {
-      dispatch({
-        type: 'POST_COMMENT_ERROR',
-        payload: {
-          comment: '',
-          loading: false,
-          error: true,
-        },
-      });
+
+      const data: PostComment = await res.json();
+      onSuccess(data);
+      ref.current!.value = '';
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return {
-    postComment,
-    error: state.error,
-    loading: state.loading,
-    comment: state.comment,
-    setTweetComment: (comment: string) =>
-      dispatch({type: 'UPDATE_COMMENT', payload: {comment: comment, loading: false, error: false}}),
-    someRef,
-  };
+  return { postComment, loading, error, ref };
 };

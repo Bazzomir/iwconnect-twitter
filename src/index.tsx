@@ -7,7 +7,6 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { CustomThemeContextConstructor } from './context/CustomThemeContext';
 import { TweetsContextConstructor } from './context/TweetsContext';
-import { TweetsCommentsContextConstructor } from './context/TweetsCommentsContext';
 import { AuthProvider } from './context/AuthContext';
 import { store } from './state/store';
 
@@ -18,9 +17,7 @@ ReactDOM.render(
         <BrowserRouter basename="/iwconnect-twitter">
           <CustomThemeContextConstructor>
             <TweetsContextConstructor>
-              <TweetsCommentsContextConstructor>
-                <App />
-              </TweetsCommentsContextConstructor>
+              <App />
             </TweetsContextConstructor>
           </CustomThemeContextConstructor>
         </BrowserRouter>

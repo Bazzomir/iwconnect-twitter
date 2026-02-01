@@ -1,23 +1,25 @@
 import React from 'react';
-import {useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import {ReplyButton} from '../../../../../../components/Button/Button';
-import {useFetchComment} from '../../../../../../hooks/useFetchComment';
-import {usePostComment} from '../../../../../../hooks/usePostComment';
-import {PostComment} from '../../types';
+import { ReplyButton } from '../../../../../../components/Button/Button';
+import { useFetchComment } from '../../../../../../hooks/useFetchComment';
+import { usePostComment } from '../../../../../../hooks/usePostComment';
+import { PostComment } from '../../types';
 
 interface Props {
   addNewComment: (post: PostComment) => void;
 }
 
-export const AddCommentsPostPage = ({addNewComment}: Props) => {
+export const AddCommentsPostPage = ({ addNewComment }: Props) => {
   const params = useParams();
-  const {postComment, loading, error, someRef} = usePostComment(addNewComment);
-  const {fetchPostsComments} = useFetchComment<PostComment[]>(`${params.id}/comments`, []);
+  const { postComment, loading, error, 
+    // someRef
+   } = usePostComment(addNewComment);
+  // const { useFetchComment } = useFetchComment<PostComment[]>(`${params.id}/comments`);
 
   useEffect(() => {
-    fetchPostsComments();
+    // fetchPostsComments();
   }, []);
 
   if (error) {
@@ -31,7 +33,7 @@ export const AddCommentsPostPage = ({addNewComment}: Props) => {
   if (loading) {
     return (
       <div>
-        <p style={{color: 'white'}}>Loading...</p>
+        <p style={{ color: 'white' }}>Loading...</p>
       </div>
     );
   }
@@ -41,7 +43,7 @@ export const AddCommentsPostPage = ({addNewComment}: Props) => {
       <Styled.Avatar src="https://i.pravatar.cc/100" />
       <Styled.Form>
         <Styled.TextArea
-          ref={someRef}
+          // ref={someRef}
           maxLength={140}
           placeholder="Tweet your reply"
         ></Styled.TextArea>

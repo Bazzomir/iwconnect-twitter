@@ -1,28 +1,37 @@
-import {useState} from 'react';
-import {useParams} from 'react-router-dom';
-import type {PostComment} from '../containers/Home/components/Main/types';
+import { useState } from 'react';
+import { PostComment } from '../containers/Home/components/Main/types';
 
-export const useFetchComment = <C>(
-  url: string,
-  initialState: PostComment[]
-): {
-  commentsData: PostComment[];
-  fetchPostsComments: () => Promise<void>;
-  addNewComment: (postComments: PostComment) => void;
-} => {
-  const [commentsData, setDataComments] = useState<PostComment[]>(initialState);
+export const useFetchComment = (url: string) => {
+  const [comments, setComments] = useState<PostComment[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-  const params = useParams();
+  const fetchComments = async () => {
+    if (!url) return;
 
-  const fetchPostsComments = async () => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${url}`);
-    const commentsData = await response.json();
-    setDataComments(commentsData);
+    try {
+      setLoading(true);
+      const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${url}`);
+      const data = await res.json();
+
+      setComments(Array.isArray(data) ? data : []);
+    } catch {
+      setError(true);
+      setComments([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const addNewComment = (postComments: PostComment) => {
-    setDataComments(prevState => [postComments, ...prevState]);
+  const addNewComment = (comment: PostComment) => {
+    setComments(prev => Array.isArray(prev) ? [comment, ...prev] : [comment]);
   };
 
-  return {commentsData, fetchPostsComments, addNewComment};
+  return {
+    comments,
+    loading,
+    error,
+    fetchComments,
+    addNewComment,
+  };
 };

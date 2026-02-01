@@ -12,8 +12,10 @@ interface Props {
   addNewComment: (post: PostComment) => void;
 }
 
-export const AddComments = ({addNewComment}: Props) => {
-  const {postComment, loading, error, someRef} = usePostComment(addNewComment);
+export const AddComments1 = ({addNewComment}: Props) => {
+  const {postComment, loading, error,
+    //  someRef
+    } = usePostComment(addNewComment);
 
   if (error) {
     return (
@@ -36,7 +38,7 @@ export const AddComments = ({addNewComment}: Props) => {
       <Styled.Avatar src="https://i.pravatar.cc/100" />
       <Styled.Form>
         <Styled.TextArea
-          ref={someRef}
+          // ref={someRef}
           maxLength={140}
           placeholder="Tweet your reply"
         ></Styled.TextArea>
