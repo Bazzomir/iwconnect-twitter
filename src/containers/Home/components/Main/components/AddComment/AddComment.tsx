@@ -1,67 +1,83 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { BsImage } from 'react-icons/bs';
-import { AiOutlineFileGif, AiOutlineSchedule } from 'react-icons/ai';
 import { BiPoll, BiSmile } from 'react-icons/bi';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
+import { AiOutlineFileGif, AiOutlineSchedule } from 'react-icons/ai';
 import { PostButton } from '../../../../../../components/Button/Button';
-import { usePostComment } from '../../../../../../hooks/usePostComment';
-import { PostComment } from '../../types';
+import { addComment } from '../../../../../../state/comments/comments.actions';
 
 interface Props {
-    addNewComment: (comment: PostComment) => void;
+  postId: number;
 }
 
-export const AddComment = ({ addNewComment }: Props) => {
-    const { postComment, loading, error, ref } = usePostComment(addNewComment);
+export const AddComments = ({ postId }: Props) => {
+  const dispatch = useDispatch();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    return (
-        <Styled.Container>
-            <Styled.Avatar src="https://i.pravatar.cc/100" />
-            <Styled.Form onSubmit={e => { e.preventDefault(); postComment(); }}            >
-                <Styled.TextArea ref={ref} maxLength={140} placeholder="Tweet your reply" />
+  const submitHandler = () => {
+    if (!textareaRef.current?.value.trim()) return;
 
-                <Styled.ActionsWrapper>
-                    <Styled.IconsWrapper>
-                        <Styled.Icon><BsImage color="rgb(29,155,240)" /></Styled.Icon>
-                        <Styled.Icon><AiOutlineFileGif color="rgb(29,155,240)" /></Styled.Icon>
-                        <Styled.Icon><BiPoll color="rgb(29,155,240)" /></Styled.Icon>
-                        <Styled.Icon><BiSmile color="rgb(29,155,240)" /></Styled.Icon>
-                        <Styled.Icon><AiOutlineSchedule color="rgb(29,155,240)" /></Styled.Icon>
-                        <Styled.Icon><HiOutlineLocationMarker color="rgb(29,155,240)" /></Styled.Icon>
-                    </Styled.IconsWrapper>
-
-                    <PostButton type="submit" nameButton="Tweet" disabled={loading} />
-                </Styled.ActionsWrapper>
-
-                {error && <p style={{ color: 'red' }}>Error posting comment</p>}
-            </Styled.Form>
-        </Styled.Container>
+    dispatch(
+      addComment({
+        postId,
+        id: Date.now(),
+        name: 'User',
+        email: 'user@twitter.com',
+        body: textareaRef.current.value,
+      })
     );
+
+    textareaRef.current.value = '';
+  };
+
+  return (
+    <Styled.Container>
+      <Styled.Avatar src="https://i.pravatar.cc/100" />
+      <Styled.Form>
+        <Styled.TextArea ref={textareaRef} maxLength={140} placeholder="Tweet your reply" />
+
+        <Styled.ActionsWrapper>
+          <Styled.IconsWrapper>
+            <Styled.Icon><BsImage color="rgb(29,155,240)" /></Styled.Icon>
+            <Styled.Icon><AiOutlineFileGif color="rgb(29,155,240)" /></Styled.Icon>
+            <Styled.Icon><BiPoll color="rgb(29,155,240)" /></Styled.Icon>
+            <Styled.Icon><BiSmile color="rgb(29,155,240)" /></Styled.Icon>
+            <Styled.Icon><AiOutlineSchedule color="rgb(29,155,240)" /></Styled.Icon>
+            <Styled.Icon><HiOutlineLocationMarker color="rgb(29,155,240)" /></Styled.Icon>
+          </Styled.IconsWrapper>
+
+          <PostButton type="submit" nameButton="Tweet" onClick={submitHandler} />
+        </Styled.ActionsWrapper>
+
+      </Styled.Form>
+    </Styled.Container>
+  );
 };
 
 
 const Styled = {
-    Container: styled.div`
+  Container: styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     height: 150px;
     padding: 10px 0;
   `,
-    Avatar: styled.img`
+  Avatar: styled.img`
     height: 50px;
     width: 50px;
     border-radius: 50%;
     margin-top: 10px;
   `,
-    Form: styled.form`
+  Form: styled.form`
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-left: 10px;
   `,
-    TextArea: styled.textarea`
+  TextArea: styled.textarea`
     height: 100%;
     width: 100%;
     background: transparent;
@@ -69,15 +85,15 @@ const Styled = {
     resize: none;
     border: none;
   `,
-    ActionsWrapper: styled.div`
+  ActionsWrapper: styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
   `,
-    IconsWrapper: styled.div`
+  IconsWrapper: styled.div`
     display: flex;
   `,
-    Icon: styled.div`
+  Icon: styled.div`
     margin-right: 10px;
   `,
 };

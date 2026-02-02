@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Action } from './components/Action';
+import { Modal } from 'react-bootstrap';
 import { FaRegComment, FaRetweet } from 'react-icons/fa';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
-import { Modal } from 'react-bootstrap';
-import { AddComment } from '../AddComment/AddComment';
-import { useFetchComment } from '../../../../../../hooks/useFetchComment';
+import { Action } from './components/Action';
+import { AddComments } from '../AddComment/AddComment';
+import { fetchComments } from '../../../../../../state/comments/comments.thunks';
+import { selectComments } from '../../../../../../state/comments/comments.selector';
+import { PostComment } from '../../types';
 
 interface Props {
   title?: string;
@@ -17,53 +20,53 @@ interface Props {
 }
 
 export const getRandomName = () => {
-  const names = ['John', 'Sarah', 'Mike', 'Elisa', 'Anne', 'Gretchen', 'Harley', 'Daisy'];
+  const names = ['John', 'Sarah', 'Mike', 'Elisa', 'Anne', 'Harley'];
   return names[Math.floor(Math.random() * names.length)];
 };
 
-export const Post = ({ title, body, id, userId }: Props) => {
+export const Post = ({ title, body, id }: Props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const comments = useSelector(selectComments);
+
   const [showComments, setShowComments] = useState(false);
 
-  const { comments, fetchComments, addNewComment } = useFetchComment(id ? `${id}/comments` : '');
-
-  useEffect(() => { if (id) { fetchComments(); } }, [id]);
+  useEffect(() => {
+    if (showComments && id) {
+      dispatch(fetchComments(id) as any);
+    }
+  }, [showComments, id, dispatch]);
 
   return (
     <Styled.Container>
-      <Styled.AdditionalInfo>
-        {id} – {getRandomName()}
-      </Styled.AdditionalInfo>
-
       <Styled.Wrapper>
         <Styled.Avatar src="https://i.pravatar.cc/100" />
 
         <Styled.MainContent>
-          <a onClick={() => navigate(`/post/${id}`, { state: { title, body, id, userId }, })}>
+          <a onClick={() => navigate(`/post/${id}`)}>
             <Styled.Title>{title}</Styled.Title>
             <Styled.Content>{body}</Styled.Content>
           </a>
 
           <Styled.Actions>
-            <Action icon={<FaRegComment />} actionNumber={444} onClick={() => setShowComments(prev => !prev)} />
-            <Action icon={<FaRetweet />} actionNumber={151} />
-            <Action icon={<AiOutlineHeart />} actionNumber={1941} />
+            <Action icon={<FaRegComment />} actionNumber={comments.length} onClick={() => setShowComments(true)} />
+            <Action icon={<FaRetweet />} actionNumber={12} />
+            <Action icon={<AiOutlineHeart />} actionNumber={88} />
             <Action icon={<FiShare />} actionNumber={0} />
           </Styled.Actions>
 
           <Modal show={showComments} onHide={() => setShowComments(false)} size="lg">
-            <Modal.Body style={{ backgroundColor: 'black', color: 'white' }}>
-              {Array.isArray(comments) &&
-                comments.map(comment => (
-                  <div key={comment.id} style={{ borderBottom: '1px solid lightgrey' }}>
-                    <b>
-                      ({comment.id} – {getRandomName()}) {comment.name}
-                    </b>
-                    <p>{comment.body}</p>
-                  </div>
-                ))}
+            <Modal.Body style={{ background: 'black', color: 'white' }}>
+              {comments.map((comment: PostComment) => (
+                <div key={comment.id} style={{ borderBottom: '1px solid gray' }}>
+                  <b>
+                    ({comment.id} – {getRandomName()}) {comment.name}
+                  </b>
+                  <p>{comment.body}</p>
+                </div>
+              ))}
 
-              <AddComment addNewComment={addNewComment} />
+              {id && <AddComments postId={id} />}
             </Modal.Body>
           </Modal>
         </Styled.MainContent>
@@ -71,7 +74,6 @@ export const Post = ({ title, body, id, userId }: Props) => {
     </Styled.Container>
   );
 };
-
 
 export const Styled = {
   Container: styled.div`
