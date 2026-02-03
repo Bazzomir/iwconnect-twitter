@@ -1,6 +1,6 @@
 {
   "name": "iwconnect-twitter",
-  "version": "1.1.0",
+  "version": "2.2.0",
   "description": "Twitter clone built with React & TypeScript during iwconnect’s React Mentorship Program (2022). Includes Redux, Context API, dark/light theme, posts API, and avatar image integration.",
   "author": {
     "name": "Bazzomir",
@@ -35,6 +35,7 @@
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "redux": "^4.2.0",
     "redux-thunk": "^3.1.0",
     "reselect": "^4.1.6",
     "styled-components": "^5.3.3",
