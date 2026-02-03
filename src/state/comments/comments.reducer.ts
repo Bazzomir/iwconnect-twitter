@@ -1,10 +1,10 @@
 import { Action } from 'redux';
 import { isType } from 'typescript-fsa';
-import { CommentsState } from './comments.types';
 import * as actions from './comments.actions';
+import { CommentsState } from './comments.types';
 
 const INITIAL_STATE: CommentsState = {
-    items: [],
+    itemsByPostId: {},
     loading: false,
     error: null,
 };
@@ -13,12 +13,22 @@ export const commentsReducer = (
     state: CommentsState = INITIAL_STATE,
     action: Action
 ): CommentsState => {
+
     if (isType(action, actions.fetchCommentsStart)) {
         return { ...state, loading: true, error: null };
     }
 
     if (isType(action, actions.fetchCommentsSuccess)) {
-        return { ...state, loading: false, items: action.payload };
+        const { postId, comments } = action.payload;
+
+        return {
+            ...state,
+            loading: false,
+            itemsByPostId: {
+                ...state.itemsByPostId,
+                [postId]: comments,
+            },
+        };
     }
 
     if (isType(action, actions.fetchCommentsError)) {
@@ -26,7 +36,15 @@ export const commentsReducer = (
     }
 
     if (isType(action, actions.addComment)) {
-        return { ...state, items: [action.payload, ...state.items] };
+        const { postId, comment } = action.payload;
+
+        return {
+            ...state,
+            itemsByPostId: {
+                ...state.itemsByPostId,
+                [postId]: [comment, ...(state.itemsByPostId[postId] || [])],
+            },
+        };
     }
 
     return state;

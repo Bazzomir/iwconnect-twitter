@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchComments } from '../../../../../../state/comments/comments.thunks';
-import { selectComments } from '../../../../../../state/comments/comments.selector';
+import { selectCommentsByPostId } from '../../../../../../state/comments/comments.selector';
 import { AddComments } from '../AddComment/AddComment';
 import { PostComment } from '../../types';
 
 export const PostPage = () => {
-  const { id } = useParams();
   const dispatch = useDispatch();
-  const comments = useSelector(selectComments);
+  const { id } = useParams<{ id: string }>();
+  const postId = Number(id);
+  const comments = useSelector(selectCommentsByPostId(postId));
 
   useEffect(() => {
     if (id) {

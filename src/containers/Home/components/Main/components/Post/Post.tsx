@@ -9,7 +9,7 @@ import { FiShare } from 'react-icons/fi';
 import { Action } from './components/Action';
 import { AddComments } from '../AddComment/AddComment';
 import { fetchComments } from '../../../../../../state/comments/comments.thunks';
-import { selectComments } from '../../../../../../state/comments/comments.selector';
+import { selectCommentsByPostId } from '../../../../../../state/comments/comments.selector';
 import { PostComment } from '../../types';
 
 interface Props {
@@ -25,9 +25,11 @@ export const getRandomName = () => {
 };
 
 export const Post = ({ title, body, id }: Props) => {
+  const postId = Number(id);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const comments = useSelector(selectComments);
+  const comments = useSelector(selectCommentsByPostId(postId));
+
 
   const [showComments, setShowComments] = useState(false);
 
@@ -44,15 +46,16 @@ export const Post = ({ title, body, id }: Props) => {
 
         <Styled.MainContent>
           <a onClick={() => navigate(`/post/${id}`)}>
+            <h3>{getRandomName()}</h3>
             <Styled.Title>{title}</Styled.Title>
             <Styled.Content>{body}</Styled.Content>
           </a>
 
           <Styled.Actions>
             <Action icon={<FaRegComment />} actionNumber={comments.length} onClick={() => setShowComments(true)} />
-            <Action icon={<FaRetweet />} actionNumber={12} />
+            <Action icon={<FaRetweet />} actionNumber={22} />
             <Action icon={<AiOutlineHeart />} actionNumber={88} />
-            <Action icon={<FiShare />} actionNumber={0} />
+            <Action icon={<FiShare />} actionNumber={15} />
           </Styled.Actions>
 
           <Modal show={showComments} onHide={() => setShowComments(false)} size="lg">

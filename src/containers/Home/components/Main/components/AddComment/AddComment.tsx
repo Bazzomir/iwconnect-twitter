@@ -22,12 +22,16 @@ export const AddComments = ({ postId }: Props) => {
     dispatch(
       addComment({
         postId,
-        id: Date.now(),
-        name: 'User',
-        email: 'user@twitter.com',
-        body: textareaRef.current.value,
+        comment: {
+          postId,
+          id: Date.now(),
+          name: 'User',
+          email: 'user@twitter.com',
+          body: textareaRef.current.value,
+        },
       })
     );
+
 
     textareaRef.current.value = '';
   };
@@ -48,7 +52,7 @@ export const AddComments = ({ postId }: Props) => {
             <Styled.Icon><HiOutlineLocationMarker color="rgb(29,155,240)" /></Styled.Icon>
           </Styled.IconsWrapper>
 
-          <PostButton type="submit" nameButton="Tweet" onClick={submitHandler} />
+          <PostButton type="button" nameButton="Tweet" onClick={submitHandler} />
         </Styled.ActionsWrapper>
 
       </Styled.Form>
@@ -81,7 +85,8 @@ const Styled = {
     height: 100%;
     width: 100%;
     background: transparent;
-    color: ${props => props.theme.color};
+    // color: ${props => props.theme.color};
+    color: white;
     resize: none;
     border: none;
   `,
