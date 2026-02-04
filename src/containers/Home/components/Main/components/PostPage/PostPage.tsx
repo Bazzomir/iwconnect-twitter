@@ -13,10 +13,10 @@ export const PostPage = () => {
   const comments = useSelector(selectCommentsByPostId(postId));
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchComments(Number(id)) as any);
+    if (id && comments.length === 0) {
+      dispatch(fetchComments(postId) as any);
     }
-  }, [id, dispatch]);
+  }, [id, comments.length, dispatch]);
 
   return (
     <div>

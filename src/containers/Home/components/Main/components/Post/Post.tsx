@@ -29,15 +29,13 @@ export const Post = ({ title, body, id }: Props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const comments = useSelector(selectCommentsByPostId(postId));
-
-
   const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
-    if (showComments && id) {
+    if (showComments && id && comments.length === 0) {
       dispatch(fetchComments(id) as any);
     }
-  }, [showComments, id, dispatch]);
+  }, [showComments, id, comments.length, dispatch]);
 
   return (
     <Styled.Container>
