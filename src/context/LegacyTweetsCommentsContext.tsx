@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import type {PostComment} from '../containers/Home/components/Main/types';
-import {useFetchComment} from '../hooks/useFetchComment';
+import {useFetchComment} from '../legacyHooks/useFetchComment';
 
 interface ContextValues {
   tweetsComments: PostComment[];

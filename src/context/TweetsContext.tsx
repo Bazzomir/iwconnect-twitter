@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {PostType} from '../containers/Home/components/Main/types';
-import {FetchPosts} from '../hooks/useFetchPost';
+import {FetchPosts} from '../legacyHooks/useFetchPost';
 
 interface ContextValues {
   tweets: PostType[];

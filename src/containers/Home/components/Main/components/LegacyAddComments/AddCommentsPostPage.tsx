@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReplyButton } from '../../../../../../components/Button/Button';
-import { useFetchComment } from '../../../../../../hooks/useFetchComment';
-import { usePostComment } from '../../../../../../hooks/usePostComment';
+import { useFetchComment } from '../../../../../../legacyHooks/useFetchComment';
+import { usePostComment } from '../../../../../../legacyHooks/usePostComment';
 import { PostComment } from '../../types';
 
 interface Props {

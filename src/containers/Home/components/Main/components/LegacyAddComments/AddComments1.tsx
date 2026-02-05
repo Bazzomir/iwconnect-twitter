@@ -5,7 +5,7 @@ import {AiOutlineFileGif, AiOutlineSchedule} from 'react-icons/ai';
 import {BiPoll, BiSmile} from 'react-icons/bi';
 import {HiOutlineLocationMarker} from 'react-icons/hi';
 import {PostButton} from '../../../../../../components/Button/Button';
-import {usePostComment} from '../../../../../../hooks/usePostComment';
+import {usePostComment} from '../../../../../../legacyHooks/usePostComment';
 import {PostComment} from '../../types';
 
 interface Props {
