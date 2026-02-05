@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User, } from 'firebase/auth';
 import { auth } from '../firebase';
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '../state/auth/auth.actions';
 
 interface RegisterParams {
   firstname: string;
@@ -28,6 +30,7 @@ const AuthContext = createContext<AuthContextValues>({
 });
 
 export const AuthProvider = ({ children }: { children: JSX.Element }) => {
+  const dispatch = useDispatch();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -45,7 +48,6 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     await signInWithEmailAndPassword(auth, email, password);
   };
 
-
   const register = async ({
     email,
     password,
@@ -60,6 +62,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   const logout = async () => {
     await signOut(auth);
+    dispatch(logoutAction());
   };
 
   return (
