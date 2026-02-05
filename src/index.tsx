@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { CustomThemeContextConstructor } from './context/CustomThemeContext';
-import { TweetsContextConstructor } from './context/TweetsContext';
 import { AuthProvider } from './context/AuthContext';
 import { store } from './state/store';
 
@@ -16,9 +15,7 @@ ReactDOM.render(
       <AuthProvider>
         <BrowserRouter basename="/iwconnect-twitter">
           <CustomThemeContextConstructor>
-            <TweetsContextConstructor>
-              <App />
-            </TweetsContextConstructor>
+            <App />
           </CustomThemeContextConstructor>
         </BrowserRouter>
       </AuthProvider>
