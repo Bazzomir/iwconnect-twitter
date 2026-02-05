@@ -1,8 +1,17 @@
 import { Dispatch } from 'redux';
 import * as actions from './comments.actions';
 import { PostComment } from '../../containers/Home/components/Main/types';
+import { RootState } from '../store';
 
-export const fetchComments = (postId: number) => async (dispatch: Dispatch) => {
+export const fetchComments = (postId: number) => async (dispatch: Dispatch, getState: () => RootState) => {
+    dispatch(actions.fetchCommentsStart());
+
+    const cached = getState().comments.itemsByPostId[postId];
+
+    if (cached && cached.length > 0) {
+        return;
+    }
+
     dispatch(actions.fetchCommentsStart());
 
     try {
@@ -24,7 +33,7 @@ export const postComment = (postId: number, body: string) => async (dispatch: Di
                 body,
             }),
             headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
+                'Content-Type': 'application/json',
             },
         });
 

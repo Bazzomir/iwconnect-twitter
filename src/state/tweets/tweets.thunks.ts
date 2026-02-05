@@ -1,8 +1,16 @@
 import { Dispatch } from 'redux';
 import * as actions from './tweets.actions';
 import { PostType } from '../../containers/Home/components/Main/types';
+import { RootState } from '../store';
 
-export const fetchTweets = () => async (dispatch: Dispatch) => {
+export const fetchTweets = () => async (dispatch: Dispatch, getState: () => RootState) => {
+
+  const cachedTweets = getState().tweets.items;
+
+  if (cachedTweets && cachedTweets.length > 0) {
+    return;
+  }
+
   dispatch(actions.fetchTweetsStart());
 
   try {
@@ -20,11 +28,9 @@ export const postTweet = (text: string) => async (dispatch: Dispatch) => {
       method: 'POST',
       body: JSON.stringify({
         body: text,
-        // title: '',
-        // userId: 1,
       }),
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
+        'Content-Type': 'application/json',
       },
     });
 
