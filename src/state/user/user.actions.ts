@@ -13,7 +13,7 @@ export const resetState = actionCreator('RESET_STATE');
 
 export const loading = actionCreator<boolean>('LOADING');
 
-export const logoutSucces = actionCreator('LOGOUT_SUCCESS');
+export const logoutSuccess = actionCreator('LOGOUT_SUCCESS');
 
 export const logoutFailure = actionCreator<{error: string}>('LOGOUT_FAILUER');
 

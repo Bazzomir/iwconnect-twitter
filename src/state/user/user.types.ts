@@ -16,11 +16,3 @@ export type UserState = {
   error: string;
   user?: User;
 };
-
-// export interface UserError {
-//   error?: string;
-// }
-// export type ErrorState = {
-//   error: string;
-//   loginFailure?: boolean;
-// };

@@ -2,7 +2,8 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, User, } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useDispatch } from 'react-redux';
-import { logoutAction } from '../state/auth/auth.actions';
+import { store } from '../state/store';
+import * as userActions from '../state/user/user.actions';
 
 interface RegisterParams {
   firstname: string;
@@ -38,6 +39,19 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       setUser(firebaseUser);
       setLoading(false);
+
+      if (firebaseUser) {
+        store.dispatch(
+          userActions.loginSuccess({
+            user: {
+              email: firebaseUser.email ?? '',
+            },
+          })
+        );
+      } else {
+        store.dispatch(userActions.logoutSuccess());
+        sessionStorage.clear();
+      }
     });
 
     return () => unsubscribe();
@@ -62,7 +76,8 @@ export const AuthProvider = ({ children }: { children: JSX.Element }) => {
 
   const logout = async () => {
     await signOut(auth);
-    dispatch(logoutAction());
+    store.dispatch(userActions.logoutSuccess());
+    sessionStorage.clear();
   };
 
   return (

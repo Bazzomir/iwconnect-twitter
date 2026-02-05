@@ -1,6 +1,6 @@
-import {Action} from 'redux';
-import {isType} from 'typescript-fsa';
-import {UserState} from './user.types';
+import { Action } from 'redux';
+import { isType } from 'typescript-fsa';
+import { UserState } from './user.types';
 import * as actions from './user.actions';
 
 const INITIAL_STATE: UserState = {
@@ -41,14 +41,8 @@ export const userReducer = (state: UserState = INITIAL_STATE, action: Action): U
     };
   }
 
-  if (isType(action, actions.resetState) || isType(action, actions.logoutSucces)) {
-    return {
-      loading: false,
-      error: '',
-      userIsLoggedIn: false,
-      userIsRegistred: true,
-      user: undefined,
-    };
+  if (isType(action, actions.logoutSuccess) || isType(action, actions.resetState)) {
+    return INITIAL_STATE;
   }
 
   if (isType(action, actions.logoutFailure)) {

@@ -3,7 +3,7 @@ import { thunk } from 'redux-thunk';
 import { commentsReducer } from './comments/comments.reducer';
 import { tweetsReducer } from './tweets/tweets.reducer';
 import { isType } from 'typescript-fsa';
-import { logoutAction } from './auth/auth.actions';
+import * as userActions from './user/user.actions';
 
 const appReducer = combineReducers({
     tweets: tweetsReducer,
@@ -35,7 +35,7 @@ const saveState = (state: RootState) => {
 };
 
 const rootReducer = (state: RootState | undefined, action: any) => {
-    if (isType(action, logoutAction)) {
+    if (isType(action, userActions.logoutSuccess)) {
         sessionStorage.clear();
         return appReducer(undefined, action);
     }

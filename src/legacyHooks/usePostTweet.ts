@@ -1,5 +1,5 @@
 import {useContext, useReducer, useRef, useState} from 'react';
-import {TweetsContext} from '../context/TweetsContext';
+import {TweetsContext} from '../context/LegacyTweetsContext';
 
 type Action =
   | {
