@@ -4,7 +4,7 @@ import * as actions from './comments.actions';
 import { CommentsState } from './comments.types';
 
 const INITIAL_STATE: CommentsState = {
-    itemsByPostId: {},
+    commentsByPostId: {},
     loading: false,
     error: null,
 };
@@ -24,8 +24,8 @@ export const commentsReducer = (
         return {
             ...state,
             loading: false,
-            itemsByPostId: {
-                ...state.itemsByPostId,
+            commentsByPostId: {
+                ...state.commentsByPostId,
                 [postId]: comments,
             },
         };
@@ -40,12 +40,27 @@ export const commentsReducer = (
 
         return {
             ...state,
-            itemsByPostId: {
-                ...state.itemsByPostId,
-                [postId]: [comment, ...(state.itemsByPostId[postId] || [])],
+            commentsByPostId: {
+                ...state.commentsByPostId,
+                [postId]: [comment, ...(state.commentsByPostId[postId] || [])],
             },
         };
     }
+
+    if (isType(action, actions.deleteCommentSuccess)) {
+        const { postId, commentId } = action.payload;
+
+        return {
+            ...state,
+            commentsByPostId: {
+                ...state.commentsByPostId,
+                [postId]: state.commentsByPostId[postId].filter(
+                    comment => comment.id !== commentId
+                ),
+            },
+        };
+    }
+
 
     return state;
 };

@@ -5,8 +5,7 @@ import { RootState } from '../store';
 
 export const fetchComments = (postId: number) => async (dispatch: Dispatch, getState: () => RootState) => {
     dispatch(actions.fetchCommentsStart());
-
-    const cached = getState().comments.itemsByPostId[postId];
+    const cached = getState().comments.commentsByPostId[postId];
 
     if (cached && cached.length > 0) {
         return;
@@ -42,5 +41,23 @@ export const postComment = (postId: number, body: string) => async (dispatch: Di
 
     } catch (err) {
         console.error('Post comment failed', err);
+    }
+};
+
+export const deleteComment = (postId: number, commentId: number) => async (dispatch: Dispatch) => {
+    dispatch(actions.deleteCommentStart());
+    try {
+        await fetch(
+            `https://jsonplaceholder.typicode.com/comments/${commentId}`,
+            {
+                method: 'DELETE',
+            }
+        );
+
+        dispatch(actions.deleteCommentSuccess({ postId, commentId }));
+    } catch (err) {
+        dispatch(
+            actions.deleteCommentFailure({ error: 'Delete comment failed' })
+        );
     }
 };

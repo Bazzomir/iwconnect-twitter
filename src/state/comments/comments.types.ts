@@ -1,7 +1,7 @@
 import { PostComment } from '../../containers/Home/components/Main/types';
 
 export interface CommentsState {
-    itemsByPostId: {
+    commentsByPostId: {
         [postId: number]: PostComment[];
     };
     loading: boolean;
