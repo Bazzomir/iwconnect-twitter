@@ -20,8 +20,7 @@ export const commentsReducer = (state: CommentsState = INITIAL_STATE, action: Ac
         const { postId, comments } = action.payload;
 
         return {
-            ...state,
-            loading: false,
+            ...state, loading: false,
             commentsByPostId: {
                 ...state.commentsByPostId,
                 [postId]: comments,
@@ -37,8 +36,7 @@ export const commentsReducer = (state: CommentsState = INITIAL_STATE, action: Ac
         const { postId, comment } = action.payload;
 
         return {
-            ...state,
-            commentsByPostId: {
+            ...state, loading: false, commentsByPostId: {
                 ...state.commentsByPostId,
                 [postId]: [comment, ...(state.commentsByPostId[postId] || [])],
             },
@@ -49,8 +47,7 @@ export const commentsReducer = (state: CommentsState = INITIAL_STATE, action: Ac
         const { postId, commentId } = action.payload;
 
         return {
-            ...state,
-            commentsByPostId: {
+            ...state, loading: false, commentsByPostId: {
                 ...state.commentsByPostId,
                 [postId]: state.commentsByPostId[postId].filter(
                     comment => comment.id !== commentId
@@ -61,13 +58,27 @@ export const commentsReducer = (state: CommentsState = INITIAL_STATE, action: Ac
 
     if (isType(action, deleteTweetSuccess)) {
         const postId = action.payload;
-
         const newByPostId = { ...state.commentsByPostId };
         delete newByPostId[postId];
 
         return {
-            ...state,
+            ...state, loading: false,
             commentsByPostId: newByPostId,
+        };
+    }
+
+    if (isType(action, actions.patchCommentSuccess)) {
+        const { postId, comment } = action.payload;
+        const comments = state.commentsByPostId[postId] || [];
+
+        return {
+            ...state, loading: false,
+            commentsByPostId: {
+                ...state.commentsByPostId,
+                [postId]: comments.map(c =>
+                    c.id === comment.id ? { ...c, body: comment.body } : c
+                ),
+            },
         };
     }
 

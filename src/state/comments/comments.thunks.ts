@@ -61,3 +61,40 @@ export const deleteComment = (postId: number, commentId: number) => async (dispa
         );
     }
 };
+
+export const patchComment = (postId: number, commentId: number, body: string) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(
+            actions.patchCommentInProgress({
+                postId,
+                commentId,
+            })
+        );
+
+        const res = await fetch(
+            `https://jsonplaceholder.typicode.com/comments/${commentId}`,
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ body }),
+            }
+        );
+
+        const data: PostComment = await res.json();
+
+        dispatch(
+            actions.patchCommentSuccess({
+                postId,
+                comment: data,
+            })
+        );
+    } catch (err) {
+        dispatch(
+            actions.patchCommentFailure({
+                error: 'Patch comment failed',
+            })
+        );
+    }
+};
