@@ -55,10 +55,9 @@ export const deleteComment = (postId: number, commentId: number) => async (dispa
         );
 
         dispatch(actions.deleteCommentSuccess({ postId, commentId }));
+        
     } catch (err) {
-        dispatch(
-            actions.deleteCommentFailure({ error: 'Delete comment failed' })
-        );
+        dispatch(actions.deleteCommentFailure({ error: 'Delete comment ailed' }));
     }
 };
 
@@ -83,18 +82,10 @@ export const patchComment = (postId: number, commentId: number, body: string) =>
         );
 
         const data: PostComment = await res.json();
+        dispatch(actions.patchCommentSuccess({ postId, comment: data, })
 
-        dispatch(
-            actions.patchCommentSuccess({
-                postId,
-                comment: data,
-            })
         );
     } catch (err) {
-        dispatch(
-            actions.patchCommentFailure({
-                error: 'Patch comment failed',
-            })
-        );
+        dispatch(actions.patchCommentFailure({ error: 'Patch comment failed', }));
     }
 };
