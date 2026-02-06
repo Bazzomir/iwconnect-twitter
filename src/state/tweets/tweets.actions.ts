@@ -8,3 +8,5 @@ export const fetchTweetsSuccess = actionCreator<PostType[]>('FETCH_SUCCESS');
 export const fetchTweetsError = actionCreator<string>('FETCH_ERROR');
 
 export const addTweet = actionCreator<PostType>('ADD_TWEET');
+
+export const deleteTweetSuccess = actionCreator<number>('DELETE_SUCCESS');

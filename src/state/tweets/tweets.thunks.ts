@@ -41,3 +41,12 @@ export const postTweet = (text: string) => async (dispatch: Dispatch) => {
     console.error('Post tweet failed', err);
   }
 };
+
+export const deleteTweet = (tweetId: number) => async (dispatch: Dispatch) => {
+  await fetch(
+    `https://jsonplaceholder.typicode.com/posts/${tweetId}`,
+    { method: 'DELETE' }
+  );
+
+  dispatch(actions.deleteTweetSuccess(tweetId));
+};
