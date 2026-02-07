@@ -30,6 +30,13 @@ export const tweetsReducer = (state: TweetsState = INITIAL_STATE, action: Action
         return { ...state, items: state.items.filter(tweet => tweet.id !== action.payload) };
     }
 
+    if (isType(action, actions.patchTweetSuccess)) {
+        const updatedTweet = action.payload;
+
+        return {
+            ...state, items: state.items.map(tweet => tweet.id === updatedTweet.id ? { ...tweet, body: updatedTweet.body } : tweet)
+        };
+    }
 
     return state;
 };

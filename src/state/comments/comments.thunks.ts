@@ -4,22 +4,21 @@ import { PostComment } from '../../containers/Home/components/Main/types';
 import { RootState } from '../store';
 
 export const fetchComments = (postId: number) => async (dispatch: Dispatch, getState: () => RootState) => {
-    dispatch(actions.fetchCommentsStart());
-    const cached = getState().comments.commentsByPostId[postId];
+    // dispatch(actions.fetchCommentsStart());
+    const cached = getState().comments?.commentsByPostId?.[postId];
 
     if (cached && cached.length > 0) {
         return;
     }
 
-    dispatch(actions.fetchCommentsStart());
-
     try {
+        dispatch(actions.fetchCommentsStart());
         const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
         const data: PostComment[] = await res.json();
 
         dispatch(actions.fetchCommentsSuccess({ postId, comments: data, }));
     } catch (err: any) {
-        dispatch(actions.fetchCommentsError(err.message));
+        dispatch(actions.fetchCommentsFailure(err.message));
     }
 };
 
@@ -55,7 +54,7 @@ export const deleteComment = (postId: number, commentId: number) => async (dispa
         );
 
         dispatch(actions.deleteCommentSuccess({ postId, commentId }));
-        
+
     } catch (err) {
         dispatch(actions.deleteCommentFailure({ error: 'Delete comment ailed' }));
     }
@@ -64,7 +63,7 @@ export const deleteComment = (postId: number, commentId: number) => async (dispa
 export const patchComment = (postId: number, commentId: number, body: string) => async (dispatch: Dispatch) => {
     try {
         dispatch(
-            actions.patchCommentInProgress({
+            actions.patchCommentStart({
                 postId,
                 commentId,
             })

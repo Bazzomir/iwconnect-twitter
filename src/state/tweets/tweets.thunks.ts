@@ -50,3 +50,27 @@ export const deleteTweet = (tweetId: number) => async (dispatch: Dispatch) => {
 
   dispatch(actions.deleteTweetSuccess(tweetId));
 };
+
+export const patchTweet = (tweetId: number, body: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(actions.patchTweetInProgress(tweetId));
+
+    const res = await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${tweetId}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ body }),
+      }
+    );
+
+    const data: PostType = await res.json();
+    dispatch(actions.patchTweetSuccess(data));
+
+  } catch (err) {
+    dispatch(actions.patchTweetFailure({ error: 'Patch tweet failed', })
+    );
+  }
+};

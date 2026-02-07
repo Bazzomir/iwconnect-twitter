@@ -28,7 +28,7 @@ export const commentsReducer = (state: CommentsState = INITIAL_STATE, action: Ac
         };
     }
 
-    if (isType(action, actions.fetchCommentsError)) {
+    if (isType(action, actions.fetchCommentsFailure)) {
         return { ...state, loading: false, error: action.payload };
     }
 
