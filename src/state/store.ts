@@ -1,4 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { thunk } from 'redux-thunk';
 import { commentsReducer } from './comments/comments.reducer';
 import { tweetsReducer } from './tweets/tweets.reducer';
@@ -48,7 +49,8 @@ const preloadedState = loadState();
 export const store = createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(thunk)
+    // applyMiddleware(thunk)
+    composeWithDevTools(applyMiddleware(thunk))
 );
 
 store.subscribe(() => {
