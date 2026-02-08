@@ -32,14 +32,14 @@ export const commentsReducer = (state: CommentsState = INITIAL_STATE, action: Ac
         return { ...state, loading: false, error: action.payload };
     }
 
-    if (isType(action, actions.addComment)) {
+    if (isType(action, actions.addCommentSuccess)) {
         const { postId, comment } = action.payload;
 
+        const prevComments = state.commentsByPostId[postId] ?? [];
+
         return {
-            ...state, loading: false, commentsByPostId: {
-                ...state.commentsByPostId,
-                [postId]: [comment, ...(state.commentsByPostId[postId] || [])],
-            },
+            ...state, loading: false,
+            commentsByPostId: { ...state.commentsByPostId, [postId]: [...prevComments, comment] }
         };
     }
 

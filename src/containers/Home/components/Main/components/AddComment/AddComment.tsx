@@ -6,7 +6,7 @@ import { BiPoll, BiSmile } from 'react-icons/bi';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
 import { AiOutlineFileGif, AiOutlineSchedule } from 'react-icons/ai';
 import { PostButton } from '../../../../../../components/Button/Button';
-import { addComment } from '../../../../../../state/comments/comments.actions';
+import { addCommentSuccess } from '../../../../../../state/comments/comments.actions';
 
 interface Props {
   postId: number;
@@ -20,7 +20,7 @@ export const AddComments = ({ postId }: Props) => {
     if (!textareaRef.current?.value.trim()) return;
 
     dispatch(
-      addComment({
+      addCommentSuccess({
         postId,
         comment: {
           postId,

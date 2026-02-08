@@ -4,7 +4,6 @@ import { PostComment } from '../../containers/Home/components/Main/types';
 import { RootState } from '../store';
 
 export const fetchComments = (postId: number) => async (dispatch: Dispatch, getState: () => RootState) => {
-    // dispatch(actions.fetchCommentsStart());
     const cached = getState().comments?.commentsByPostId?.[postId];
 
     if (cached && cached.length > 0) {
@@ -35,8 +34,8 @@ export const postComment = (postId: number, body: string) => async (dispatch: Di
             },
         });
 
-        const data: PostComment = await res.json();
-        dispatch(actions.addComment({ postId, comment: data, }));
+        const data = await res.json();
+        dispatch(actions.addCommentSuccess({ postId, comment: { ...data, id: Date.now(), postId } }));
 
     } catch (err) {
         console.error('Post comment failed', err);

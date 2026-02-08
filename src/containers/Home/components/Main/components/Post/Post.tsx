@@ -9,8 +9,7 @@ import { FiShare } from 'react-icons/fi';
 import { Action } from './components/Action';
 import { AddComments } from '../AddComment/AddComment';
 import { fetchComments } from '../../../../../../state/comments/comments.thunks';
-// import { selectCommentsByPostId } from '../../../../../../state/comments/comments.selector';
-import { makeSelectCommentsByPostId } from '../../../../../../state/comments/comments.selector';
+import { selectCommentsByPostId } from '../../../../../../state/comments/comments.selector';
 import { PostComment } from '../../types';
 
 interface Props {
@@ -29,12 +28,8 @@ export const Post = ({ title, body, id }: Props) => {
   const postId = Number(id);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const comments = useSelector(selectCommentsByPostId(postId));
   const [showComments, setShowComments] = useState(false);
-  const selectComments = useMemo(
-    () => makeSelectCommentsByPostId(postId),
-    [postId]
-  );
+  const selectComments = useMemo(() => selectCommentsByPostId(postId), [postId]);
   const comments = useSelector(selectComments);
 
   useEffect(() => {
