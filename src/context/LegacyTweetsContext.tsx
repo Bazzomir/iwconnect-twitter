@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import {PostType} from '../containers/Home/components/Main/types';
+import {PostTweet} from '../containers/Home/components/Main/types';
 import {FetchPosts} from '../legacyHooks/useFetchPost';
 
 interface ContextValues {
-  tweets: PostType[];
-  addNewTweet: (post: PostType) => void;
+  tweets: PostTweet[];
+  addNewTweet: (post: PostTweet) => void;
 }
 
 export const TweetsContext = React.createContext<ContextValues>({
@@ -13,7 +13,7 @@ export const TweetsContext = React.createContext<ContextValues>({
 });
 
 export const TweetsContextConstructor = ({children}: {children: JSX.Element}) => {
-  const {data: tweets, FetchPostFromApi, addNewTweet} = FetchPosts<PostType[]>('posts', []);
+  const {data: tweets, FetchPostFromApi, addNewTweet} = FetchPosts<PostTweet[]>('posts', []);
   useEffect(() => {
     FetchPostFromApi();
   }, []);
