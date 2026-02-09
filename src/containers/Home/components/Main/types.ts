@@ -1,4 +1,4 @@
-export interface PostType {
+export interface PostTweet {
   userId: number;
   id: number;
   title: string;

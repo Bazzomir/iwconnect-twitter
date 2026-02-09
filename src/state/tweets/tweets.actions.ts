@@ -1,16 +1,20 @@
 import actionCreatorFactory from 'typescript-fsa';
-import { PostType } from '../../containers/Home/components/Main/types';
+import { PostTweet } from '../../containers/Home/components/Main/types';
 
 const actionCreator = actionCreatorFactory('TWEETS');
 
-export const fetchTweetsStart = actionCreator('FETCH_START');
-export const fetchTweetsSuccess = actionCreator<PostType[]>('FETCH_SUCCESS');
-export const fetchTweetsError = actionCreator<string>('FETCH_ERROR');
+export const fetchTweetsStart = actionCreator('FETCH_TWEET_START');
+export const fetchTweetsSuccess = actionCreator<PostTweet[]>('FETCH_TWEET_SUCCESS');
+export const fetchTweetsError = actionCreator<{ error: string }>('FETCH_TWEET_ERROR');
 
-export const addTweet = actionCreator<PostType>('ADD_TWEET');
+export const postTweetStart = actionCreator('POST_TWEET_START');
+export const postTweetSuccess = actionCreator<PostTweet>('ADD_TWEET');
+export const postTweetError = actionCreator<{ error: string }>('POST_TWEET_ERROR');
 
+export const deleteTweetStart = actionCreator('DELETE_TWEET_START');
 export const deleteTweetSuccess = actionCreator<number>('DELETE_SUCCESS');
+export const deleteTweetError = actionCreator<{ error: string }>('DELETE_TWEET_ERROR');
 
-export const patchTweetInProgress = actionCreator<number>('PATCH_PROGRESS');
-export const patchTweetSuccess = actionCreator<PostType>('PATCH_SUCCESS');
-export const patchTweetFailure = actionCreator<{ error: string }>('PATCH_FAILURE');
+export const patchTweetStart = actionCreator<number>('PATCH_TWEET_START');
+export const patchTweetSuccess = actionCreator<PostTweet>('PATCH_TWEET_SUCCESS');
+export const patchTweetError = actionCreator<{ error: string }>('PATCH_TWEET_ERROR');

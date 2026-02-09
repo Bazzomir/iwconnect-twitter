@@ -1,7 +1,7 @@
-import { PostType } from '../../containers/Home/components/Main/types';
+import { PostTweet } from '../../containers/Home/components/Main/types';
 
 export interface TweetsState {
-  items: PostType[];
+  tweets: PostTweet[];
   loading: boolean;
   error: string | null;
 }

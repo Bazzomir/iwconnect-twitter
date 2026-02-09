@@ -1,19 +1,18 @@
 import { Dispatch } from 'redux';
 import * as actions from './tweets.actions';
-import { PostType } from '../../containers/Home/components/Main/types';
+import { PostTweet } from '../../containers/Home/components/Main/types';
 import { RootState } from '../store';
 
 export const fetchTweets = () => async (dispatch: Dispatch, getState: () => RootState) => {
 
-  const cachedTweets = getState().tweets.items;
+  const cachedTweets = getState().tweets.tweets;
 
   if (cachedTweets && cachedTweets.length > 0) {
     return;
   }
 
-  dispatch(actions.fetchTweetsStart());
-
   try {
+    dispatch(actions.fetchTweetsStart());
     const res = await fetch('https://jsonplaceholder.typicode.com/posts');
     const data = await res.json();
     dispatch(actions.fetchTweetsSuccess(data));
@@ -24,7 +23,8 @@ export const fetchTweets = () => async (dispatch: Dispatch, getState: () => Root
 
 export const postTweet = (text: string) => async (dispatch: Dispatch) => {
   try {
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts', {
+    dispatch(actions.postTweetStart());
+    await fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
       body: JSON.stringify({
         body: text,
@@ -34,27 +34,36 @@ export const postTweet = (text: string) => async (dispatch: Dispatch) => {
       },
     });
 
-    const data: PostType = await res.json();
+    const data: PostTweet = {
+      userId: 1,
+      id: Date.now(),
+      title: '',
+      body: text,
+    };
 
-    dispatch(actions.addTweet(data));
-  } catch (err) {
-    console.error('Post tweet failed', err);
+    dispatch(actions.postTweetSuccess(data));
+  } catch (err: any) {
+    dispatch(actions.postTweetError(err.message));
   }
 };
 
 export const deleteTweet = (tweetId: number) => async (dispatch: Dispatch) => {
-  await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${tweetId}`,
-    { method: 'DELETE' }
-  );
+  try {
+    dispatch(actions.deleteTweetStart());
+    await fetch(
+      `https://jsonplaceholder.typicode.com/posts/${tweetId}`,
+      { method: 'DELETE' }
+    );
+    dispatch(actions.deleteTweetSuccess(tweetId));
+  } catch (err: any) {
+    dispatch(actions.deleteTweetError(err.message));
+  }
 
-  dispatch(actions.deleteTweetSuccess(tweetId));
 };
 
 export const patchTweet = (tweetId: number, body: string) => async (dispatch: Dispatch) => {
   try {
-    dispatch(actions.patchTweetInProgress(tweetId));
-
+    dispatch(actions.patchTweetStart(tweetId));
     const res = await fetch(
       `https://jsonplaceholder.typicode.com/posts/${tweetId}`,
       {
@@ -66,11 +75,10 @@ export const patchTweet = (tweetId: number, body: string) => async (dispatch: Di
       }
     );
 
-    const data: PostType = await res.json();
+    const data: PostTweet = await res.json();
     dispatch(actions.patchTweetSuccess(data));
 
-  } catch (err) {
-    dispatch(actions.patchTweetFailure({ error: 'Patch tweet failed', })
-    );
+  } catch (err: any) {
+    dispatch(actions.patchTweetError(err.message));
   }
 };
