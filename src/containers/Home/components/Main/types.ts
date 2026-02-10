@@ -3,6 +3,7 @@ export interface PostTweet {
   id: number;
   title: string;
   body: string;
+  isLocal: boolean;
 }
 
 export interface PostComment {

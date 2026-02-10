@@ -4,10 +4,9 @@ import { PostTweet } from '../../containers/Home/components/Main/types';
 import { RootState } from '../store';
 
 export const fetchTweets = () => async (dispatch: Dispatch, getState: () => RootState) => {
-
   const cachedTweets = getState().tweets.tweets;
 
-  if (cachedTweets && cachedTweets.length > 0) {
+  if (cachedTweets.length > 0) {
     return;
   }
 
@@ -39,6 +38,7 @@ export const postTweet = (text: string) => async (dispatch: Dispatch) => {
       id: Date.now(),
       title: '',
       body: text,
+      isLocal: true
     };
 
     dispatch(actions.postTweetSuccess(data));
@@ -49,7 +49,7 @@ export const postTweet = (text: string) => async (dispatch: Dispatch) => {
 
 export const deleteTweet = (tweetId: number) => async (dispatch: Dispatch) => {
   try {
-    dispatch(actions.deleteTweetStart());
+    dispatch(actions.deleteTweetStart(tweetId));
     await fetch(
       `https://jsonplaceholder.typicode.com/posts/${tweetId}`,
       { method: 'DELETE' }
@@ -58,13 +58,12 @@ export const deleteTweet = (tweetId: number) => async (dispatch: Dispatch) => {
   } catch (err: any) {
     dispatch(actions.deleteTweetError(err.message));
   }
-
 };
 
 export const patchTweet = (tweetId: number, body: string) => async (dispatch: Dispatch) => {
   try {
     dispatch(actions.patchTweetStart(tweetId));
-    const res = await fetch(
+    await fetch(
       `https://jsonplaceholder.typicode.com/posts/${tweetId}`,
       {
         method: 'PATCH',
@@ -74,10 +73,7 @@ export const patchTweet = (tweetId: number, body: string) => async (dispatch: Di
         body: JSON.stringify({ body }),
       }
     );
-
-    const data: PostTweet = await res.json();
-    dispatch(actions.patchTweetSuccess(data));
-
+    dispatch(actions.patchTweetSuccess({ id: tweetId, body, }));
   } catch (err: any) {
     dispatch(actions.patchTweetError(err.message));
   }

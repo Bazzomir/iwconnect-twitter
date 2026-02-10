@@ -20,6 +20,7 @@ interface Props {
   body?: string;
   id?: number;
   userId?: number;
+  isLocal?: boolean;
 }
 
 export const getRandomName = () => {
@@ -27,15 +28,17 @@ export const getRandomName = () => {
   return names[Math.floor(Math.random() * names.length)];
 };
 
-export const Post = ({ title, body, id, userId }: Props) => {
+export const Post = ({ title, body, id, isLocal }: Props) => {
   const postId = Number(id);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showComments, setShowComments] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedBody, setEditedBody] = useState(body || '');
   const selectComments = useMemo(() => selectCommentsByPostId(postId), [postId]);
   const comments = useSelector(selectComments);
   const { user } = useAuth();
-  const isMine = Boolean(user) && userId === 1;
+  const isMine = Boolean(user) && isLocal === true;
 
   useEffect(() => {
     if (showComments && id && comments.length === 0) {
@@ -49,17 +52,34 @@ export const Post = ({ title, body, id, userId }: Props) => {
         <Styled.Avatar src="https://i.pravatar.cc/100" />
 
         <Styled.MainContent>
-          <a onClick={() => navigate(`/post/${id}`)}>
-            <h3>{getRandomName()}</h3>
-            <Styled.Title>{title}</Styled.Title>
-            <Styled.Content>{body}</Styled.Content>
-          </a>
-
+          <h3>{getRandomName()}</h3>
+          <Styled.Title>{title}</Styled.Title>
+          {isEditing ? (
+            <textarea
+              value={editedBody}
+              onChange={e => setEditedBody(e.target.value)}
+              style={{ width: '100%' }}
+            />
+          ) : (
+            <a onClick={() => navigate(`/post/${id}`)}>
+              <Styled.Content>{body}</Styled.Content>
+            </a>
+          )}
           {isMine && (
             <EditDeleteBtn
-              onEdit={() => { if (!id) return; dispatch(patchTweet(id, body ?? '') as any) }}
-              onDelete={() => { if (!id) return; dispatch(deleteTweet(id) as any) }}
+              onEdit={() => setIsEditing(true)}
+              onDelete={() => dispatch(deleteTweet(postId) as any)}
             />
+          )}
+          {isEditing && (
+            <button
+              onClick={() => {
+                dispatch(patchTweet(id!, editedBody) as any);
+                setIsEditing(false);
+              }}
+            >
+              Save
+            </button>
           )}
 
           <Styled.Actions>

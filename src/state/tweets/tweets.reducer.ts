@@ -10,6 +10,7 @@ const INITIAL_STATE: TweetsState = {
 };
 
 export const tweetsReducer = (state: TweetsState = INITIAL_STATE, action: Action): TweetsState => {
+    // Fetch Data 
     if (isType(action, actions.fetchTweetsStart)) {
         return { ...state, loading: true, error: null };
     }
@@ -20,32 +21,35 @@ export const tweetsReducer = (state: TweetsState = INITIAL_STATE, action: Action
         return { ...state, loading: false, error: "Failed to Fetch" };
     }
 
+    // Post Data
     if (isType(action, actions.postTweetStart)) {
         return { ...state, loading: true, error: null };
     }
     if (isType(action, actions.postTweetSuccess)) {
-        return { ...state, tweets: [action.payload, ...state.tweets] };
+        return { ...state, loading: false, tweets: [action.payload, ...state.tweets] };
     }
     if (isType(action, actions.postTweetError)) {
         return { ...state, loading: false, error: "Failed to Post" };
     }
 
+    // Delete Data
     if (isType(action, actions.deleteTweetStart)) {
         return { ...state, loading: true, error: null };
     }
     if (isType(action, actions.deleteTweetSuccess)) {
-        return { ...state, tweets: state.tweets.filter(tweet => tweet.id !== action.payload) };
+        return { ...state, loading: false, tweets: state.tweets.filter(tweet => tweet.id !== action.payload) };
     }
     if (isType(action, actions.deleteTweetError)) {
         return { ...state, loading: false, error: "Failed to Delete" };
     }
-
-    if (isType(action, actions.deleteTweetStart)) {
+    
+    // Patch Data
+    if (isType(action, actions.patchTweetStart)) {
         return { ...state, loading: true, error: null };
     }
     if (isType(action, actions.patchTweetSuccess)) {
         return {
-            ...state,
+            ...state, loading: false,
             tweets: state.tweets.map(tweet => tweet.id === action.payload.id ? { ...tweet, body: action.payload.body } : tweet)
         };
     }
