@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
+import { MdOutlineEdit, MdOutlineDeleteForever } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
 
 interface Props {
   nameButton?: string;
   onClick?: () => void;
   type?: React.HTMLProps<HTMLButtonElement>['type'];
   isOpen?: boolean;
+  onEdit?: () => void;
+  onDelete?: () => void;
 }
 
 export const Button = ({ nameButton }: Props) => {
@@ -137,6 +141,27 @@ export const AuthButton = ({ nameButton, onClick }: Props) => {
     >
       {nameButton}
     </button>
+  );
+};
+
+export const EditDeleteBtn = ({ onEdit, onDelete }: Props) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="three-dots-wrapper" style={{ position: 'relative' }}>
+      <button onClick={() => setOpen(prev => !prev)}><BsThreeDotsVertical /></button>
+      {open && (
+        <div className="menu" style={{
+          position: 'absolute',
+          right: 0,
+          background: '#fff',
+          border: '1px solid #ccc',
+          padding: '4px',
+        }}>
+          <button onClick={onEdit}><MdOutlineEdit /> Edit</button>
+          <button onClick={onDelete}><MdOutlineDeleteForever /> Delete</button>
+        </div>
+      )}
+    </div>
   );
 };
 

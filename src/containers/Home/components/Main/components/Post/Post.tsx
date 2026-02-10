@@ -11,6 +11,9 @@ import { AddComments } from '../AddComment/AddComment';
 import { fetchComments } from '../../../../../../state/comments/comments.thunks';
 import { selectCommentsByPostId } from '../../../../../../state/comments/comments.selector';
 import { PostComment } from '../../types';
+import { useAuth } from '../../../../../../context/AuthContext';
+import { EditDeleteBtn } from '../../../../../../components/Button/Button';
+import { deleteTweet, patchTweet } from '../../../../../../state/tweets/tweets.thunks';
 
 interface Props {
   title?: string;
@@ -24,13 +27,15 @@ export const getRandomName = () => {
   return names[Math.floor(Math.random() * names.length)];
 };
 
-export const Post = ({ title, body, id }: Props) => {
+export const Post = ({ title, body, id, userId }: Props) => {
   const postId = Number(id);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showComments, setShowComments] = useState(false);
   const selectComments = useMemo(() => selectCommentsByPostId(postId), [postId]);
   const comments = useSelector(selectComments);
+  const { user } = useAuth();
+  const isMine = Boolean(user) && userId === 1;
 
   useEffect(() => {
     if (showComments && id && comments.length === 0) {
@@ -49,6 +54,13 @@ export const Post = ({ title, body, id }: Props) => {
             <Styled.Title>{title}</Styled.Title>
             <Styled.Content>{body}</Styled.Content>
           </a>
+
+          {isMine && (
+            <EditDeleteBtn
+              onEdit={() => { if (!id) return; dispatch(patchTweet(id, body ?? '') as any) }}
+              onDelete={() => { if (!id) return; dispatch(deleteTweet(id) as any) }}
+            />
+          )}
 
           <Styled.Actions>
             <Action icon={<FaRegComment />} actionNumber={comments.length} onClick={() => setShowComments(true)} />
