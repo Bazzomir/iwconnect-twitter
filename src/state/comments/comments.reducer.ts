@@ -64,13 +64,13 @@ export const commentsReducer = (state: CommentsState = INITIAL_STATE, action: Ac
         return { ...state, loading: true, error: null };
     }
     if (isType(action, actions.patchCommentSuccess)) {
-        const { postId, comment } = action.payload;
+        const { postId, commentId, body } = action.payload;
         const comments = state.commentsByPostId[postId] || [];
         return {
             ...state, loading: false, commentsByPostId: {
-                ...state.commentsByPostId, [postId]: comments.map(c => c.id === comment.id ? { ...c, body: comment.body } : c)
-            }
-        };
+                ...state.commentsByPostId, [postId]: comments.map((comment) => comment.id === commentId ? { ...comment, body } : comment)
+            },
+        }
     }
     if (isType(action, actions.patchCommentError)) {
         return { ...state, loading: false, error: "Failed to Patch" };

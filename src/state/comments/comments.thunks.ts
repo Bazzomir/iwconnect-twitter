@@ -12,10 +12,8 @@ export const fetchComments = (postId: number) => async (dispatch: Dispatch, getS
 
     try {
         dispatch(actions.fetchCommentsStart());
-
         const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`);
         const data: PostComment[] = await res.json();
-
         dispatch(actions.fetchCommentsSuccess({ postId, comments: data, }));
     } catch (err: any) {
         dispatch(actions.fetchCommentsError(err.message));
@@ -26,16 +24,10 @@ export const postComment = (postId: number, body: string) => async (dispatch: Di
     try {
         const res = await fetch('https://jsonplaceholder.typicode.com/comments', {
             method: 'POST',
-            body: JSON.stringify({
-                postId,
-                body,
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            body: JSON.stringify({ postId, body }),
+            headers: { 'Content-Type': 'application/json' }
         });
         const data = await res.json();
-
         dispatch(actions.addCommentSuccess({ postId, comment: { ...data, id: Date.now(), postId } }));
     } catch (err: any) {
         dispatch(actions.addCommentError(err.message))
@@ -45,10 +37,9 @@ export const postComment = (postId: number, body: string) => async (dispatch: Di
 export const deleteComment = (postId: number, commentId: number) => async (dispatch: Dispatch) => {
     try {
         dispatch(actions.deleteCommentStart());
-        await fetch(
-            `https://jsonplaceholder.typicode.com/comments/${commentId}`,
-            { method: 'DELETE' }
-        );
+        await fetch(`https://jsonplaceholder.typicode.com/comments/${commentId}`, {
+            method: 'DELETE'
+        });
         dispatch(actions.deleteCommentSuccess({ postId, commentId }));
     } catch (err: any) {
         dispatch(actions.deleteCommentError(err.message));
@@ -57,21 +48,13 @@ export const deleteComment = (postId: number, commentId: number) => async (dispa
 
 export const patchComment = (postId: number, commentId: number, body: string) => async (dispatch: Dispatch) => {
     try {
-        dispatch(actions.patchCommentStart({ postId, commentId, }));
-
-        const res = await fetch(
-            `https://jsonplaceholder.typicode.com/comments/${commentId}`,
-            {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ body }),
-            }
-        );
-        const data: PostComment = await res.json();
-
-        dispatch(actions.patchCommentSuccess({ postId, comment: data, }));
+        dispatch(actions.patchCommentStart());
+        await fetch(`https://jsonplaceholder.typicode.com/comments/${commentId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ body }),
+        });
+        dispatch(actions.patchCommentSuccess({ postId, commentId, body }));
     } catch (err: any) {
         dispatch(actions.patchCommentError(err.message));
     }

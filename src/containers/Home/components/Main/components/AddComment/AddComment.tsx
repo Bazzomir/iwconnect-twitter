@@ -28,10 +28,10 @@ export const AddComments = ({ postId }: Props) => {
           name: 'User',
           email: 'user@twitter.com',
           body: textareaRef.current.value,
-        },
+          isLocal: true
+        }
       })
     );
-
 
     textareaRef.current.value = '';
   };

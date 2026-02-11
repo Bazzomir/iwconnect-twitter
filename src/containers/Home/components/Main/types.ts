@@ -12,4 +12,5 @@ export interface PostComment {
   name: string;
   email: string;
   body: string;
+  isLocal?: boolean;
 }

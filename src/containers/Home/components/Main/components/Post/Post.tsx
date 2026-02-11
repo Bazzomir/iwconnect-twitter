@@ -14,6 +14,7 @@ import { PostComment } from '../../types';
 import { useAuth } from '../../../../../../context/AuthContext';
 import { EditDeleteBtn } from '../../../../../../components/Button/Button';
 import { deleteTweet, patchTweet } from '../../../../../../state/tweets/tweets.thunks';
+import { deleteComment, patchComment } from '../../../../../../state/comments/comments.thunks';
 
 interface Props {
   title?: string;
@@ -35,6 +36,8 @@ export const Post = ({ title, body, id, isLocal }: Props) => {
   const [showComments, setShowComments] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editedBody, setEditedBody] = useState(body || '');
+  const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
+  const [editedCommentBody, setEditedCommentBody] = useState('');
   const selectComments = useMemo(() => selectCommentsByPostId(postId), [postId]);
   const comments = useSelector(selectComments);
   const { user } = useAuth();
@@ -91,18 +94,40 @@ export const Post = ({ title, body, id, isLocal }: Props) => {
 
           <Modal show={showComments} onHide={() => setShowComments(false)} size="lg">
             <Modal.Body style={{ background: 'black', color: 'white' }}>
-              {comments.map((comment: PostComment) => (
-                <div key={comment.id} style={{ borderBottom: '1px solid gray' }}>
-                  <b>
-                    ({comment.id} – {getRandomName()}) {comment.name}
-                  </b>
-                  <p>{comment.body}</p>
-                </div>
-              ))}
+              {comments.map((comment: PostComment) => {
+                const isMine = comment.isLocal;
+                const isEditing = editingCommentId === comment.id;
+
+                return (
+                  <div key={comment.id} style={{ borderBottom: '1px solid gray', padding: '10px 0' }}>
+                    <b>
+                      ({comment.id}) {comment.name}
+                    </b>
+                    {isEditing ? (
+                      <>
+                        <textarea value={editedCommentBody} onChange={(e) => setEditedCommentBody(e.target.value)} style={{ width: '100%', marginTop: '5px' }} />
+                        <div style={{ marginTop: '5px' }}>
+                          <button onClick={() => { dispatch(patchComment(postId, comment.id, editedCommentBody) as any); setEditingCommentId(null) }}>Save</button>
+                          <button onClick={() => setEditingCommentId(null)} style={{ marginLeft: '10px' }}>Cancel</button>
+                        </div>
+                      </>
+                    ) : (
+                      <p>{comment.body}</p>
+                    )}
+                    {isMine && !isEditing && (
+                      <div>
+                        <button onClick={() => { setEditingCommentId(comment.id); setEditedCommentBody(comment.body); }}>Edit</button>
+                        <button onClick={() => dispatch(deleteComment(postId, comment.id) as any)} style={{ marginLeft: '10px' }}>Delete</button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
 
               {id && <AddComments postId={id} />}
             </Modal.Body>
           </Modal>
+
         </Styled.MainContent>
       </Styled.Wrapper>
     </Styled.Container>
