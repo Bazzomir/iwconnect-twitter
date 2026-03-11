@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/iwconnect-twitter/static/css/main.b003f230.css",
-    "main.js": "/iwconnect-twitter/static/js/main.dd3e6ee2.js",
+    "main.css": "/iwconnect-twitter/static/css/main.25ea5d23.css",
+    "main.js": "/iwconnect-twitter/static/js/main.17907f40.js",
     "static/js/787.f210881e.chunk.js": "/iwconnect-twitter/static/js/787.f210881e.chunk.js",
     "index.html": "/iwconnect-twitter/index.html",
-    "main.b003f230.css.map": "/iwconnect-twitter/static/css/main.b003f230.css.map",
-    "main.dd3e6ee2.js.map": "/iwconnect-twitter/static/js/main.dd3e6ee2.js.map",
+    "main.25ea5d23.css.map": "/iwconnect-twitter/static/css/main.25ea5d23.css.map",
+    "main.17907f40.js.map": "/iwconnect-twitter/static/js/main.17907f40.js.map",
     "787.f210881e.chunk.js.map": "/iwconnect-twitter/static/js/787.f210881e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b003f230.css",
-    "static/js/main.dd3e6ee2.js"
+    "static/css/main.25ea5d23.css",
+    "static/js/main.17907f40.js"
   ]
 }
